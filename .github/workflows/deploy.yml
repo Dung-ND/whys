@@ -1,0 +1,59 @@
+name: Test & deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      pages: ${{ steps.pages.outcome == 'success' }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      # Fails until Settings → Pages → Source is set to "GitHub Actions".
+      # Until then the site is still built and tested, and the run shows a warning instead of failing.
+      - id: pages
+        if: github.event_name != 'pull_request'
+        continue-on-error: true
+        uses: actions/configure-pages@v5
+      - if: steps.pages.outcome == 'failure'
+        run: echo "::warning title=Not deployed::GitHub Pages is not enabled. Go to Settings → Pages → Source, choose GitHub Actions, then re-run this workflow."
+      - name: Build
+        run: npm run build
+        env:
+          # GitHub Pages serves from /<repo>/ until a custom domain is set; then base_path is empty.
+          SITE_URL: ${{ steps.pages.outputs.origin || 'https://example.com' }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path || '/' }}
+      - if: steps.pages.outcome == 'success'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    if: needs.build.outputs.pages == 'true'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

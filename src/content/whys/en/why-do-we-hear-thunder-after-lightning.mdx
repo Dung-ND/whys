@@ -1,0 +1,68 @@
+---
+question: Why do we hear thunder after lightning?
+teaser: Lightning and thunder happen at the same moment. So why does the boom always come late?
+art: A dark storm cloud shoots a lightning bolt to the ground. Rings of sound spread out from it toward a house and a kid, who counts "1… 2… 3…" before a big BOOM.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import ThunderLab from '@/interactives/thunder/ThunderLab.svelte';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `Thunder starts a little after the lightning.`, reply: `They actually happen at the same moment: the lightning makes the thunder. The difference is in the trip to your ears.` },
+    { text: `Light travels much faster than sound.`, reply: `Light from the flash reaches you almost instantly. Sound is nearly a million times slower, so the boom arrives later.` },
+    { text: `The sound bounces off the clouds first.`, reply: `Thunder does echo off clouds and hills, which is why it rumbles. But even the very first bit of sound arrives late, because sound is slow.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<ThunderLab client:visible lang={props.lang} />
+
+Try a storm 1 km away, then 3 km away. Does the thunder take three times as long?
+
+</Part>
+
+<Part kind="answer">
+
+Light and sound start together, but light is almost a million times faster, so you see the flash first.
+
+A lightning bolt is a giant electric spark. In a split second it makes the air around it hotter than the surface of the Sun. The hot air expands so suddenly that it sends out a huge sound wave: **thunder**.
+
+Light from the flash zooms toward you at 300,000 kilometers per second. Even from 10 km away, it arrives in a tiny fraction of a second.
+
+Sound is much slower. It travels through air at about 343 meters per second, so it takes **about 3 seconds to go 1 kilometer** (or about 5 seconds to go 1 mile).
+
+That's how you can tell how far away a storm is: count the seconds between the flash and the boom, then divide by 3. Six seconds? The lightning struck about 2 km away.
+
+**Why does thunder rumble?** A lightning bolt can be several kilometers long. Sound from its near end reaches you first and sound from its far end arrives later, plus echoes from hills and clouds. So one bang becomes a long rumble.
+
+</Part>
+
+<Myth claim="Lightning never strikes the same place twice.">
+
+It often does, because lightning likes tall, pointy things. The Empire State Building in New York is struck about 20 times a year.
+
+</Myth>
+
+<TryIt title="measure a storm" need={['A thunderstorm, watched from indoors', 'Your voice, or a watch with seconds']} safety="If you can hear thunder, you are close enough to be struck by lightning. Stay indoors until 30 minutes after the last thunder.">
+
+1. Watch the sky through a window. When you see a flash, start counting: "one-and-two-and-three…"
+2. Stop when you hear the thunder.
+3. Divide by 3 to get kilometers (or by 5 for miles).
+4. Do it again for the next flashes. Is the storm coming closer, or moving away?
+
+</TryIt>
+
+<Whoa big="30,000 °C">
+
+For a split second, lightning heats the air to about 30,000 °C. That's about five times hotter than the surface of the Sun!
+
+</Whoa>

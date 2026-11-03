@@ -1,0 +1,46 @@
+---
+// The clue that wrinkling is not just soaking: a finger whose nerve is cut stays smooth in water.
+import Figure from '../Figure.astro';
+
+interface Props { label: string; ok: string; cut: string; wrinkly: string; smooth: string }
+const { label, ok, cut, wrinkly, smooth } = Astro.props;
+---
+<Figure label={label} width={640} height={330}>
+  <rect width="640" height="330" rx="16" fill="var(--art-sky-2)" />
+  {[{ x: 170, nerve: true }, { x: 470, nerve: false }].map(({ x, nerve }) => (
+    <g>
+      <rect x={x - 110} y="180" width="220" height="120" rx="14" fill="var(--art-water)" opacity="0.6" />
+      <!-- finger -->
+      <rect x={x - 40} y="60" width="80" height="250" rx="40" fill="var(--art-skin)" stroke="var(--art-ink)" stroke-width="4" />
+      <path d={`M${x - 20} 84q20 -12 40 0`} fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="2.5" opacity="0.8" />
+      <!-- nerve: a yellow line up the finger, broken when cut -->
+      {nerve ? (
+        <path d={`M${x + 6} 300V110`} stroke="var(--art-y)" stroke-width="6" stroke-linecap="round" />
+      ) : (
+        <>
+          <path d={`M${x + 6} 300V230M${x + 6} 200V110`} stroke="var(--art-y)" stroke-width="6" stroke-linecap="round" />
+          <text x={x + 6} y="222" text-anchor="middle" font-size="22">✂️</text>
+        </>
+      )}
+      {nerve && (
+        <g fill="none" stroke="var(--art-skin-2)" stroke-width="3" stroke-linecap="round">
+          {[100, 116, 132, 148, 164].map((y) => <path d={`M${x - 30} ${y}q7 -5 15 0t15 0t15 0t15 0`} />)}
+        </g>
+      )}
+      <text x={x} y="34" text-anchor="middle" class="h">{nerve ? ok : cut}</text>
+      <text x={x + 52} y={nerve ? 130 : 130} class="tag" fill="var(--art-ink)">{nerve ? `← ${wrinkly}` : `← ${smooth}`}</text>
+    </g>
+  ))}
+</Figure>
+
+<style>
+  .h {
+    font-weight: 900;
+    font-size: 19px;
+    fill: var(--art-ink);
+  }
+  .tag {
+    font-weight: 850;
+    font-size: 15px;
+  }
+</style>

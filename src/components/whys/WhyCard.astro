@@ -1,0 +1,92 @@
+---
+import { useT, href } from '@/i18n';
+import { whyCategories, whyNumber, localized } from '@/data/whys';
+import type { Lang } from '@/config/site';
+import { catStyle, type LoadedWhy } from './load';
+import Scene from './scenes/Scene.astro';
+
+interface Props { item: LoadedWhy; lang: Lang; level?: 'h2' | 'h3' }
+const { item, lang, level = 'h3' } = Astro.props;
+const { why, entry } = item;
+const H = level;
+const t = useT(lang);
+---
+<a
+  class="wcard"
+  href={href(lang, `${why.slug}/`)}
+  style={catStyle(why)}
+  data-slug={why.slug}
+  data-cat={why.category}
+  data-search={`${entry.data.question} ${entry.data.teaser}`.toLowerCase()}
+>
+  <div class="art"><Scene slug={why.slug} label="" /></div>
+  <div class="body">
+    <div class="meta">
+      <span class="num">{t('whys.number', { n: whyNumber(why.n) })}</span>
+      <span class="cat">{localized(whyCategories[why.category].title, lang)}</span>
+    </div>
+    <H class="q">{entry.data.question}</H>
+    <p>{entry.data.teaser}</p>
+  </div>
+</a>
+
+<style>
+  .wcard {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--ink);
+    box-shadow: var(--shadow-1);
+    transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast);
+  }
+  .wcard:hover {
+    transform: translateY(-4px) rotate(-0.4deg);
+    box-shadow: var(--shadow-2);
+  }
+  .wcard[hidden] {
+    display: none;
+  }
+  .art {
+    border-bottom: 4px solid var(--cat);
+    aspect-ratio: 8 / 5;
+    overflow: hidden;
+  }
+  /* Thumbnails stay still; the big picture on the why page moves. */
+  .art :global(*) {
+    animation-play-state: paused !important;
+  }
+  .art :global(.wm) {
+    display: none;
+  }
+  .body {
+    padding: 0.9rem 1.15rem 1.1rem;
+  }
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: var(--fs-0);
+    font-weight: 800;
+  }
+  .num {
+    font-family: var(--font-mono);
+    color: var(--muted);
+  }
+  .cat {
+    color: var(--cat-text);
+  }
+  .q {
+    font-size: 1.3rem;
+    margin: 0.35rem 0 0.4rem;
+    letter-spacing: -0.02em;
+  }
+  p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: var(--fs-0);
+  }
+</style>

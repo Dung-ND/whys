@@ -1,0 +1,200 @@
+/*
+  Design tokens. Change these to re-theme the whole site.
+  Concept colors (--c-*) are used consistently in every figure:
+  the same idea always has the same color, in the picture, the formula and the text.
+*/
+:root {
+  color-scheme: light;
+
+  /* Surfaces & text */
+  --bg: #f8f8ff;
+  --bg-2: #eff0ff;
+  --surface: #ffffff;
+  --surface-2: #f3f4fc;
+  --ink: #1d2140;
+  --ink-2: #4a5073;
+  --muted: #666b88;
+  --line: #e3e5f3;
+  --line-2: #d1d4ea;
+
+  /* Brand: a curious indigo, with a sunny yellow for the question mark */
+  --brand: #5b5cf0;
+  --brand-2: #7374f5;
+  --brand-ink: #3d3ec7;
+  --brand-soft: #e4e4ff;
+  --brand-shadow: #3536a8;
+  --on-brand: #ffffff;
+  --spark: #ffc93c;
+
+  /* Concept colors (figures) */
+  --c-blue: #2a6fdc;
+  --c-red: #ef4562;
+  --c-green: #12a672;
+  --c-purple: #8b5cf6;
+  --c-amber: #f59e0b;
+  --c-teal: #0b8a99;
+  --c-ink: var(--ink);
+  --c-grid: #e4e6f4;
+  --c-water: #cfe8ff;
+  --c-water-2: #9fd0ff;
+  /* Cartoons and diagrams. These are the picture's own colors (sky, skin, grass), so they
+     stay the same in light and dark mode. Outlines use --art-ink on purpose. */
+  --art-ink: #1d2140;
+  --art-white: #ffffff;
+  --art-sky: #9fd6ff;
+  --art-sky-2: #dff2ff;
+  --art-night: #1b2350;
+  --art-night-2: #36418a;
+  --art-sun: #ffd23f;
+  --art-sun-2: #ffa41e;
+  --art-grass: #86d46e;
+  --art-grass-2: #5bb04c;
+  --art-cloud: #ffffff;
+  --art-storm: #707899;
+  --art-storm-2: #4b5178;
+  --art-bolt: #fff36b;
+  --art-skin: #f6c7a0;
+  --art-skin-2: #e2a57a;
+  --art-cheek: #ff9fb0;
+  --art-hair: #4a2e1f;
+  --art-shirt: #2a6fdc;
+  --art-red: #ff4f2e;
+  --art-leaf: #3ccf8e;
+  --art-water: #8fd3ff;
+  --art-moon: #f6f2cf;
+  --art-moon-dark: #3b4374;
+  --art-wire: #3a3f5c;
+  --art-wood: #a57a52;
+  --art-fly: #3b3f58;
+  --art-tan: #e9cf9a;
+  --art-horse: #8a5a3c;
+  --art-glass: #d8f3ff;
+  /* The spectrum, red to violet. */
+  --art-r: #ff3b3b;
+  --art-o: #ff9a1f;
+  --art-y: #ffe14d;
+  --art-g: #3fcf5a;
+  --art-b: #2f8cff;
+  --art-i: #4b4bd8;
+  --art-v: #9b4dff;
+
+  /* Darker twins of the concept colors for small text (4.5:1 contrast). Same as --c-* in dark mode. */
+  --t-blue: #1f5fc4;
+  --t-red: #c41d42;
+  --t-green: #0a7a52;
+  --t-purple: #6b3fd4;
+  --t-amber: #9a5b00;
+  --t-teal: #087180;
+
+  /* Box backgrounds: safety notes and open questions */
+  --warn-soft: #fff1cc;
+  --mystery-soft: #e6e6ff;
+
+  /* Feedback */
+  --ok: #12a672;
+  --ok-soft: #dcf6ea;
+  --bad: #e5484d;
+  --bad-soft: #fde4e4;
+
+  /* Type */
+  --font: 'Nunito Variable', ui-rounded, 'SF Pro Rounded', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --fs-0: 0.875rem;
+  --fs-1: 1rem;
+  --fs-2: 1.125rem;
+  --fs-3: 1.375rem;
+  --fs-4: 1.75rem;
+  --fs-5: clamp(2rem, 4.5vw, 2.75rem);
+  --fs-6: clamp(2.5rem, 7vw, 4.5rem);
+
+  /* Shape & space */
+  --r-1: 10px;
+  --r-2: 16px;
+  --r-3: 24px;
+  --r-pill: 999px;
+  --gap: 1rem;
+  --page: 1180px;
+  --text: 70ch;
+  --tap: 44px;
+
+  --shadow-1: 0 1px 2px rgb(29 33 64 / 0.06), 0 2px 8px rgb(29 33 64 / 0.05);
+  --shadow-2: 0 2px 4px rgb(29 33 64 / 0.06), 0 12px 32px rgb(29 33 64 / 0.1);
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --t-fast: 160ms;
+  --t-med: 320ms;
+}
+
+/* Dark theme: follows the OS unless the visitor picked one (the two blocks below must match). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: #11132a;
+    --bg-2: #171a36;
+    --surface: #1b1e3c;
+    --surface-2: #22264a;
+    --ink: #f3f1ff;
+    --ink-2: #c3c6e2;
+    --muted: #8a8fb3;
+    --line: #2d3260;
+    --line-2: #3a4075;
+    --brand-soft: #2c2d6b;
+    --brand-ink: #a9aaff;
+    --c-blue: #5c9dff;
+    --c-red: #ff6b85;
+    --c-green: #34d399;
+    --c-purple: #a78bfa;
+    --c-amber: #fbbf24;
+    --c-teal: #22d3ee;
+    --c-grid: #2a2f58;
+    --c-water: #1d3d66;
+    --c-water-2: #2a5590;
+  --t-blue: var(--c-blue);
+  --t-red: var(--c-red);
+  --t-green: var(--c-green);
+  --t-purple: var(--c-purple);
+  --t-amber: var(--c-amber);
+  --t-teal: var(--c-teal);
+    --t-blue: var(--c-blue);
+    --t-red: var(--c-red);
+    --t-green: var(--c-green);
+    --t-purple: var(--c-purple);
+    --t-amber: var(--c-amber);
+    --t-teal: var(--c-teal);
+    --warn-soft: #3b3014;
+    --mystery-soft: #262863;
+    --ok-soft: #123a2d;
+    --bad-soft: #43191d;
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow-2: 0 12px 32px rgb(0 0 0 / 0.35);
+  }
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #11132a;
+  --bg-2: #171a36;
+  --surface: #1b1e3c;
+  --surface-2: #22264a;
+  --ink: #f3f1ff;
+  --ink-2: #c3c6e2;
+  --muted: #8a8fb3;
+  --line: #2d3260;
+  --line-2: #3a4075;
+  --brand-soft: #2c2d6b;
+  --brand-ink: #a9aaff;
+  --c-blue: #5c9dff;
+  --c-red: #ff6b85;
+  --c-green: #34d399;
+  --c-purple: #a78bfa;
+  --c-amber: #fbbf24;
+  --c-teal: #22d3ee;
+  --c-grid: #2a2f58;
+  --c-water: #1d3d66;
+  --c-water-2: #2a5590;
+  --warn-soft: #3b3014;
+  --mystery-soft: #262863;
+  --ok-soft: #123a2d;
+  --bad-soft: #43191d;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-2: 0 12px 32px rgb(0 0 0 / 0.35);
+}
+

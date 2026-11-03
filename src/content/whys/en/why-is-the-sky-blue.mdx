@@ -1,0 +1,70 @@
+---
+question: Why is the sky blue?
+teaser: Sunlight looks white, but it carries every color of the rainbow. So why does the sky pick blue?
+art: A smiling Sun shines a rainbow-striped beam of light across the sky. Tiny air molecules along the beam send wiggly blue arrows in every direction, while a kid on the grass points up in surprise.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import SkyLab from '@/interactives/sky-color/SkyLab.svelte';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `The sky reflects the blue ocean.`, reply: `Lots of people think so! But the sky is just as blue over deserts and mountains, far from any sea. It's really the other way around: the sea looks blue partly because it reflects the sky.` },
+    { text: `Air scatters blue light more than other colors.`, reply: `Sunlight is a mix of all colors. When it hits the tiny molecules in air, blue light gets bounced around much more than red, so blue comes at you from every part of the sky.` },
+    { text: `Space behind the air is blue.`, reply: `Nice idea to wonder what's behind the air! But space is black. Astronauts on the Moon, with no air above them, see a black sky even in the middle of the day.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<SkyLab client:visible lang={props.lang} />
+
+Slide the Sun all the way down to the horizon. What happens to the color of the Sun? And to the sky around it?
+
+</Part>
+
+<Part kind="answer">
+
+Air bounces blue light around the whole sky, much more than the other colors.
+
+Sunlight looks white, but it is really a mix of every color, from red to violet. You can see them split apart in a rainbow.
+
+On its way to you, sunlight passes through the air. Air is made of tiny molecules, mostly nitrogen and oxygen, far too small to see. When light hits them, a little of it gets **scattered**: bounced off in a new direction.
+
+Here's the trick: light travels as waves, and the shorter the waves, the more they get scattered. Blue light has short waves and red light has long ones, so <b class="c-blue">blue gets scattered about 5 times more than red</b>.
+
+So wherever you look in the sky, blue light that was bounced around by the air is heading toward your eyes. The whole sky glows blue! Most of the red, orange and yellow light keeps going straight, so the Sun itself looks yellow-white.
+
+**What about sunsets?** When the Sun is low, its light crosses much more air to reach you, up to about 38 times more. On that long trip almost all the blue is scattered away, and the <b class="c-red">reds and oranges</b> are left.
+
+**Why not violet?** Violet waves are even shorter, so violet scatters even more. But sunlight has less violet than blue to begin with, and our eyes are much better at seeing blue. Put together, the sky looks blue.
+
+</Part>
+
+<Myth claim="The sky is blue because it reflects the ocean.">
+
+The sky is just as blue over the middle of the Sahara Desert. It's the other way around: water reflects the sky. On a cloudy day, the sea looks grey.
+
+</Myth>
+
+<TryIt title="a sunset in a glass" need={['A clear glass of water', 'Milk (a few drops)', 'A flashlight or phone light', 'A dark room']}>
+
+1. Stir a few drops of milk into the water. It should look only a little cloudy.
+2. In a dark room, shine the flashlight through the side of the glass.
+3. Look at the glass from the side: it glows a faint **bluish** color.
+4. Now look through the glass straight at the light: it looks **yellow-orange**, like a sunset! The tiny bits of milk scatter blue light sideways, just like air does.
+
+</TryIt>
+
+<Whoa big="Mars">
+
+On Mars, the daytime sky is a dusty butterscotch color, and the sunsets are **blue**! Fine dust in Mars's thin air scatters light differently from the gas in ours.
+
+</Whoa>

@@ -1,0 +1,93 @@
+---
+// Why do we hear thunder after lightning? The flash reaches the kid right away;
+// the sound (rings) takes about 3 seconds per kilometre to arrive.
+import Kid from './Kid.astro';
+---
+<rect width="640" height="400" fill="var(--art-storm-2)" />
+<rect class="flash" width="640" height="400" fill="var(--art-white)" />
+<!-- rain -->
+<g stroke="var(--art-sky)" stroke-width="3" stroke-linecap="round" opacity="0.7" class="rain">
+  {Array.from({ length: 26 }, (_, i) => <path d={`M${(i * 53) % 640} ${70 + ((i * 37) % 200)}l-8 18`} />)}
+</g>
+<!-- sound rings spreading from the strike -->
+<g fill="none" stroke="var(--art-bolt)" stroke-width="5">
+  {[0, 1, 2].map((i) => <circle class="ring" cx="150" cy="300" r="40" style={`animation-delay:${0.4 + i * 0.7}s`} />)}
+</g>
+<!-- clouds -->
+<g fill="var(--art-storm)" stroke="var(--art-ink)" stroke-width="4">
+  <path d="M30 110a40 40 0 0 1 60 -40a52 52 0 0 1 96 10a36 36 0 0 1 24 66h-170a30 30 0 0 1 -10 -36z" />
+  <path d="M330 80a32 32 0 0 1 50 -30a44 44 0 0 1 80 10a30 30 0 0 1 16 54h-140a24 24 0 0 1 -6 -34z" opacity="0.9" />
+</g>
+<!-- lightning -->
+<path class="bolt" d="M150 150l-26 70h26l-22 74l60 -98h-30l24 -46z" fill="var(--art-bolt)" stroke="var(--art-ink)" stroke-width="4" stroke-linejoin="round" />
+<!-- ground, house, kid counting -->
+<path d="M0 330h640v70h-640z" fill="var(--art-grass-2)" stroke="var(--art-ink)" stroke-width="4" />
+<g stroke="var(--art-ink)" stroke-width="4" stroke-linejoin="round">
+  <path d="M440 330v-80h120v80z" fill="var(--art-tan)" />
+  <path d="M428 254l72 -56l72 56z" fill="var(--art-red)" />
+  <rect x="482" y="290" width="36" height="40" fill="var(--art-wood)" />
+</g>
+<Kid x={380} y={384} mood="wow" look={[-4, -2]} s={0.9} />
+<g class="count" font-weight="900" font-size="28" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="5" paint-order="stroke">
+  <text x="320" y="200" class="n1">1…</text>
+  <text x="364" y="178" class="n2">2…</text>
+  <text x="408" y="156" class="n3">3…</text>
+  <text x="440" y="120" class="boom" font-size="40">BOOM!</text>
+</g>
+
+<style>
+  /* One 4-second loop: flash at the start, the count, then the boom. */
+  .flash,
+  .bolt {
+    animation: flash 4s steps(1) infinite;
+  }
+  .flash {
+    opacity: 0;
+    animation-name: sky;
+  }
+  .ring {
+    animation: ring 4s ease-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+  }
+  .count text {
+    opacity: 0;
+    animation: show 4s steps(1) infinite;
+  }
+  .n2 { animation-delay: 0.7s !important; }
+  .n3 { animation-delay: 1.4s !important; }
+  .boom { animation-name: boom !important; }
+  .rain {
+    animation: rain 0.6s linear infinite;
+  }
+  @keyframes flash {
+    0% { opacity: 1; }
+    12% { opacity: 0.25; }
+    16% { opacity: 1; }
+    24%, 100% { opacity: 0.25; }
+  }
+  @keyframes sky {
+    0% { opacity: 0.55; }
+    6%, 100% { opacity: 0; }
+  }
+  @keyframes ring {
+    0% { transform: scale(0.3); opacity: 0.9; }
+    60%, 100% { transform: scale(7); opacity: 0; }
+  }
+  @keyframes show {
+    0% { opacity: 0; }
+    15% { opacity: 1; }
+    70%, 100% { opacity: 0; }
+  }
+  @keyframes boom {
+    0%, 60% { opacity: 0; transform: none; }
+    62% { opacity: 1; transform: translate(-3px, 2px); }
+    66% { transform: translate(3px, -2px); }
+    70% { transform: none; }
+    92%, 100% { opacity: 0; }
+  }
+  @keyframes rain {
+    to { transform: translate(-8px, 18px); }
+  }
+</style>

@@ -1,0 +1,26 @@
+---
+// For questions science hasn't fully settled: what is known, and what is still being tested.
+import { useT, langFromUrl } from '@/i18n';
+const t = useT(langFromUrl(Astro.url));
+---
+<aside class="mystery">
+  <h2><span aria-hidden="true">🕵️</span> {t('whys.mystery')}</h2>
+  <slot />
+</aside>
+
+<style>
+  .mystery {
+    margin: 2.5rem 0;
+    padding: 1.4rem 1.6rem;
+    border-radius: var(--r-3);
+    background: var(--mystery-soft);
+    font-size: var(--fs-2);
+    max-width: var(--text);
+  }
+  h2 {
+    font-size: var(--fs-3);
+  }
+  .mystery :global(p:last-child) {
+    margin-bottom: 0;
+  }
+</style>

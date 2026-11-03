@@ -1,0 +1,11 @@
+---
+// The big picture for a why, by slug. Scenes are drawn in this folder and listed in index.ts.
+import Figure from '../Figure.astro';
+import { scenes } from './index';
+
+interface Props { slug: string; label: string }
+const { slug, label } = Astro.props;
+const Art = scenes[slug];
+if (!Art) throw new Error(`No scene for why "${slug}": add one to src/components/whys/scenes/index.ts`);
+---
+<Figure label={label}><Art /></Figure>

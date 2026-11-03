@@ -1,0 +1,18 @@
+# Opens pull requests when a dependency or a GitHub Action has an update.
+# Security fixes come right away; ordinary updates are grouped into one weekly PR.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      npm:
+        patterns: ['*']
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ['*']

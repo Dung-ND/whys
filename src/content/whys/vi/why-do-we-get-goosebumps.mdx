@@ -1,0 +1,66 @@
+---
+question: Vì sao chúng ta nổi da gà?
+teaser: Một cơn gió lạnh, một câu chuyện ma hay bài hát em yêu thích, thế là hai cánh tay nổi đầy những nốt nhỏ li ti. Chuyện gì đang xảy ra trong làn da?
+art: Một bạn nhỏ mặc áo len đỏ run cầm cập giữa trời tuyết, thở ra những làn hơi trắng. Một chiếc kính lúp lớn soi cận cảnh làn da, phủ đầy những nốt nhỏ, mỗi nốt có một sợi lông dựng đứng.
+---
+import { Part, Mystery, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import SkinLab from '@/interactives/goosebumps/SkinLab.svelte';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `Da co lại vì lạnh.`, reply: `Da không co lại kiểu đó. Da gà có thể nổi lên chỉ trong một giây, và em cũng có thể nổi da gà trong phòng ấm, khi sợ hãi hay xúc động vì một bản nhạc.` },
+    { text: `Những cơ tí hon kéo các sợi lông dựng đứng.`, reply: `Mỗi sợi lông có một cơ nhỏ của riêng nó. Khi cơ co lại, sợi lông dựng lên và phần da quanh nó dồn thành một nốt.` },
+    { text: `Những bọt khí nhỏ hình thành dưới da.`, reply: `Dưới da em không có không khí. Các nốt được tạo ra bởi cơ, và chúng biến mất ngay khi cơ thả lỏng.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<SkinLab client:visible lang={props.lang} />
+
+Chuyển qua lại giữa **Ấm**, **Lạnh** và **Sợ**. Quan sát những cơ màu đỏ và xem chúng làm gì với sợi lông và làn da.
+
+</Part>
+
+<Part kind="answer">
+
+Mỗi sợi lông trên cơ thể em có một cơ tí hon. Khi cơ co lại, nó kéo sợi lông dựng đứng và đẩy da nhô lên thành một nốt nhỏ.
+
+Lông mọc gần như khắp người em, kể cả những chỗ lông mịn đến mức khó nhận ra. Mỗi sợi mọc ra từ một cái túi nhỏ trong da gọi là *nang lông*, và hầu như nang lông nào cũng có một cơ tí hon riêng, gọi là *cơ dựng lông*.
+
+Em không thể tự điều khiển những cơ này. Khi em bị lạnh, hệ thần kinh tự động bật chúng lên. Những cảm xúc mạnh cũng bật được cùng công tắc đó: sợ hãi, phấn khích hay một bài hát làm em rùng mình. Đó là lúc cơ thể tiết ra **adrenaline**.
+
+Với các loài thú có lông dày, điều này rất có ích. Bộ lông xù lên giữ lại một lớp không khí ấm dày hơn, như chiếc áo phao. Nó còn làm con vật trông to hơn: hãy nghĩ đến chú mèo sợ hãi với cái đuôi xù như chổi. Con nhím cũng dựng lông gai theo đúng cách đó, vì gai nhím là những sợi lông đặc biệt, rất cứng.
+
+Con người đã mất gần hết lông, nên da gà không giữ ấm được bao nhiêu. Nó là thứ còn sót lại từ tổ tiên nhiều lông của chúng ta. Còn cái tên thì rất dễ hiểu: làn da nổi nốt trông giống da con gà đã vặt lông!
+
+</Part>
+
+<Mystery>
+
+Các nhà khoa học từng nghĩ da gà ở người chỉ là thứ còn sót lại. Nhưng năm 2020, khi nghiên cứu trên chuột, họ phát hiện dây thần kinh và cơ tạo ra da gà còn đánh thức các tế bào gốc giúp mọc lông mới. Khi chuột ở trong lạnh lâu ngày, điều này giúp chúng mọc bộ lông dày hơn. Vậy với con người thì sao? Chưa ai biết.
+
+</Mystery>
+
+<TryIt title="săn da gà" need={['Một cốc nước đá', 'Kính lúp, nếu em có', 'Một bài hát em yêu thích']}>
+
+1. Quan sát thật kỹ làn da trên cẳng tay. Em có thấy những sợi lông mịn không?
+2. Áp cốc nước lạnh vào mặt trong cổ tay bên kia một lúc, hoặc đứng trước gió mát.
+3. Nhìn cẳng tay. Lông có dựng lên không? Nốt da gà xuất hiện ở đâu trước?
+4. Thử thêm: nghe một bài hát làm em rùng mình. Em có nổi da gà dù không lạnh không?
+
+</TryIt>
+
+<Whoa big="5 triệu">
+
+Cơ thể em có khoảng 5 triệu nang lông, và hầu như nang nào cũng có một cơ nổi da gà riêng. Lông mày và lông mi thì không có, vì vậy chúng chẳng bao giờ dựng đứng.
+
+</Whoa>

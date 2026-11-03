@@ -1,0 +1,57 @@
+---
+// "Myth busted": a common wrong idea, crossed out, then what is really going on.
+// Usage: <Myth claim="The sky reflects the ocean.">Real explanation…</Myth>
+import { useT, langFromUrl } from '@/i18n';
+
+interface Props { claim: string }
+const { claim } = Astro.props;
+const t = useT(langFromUrl(Astro.url));
+---
+<aside class="myth">
+  <span class="stamp" aria-hidden="true">{t('whys.myth')}</span>
+  <h2 class="sr-only">{t('whys.myth')}</h2>
+  <p class="claim"><s>{claim}</s></p>
+  <div class="truth"><slot /></div>
+</aside>
+
+<style>
+  .myth {
+    position: relative;
+    margin: 2.5rem 0;
+    padding: 1.5rem 1.5rem 1.1rem;
+    border-radius: var(--r-3);
+    background: var(--bad-soft);
+    max-width: var(--text);
+  }
+  .stamp {
+    position: absolute;
+    top: -0.9rem;
+    right: 1.2rem;
+    padding: 0.15rem 0.8rem;
+    border: 3px solid var(--bad);
+    border-radius: 8px;
+    color: var(--t-red);
+    background: var(--surface);
+    font-weight: 900;
+    font-size: var(--fs-0);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transform: rotate(4deg);
+  }
+  .claim {
+    font-size: var(--fs-3);
+    font-weight: 800;
+    color: var(--ink-2);
+    margin-bottom: 0.6rem;
+  }
+  .claim s {
+    text-decoration-color: var(--bad);
+    text-decoration-thickness: 3px;
+  }
+  .truth {
+    font-size: var(--fs-2);
+  }
+  .truth :global(p:last-child) {
+    margin-bottom: 0;
+  }
+</style>

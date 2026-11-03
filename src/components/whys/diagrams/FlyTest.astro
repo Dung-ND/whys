@@ -1,0 +1,65 @@
+---
+// The horse-coat experiment: horseflies came close to all coats, but landed far less on stripes.
+import Figure from '../Figure.astro';
+
+interface Props { label: string; dark: string; light: string; striped: string; many: string; few: string }
+const { label, dark, light, striped, many, few } = Astro.props;
+const id = `ft${Math.random().toString(36).slice(2, 8)}`;
+const body = 'M-70 0q0 -34 40 -34h70q30 0 40 -24l14 -20q8 -6 14 2l4 16q2 8 -6 12l-20 30q-6 40 -36 40h-80q-40 0 -40 -22z';
+const coats = [
+  { x: 100, fill: 'var(--art-horse)', name: dark, land: true },
+  { x: 305, fill: 'var(--art-white)', name: light, land: true },
+  { x: 505, fill: 'var(--art-white)', name: striped, land: false },
+];
+---
+<Figure label={label} width={640} height={300}>
+  <rect width="640" height="300" rx="16" fill="var(--art-sky-2)" />
+  <defs><clipPath id={id}><path d={body} transform="translate(505 170)" /></clipPath></defs>
+  {coats.map((c) => (
+    <g>
+      <g transform={`translate(${c.x} 170)`} stroke="var(--art-ink)" stroke-width="3.5" stroke-linejoin="round">
+        <path d="M-50 20v50M30 20v50" stroke-width="12" stroke-linecap="round" />
+        <path d={body} fill={c.fill} />
+      </g>
+      {!c.land && (
+        <g clip-path={`url(#${id})`} stroke="var(--art-ink)" stroke-width="10">
+          {[-60, -40, -20, 0, 20, 40, 60, 80, 100].map((d) => <path d={`M${c.x + d} 100l-14 120`} />)}
+        </g>
+      )}
+      {!c.land && <path d={body} transform={`translate(${c.x} 170)`} fill="none" stroke="var(--art-ink)" stroke-width="3.5" />}
+      <text x={c.x} y="42" text-anchor="middle" class="h">{c.name}</text>
+      {c.land ? (
+        <g>
+          {[[-40, -40], [0, -36], [36, -30], [-20, 20], [20, 26]].map(([dx, dy]) => (
+            <g transform={`translate(${c.x + dx} ${170 + dy})`}>
+              <ellipse rx="7" ry="5" fill="var(--art-fly)" stroke="var(--art-white)" stroke-width="1.5" />
+            </g>
+          ))}
+          <text x={c.x} y="280" text-anchor="middle" class="tag" fill="var(--art-ink)">✓ {many}</text>
+        </g>
+      ) : (
+        <g>
+          {[[-70, -66], [0, -76], [60, -60]].map(([dx, dy]) => (
+            <g>
+              <path d={`M${c.x + dx - 30} ${170 + dy - 20}q30 50 50 20t30 -40`} fill="none" stroke="var(--art-fly)" stroke-width="2" stroke-dasharray="4 5" />
+              <ellipse cx={c.x + dx + 50} cy={170 + dy - 22} rx="7" ry="5" fill="var(--art-fly)" />
+            </g>
+          ))}
+          <text x={c.x} y="280" text-anchor="middle" class="tag" fill="var(--art-ink)">✗ {few}</text>
+        </g>
+      )}
+    </g>
+  ))}
+</Figure>
+
+<style>
+  .h {
+    font-weight: 900;
+    font-size: 18px;
+    fill: var(--art-ink);
+  }
+  .tag {
+    font-weight: 900;
+    font-size: 16px;
+  }
+</style>

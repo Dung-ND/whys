@@ -1,0 +1,63 @@
+---
+// Why do rainbows appear? The Sun is behind the kid; sunlight goes into falling raindrops in front,
+// bends, bounces off the back of each drop and comes out split into colors.
+import Kid from './Kid.astro';
+const bands = ['--art-r', '--art-o', '--art-y', '--art-g', '--art-b', '--art-i', '--art-v'];
+// The bow is a circle around the point straight opposite the Sun (below the horizon here).
+const cx = 420, cy = 420, r0 = 300;
+---
+<rect width="640" height="400" fill="var(--art-sky)" />
+<!-- rain falling on the right -->
+<rect x="250" y="80" width="390" height="260" fill="var(--art-storm)" opacity="0.25" />
+<g class="arc" fill="none" stroke-width="11" opacity="0.92">
+  {bands.map((c, i) => <path d={`M${cx - (r0 - i * 11)} ${cy}A${r0 - i * 11} ${r0 - i * 11} 0 0 1 ${cx + r0 - i * 11} ${cy}`} stroke={`var(${c})`} />)}
+</g>
+<g stroke="var(--art-water)" stroke-width="3" stroke-linecap="round" class="rain">
+  {Array.from({ length: 30 }, (_, i) => <path d={`M${270 + ((i * 47) % 370)} ${90 + ((i * 61) % 220)}l-4 14`} />)}
+</g>
+<g fill="var(--art-storm)" stroke="var(--art-ink)" stroke-width="4">
+  <path d="M300 70a34 34 0 0 1 52 -32a46 46 0 0 1 84 8a30 30 0 0 1 18 56h-150a26 26 0 0 1 -4 -32z" />
+  <path d="M470 90a30 30 0 0 1 46 -26a40 40 0 0 1 74 8a28 28 0 0 1 14 50h-128a22 22 0 0 1 -6 -32z" />
+</g>
+<!-- sun behind, low in the sky -->
+<g class="rays" stroke="var(--art-sun-2)" stroke-width="7" stroke-linecap="round">
+  {Array.from({ length: 12 }, (_, i) => <path d="M70 120v16" transform={`rotate(${i * 30} 70 186)`} />)}
+</g>
+<circle cx="70" cy="186" r="40" fill="var(--art-sun)" stroke="var(--art-ink)" stroke-width="4" />
+<path d="M56 182a4 4 0 0 1 8 0M76 182a4 4 0 0 1 8 0" fill="none" stroke="var(--art-ink)" stroke-width="3" stroke-linecap="round" />
+<path d="M58 196q12 9 24 0" fill="none" stroke="var(--art-ink)" stroke-width="3.5" stroke-linecap="round" />
+<!-- sunlight going past the kid into the rain -->
+<g stroke="var(--art-sun)" stroke-width="4" stroke-dasharray="10 12" class="light">
+  <path d="M112 196L300 236" />
+  <path d="M112 220L300 290" />
+</g>
+<path d="M0 330q200 -30 640 -6v76h-640z" fill="var(--art-grass)" stroke="var(--art-ink)" stroke-width="4" />
+<Kid x={210} y={380} back />
+
+<style>
+  .rays {
+    animation: spin 18s linear infinite;
+    transform-origin: 70px 186px;
+  }
+  .rain {
+    animation: rain 0.7s linear infinite;
+  }
+  .light {
+    animation: march 1s linear infinite;
+  }
+  .arc {
+    animation: shimmer 3s ease-in-out infinite alternate;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes rain {
+    to { transform: translate(-4px, 14px); }
+  }
+  @keyframes march {
+    to { stroke-dashoffset: -22; }
+  }
+  @keyframes shimmer {
+    from { opacity: 0.7; }
+  }
+</style>

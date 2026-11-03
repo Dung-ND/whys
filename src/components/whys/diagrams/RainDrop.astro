@@ -1,0 +1,63 @@
+---
+// Inside one raindrop: sunlight bends going in, bounces off the back, and bends again coming out.
+// Ray paths are computed with real refraction; the color spread is made wider so it can be seen.
+import Figure from '../Figure.astro';
+
+interface Props { label: string; sun: string; bend: string; bounce: string; out: string; note: string }
+const { label, sun, bend, bounce, out, note } = Astro.props;
+
+const cx = 300, cy = 150, R = 120, b = 0.86;
+const colors = ['--art-r', '--art-o', '--art-y', '--art-g', '--art-b', '--art-v'];
+// Real indices are 1.331 (red) to 1.343 (violet); we stretch the range 3× so the fan shows.
+const ns = colors.map((_, i) => 1.331 + (i / (colors.length - 1)) * 0.036);
+const P = (phi: number) => [cx + R * Math.cos(phi), cy - R * Math.sin(phi)];
+const inc = Math.asin(b);
+const A = P(Math.PI - inc);
+const rays = ns.map((n, k) => {
+  const r = Math.asin(b / n);
+  const B = P(Math.PI - inc - (Math.PI - 2 * r));
+  const C = P(Math.PI - inc - 2 * (Math.PI - 2 * r));
+  const D = Math.PI + 2 * inc - 4 * r;
+  const E = [C[0] + 110 * Math.cos(-D), C[1] - 110 * Math.sin(-D)];
+  return { color: colors[k], B, C, E };
+});
+const f = (p: number[]) => p.map((v) => v.toFixed(1)).join(' ');
+const red = rays[0], vio = rays[rays.length - 1];
+---
+<Figure label={label} width={640} height={350}>
+  <rect width="640" height="350" rx="16" fill="var(--art-sky-2)" />
+  <circle cx={cx} cy={cy} r={R} fill="var(--art-water)" fill-opacity="0.55" stroke="var(--c-blue)" stroke-width="4" />
+  <!-- sunlight in -->
+  <path d={`M20 ${A[1]}H${A[0]}`} stroke="var(--art-sun-2)" stroke-width="7" stroke-linecap="round" />
+  <path d={`M${A[0] - 40} ${A[1] - 8}l12 8l-12 8`} fill="none" stroke="var(--art-sun-2)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  {rays.map((r) => (
+    <path d={`M${f(A)}L${f(r.B)}L${f(r.C)}L${f(r.E)}`} fill="none" stroke={`var(${r.color})`} stroke-width="3.5" stroke-linejoin="round" />
+  ))}
+  <!-- the reference line (straight back toward the Sun) for the 42° and 40° angles -->
+  <path d={`M${f(red.C)}L${red.C[0] - 200} ${red.C[1]}`} stroke="var(--art-ink)" stroke-width="2" stroke-dasharray="5 6" />
+  <text x={red.C[0] - 196} y={red.C[1] + 30} class="ang"><tspan fill="var(--art-r)">42°</tspan> <tspan fill="var(--art-ink)">/</tspan> <tspan fill="var(--art-v)">40°</tspan></text>
+  <g class="lbl">
+    <text x="24" y={A[1] - 16}>☀️ {sun}</text>
+    <text x={A[0] + 14} y={A[1] - 34}>① {bend}</text>
+    <text x={red.B[0] + 18} y={red.B[1] + 6}>② {bounce}</text>
+    <text x={red.C[0] + 20} y={red.C[1] + 24}>③ {out}</text>
+  </g>
+</Figure>
+<p class="note">{note}</p>
+
+<style>
+  .lbl text {
+    font-weight: 850;
+    font-size: 17px;
+    fill: var(--art-ink);
+  }
+  .ang {
+    font-weight: 900;
+    font-size: 20px;
+  }
+  .note {
+    margin: 0.4rem 0 0;
+    font-size: var(--fs-0);
+    color: var(--muted);
+  }
+</style>

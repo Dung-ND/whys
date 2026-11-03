@@ -1,0 +1,78 @@
+---
+question: Why do our fingers wrinkle in water?
+teaser: Stay in the bath long enough and your fingertips go wrinkly like raisins. Is it just water soaking in? Scientists found a surprising clue.
+art: A hand rises out of a bubbly bath, its fingertips covered in wrinkles, next to a bobbing yellow rubber duck.
+---
+import { Part, Myth, Mystery, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { FingerEvidence } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `Water soaks into the skin and makes it swell.`, reply: `That's what scientists believed for a long time, and the outer layer of skin does soak up some water. But it isn't the main reason. Keep reading to see the clue that proved it.` },
+    { text: `Your nerves make blood vessels narrow, so the skin puckers.`, reply: `It's your nervous system at work! Tiny blood vessels in your fingertips get narrower, the soft padding shrinks a little, and the skin on top folds into wrinkles.` },
+    { text: `Water washes away the skin's oil and it dries out.`, reply: `Water does rinse off some oil, but dry skin doesn't wrinkle like this. And the wrinkles only appear on fingers and toes, not on your arms or tummy.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<FingerEvidence
+  label="Two fingers soaked in water. The left finger has a working nerve, drawn as a yellow line, and its tip is wrinkled. The right finger's nerve has been cut, and its tip stays smooth."
+  ok="Nerve working"
+  cut="Nerve cut"
+  wrinkly="wrinkles"
+  smooth="stays smooth"
+/>
+</div>
+
+In the 1930s, doctors noticed something odd. When a person had injured the nerve to one finger, that finger **did not wrinkle** in water, while the others did. If wrinkling were just water soaking in, every finger would wrinkle. So the nerves must be in charge! Doctors still use this "wrinkle test" to check whether the nerves in a hand are working.
+
+</Part>
+
+<Part kind="answer">
+
+Your nerves tell the tiny blood vessels in your fingertips to narrow. The padding under the skin shrinks a little, and the skin on top folds into wrinkles.
+
+After about 5 minutes in warm water, your fingertips and toes start to wrinkle. Water seeping into the outer layer of skin seems to be the signal. Your nervous system answers by squeezing the tiny blood vessels under the skin.
+
+With less blood in them, the soft pads of your fingertips get a little smaller. But the skin on top stays the same size, so it buckles into ridges, like the skin of a balloon that's losing air.
+
+This happens mostly on fingertips and toes, where the skin is thick and tightly held in place.
+
+</Part>
+
+<Myth claim="Wrinkly fingers are just skin soaking up water like a sponge.">
+
+A finger whose nerve is cut stays smooth, even after a long bath. Wrinkling is something your body *does*, not just something that happens to it.
+
+</Myth>
+
+<Mystery>
+
+**But why would our bodies do this?** Some scientists think wrinkly fingers work like the treads on a tyre, giving a better grip on wet things. In a 2013 experiment, people with wrinkly fingers moved wet marbles from one box to another faster. But in a 2014 experiment, other scientists found no difference at all. The question is still open. Maybe you'll be the one to answer it!
+
+</Mystery>
+
+<TryIt title="be the scientist" need={['A bowl of warm water', 'A timer', '10 marbles or coins in a bowl of water', 'An empty bowl']}>
+
+1. Move the marbles one at a time from the water to the empty bowl with **dry** fingers. Time it.
+2. Put your hand in the warm water. Check your fingertips every minute. When do the wrinkles start? Do your palms wrinkle?
+3. Once your fingers are wrinkly, time the marble move again. Was it faster?
+4. To be fair, try it a few times each way. That's exactly what real scientists do!
+
+</TryIt>
+
+<Whoa big="5 min">
+
+In warm water, fingertips usually start to wrinkle after about 5 minutes. And the wrinkles go away by themselves a while after you get out.
+
+</Whoa>

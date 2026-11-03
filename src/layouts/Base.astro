@@ -1,0 +1,264 @@
+---
+import '@fontsource-variable/nunito';
+import '@/styles/global.css';
+import Logo from '@/components/Logo.astro';
+import { site, locales, defaultLang, languageNames, regionHints, type Lang } from '@/config/site';
+import { useT, href, pathWithoutLang } from '@/i18n';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+}
+const { lang, title, description } = Astro.props;
+const t = useT(lang);
+const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · ${t('tagline')}`;
+const desc = description ?? t('meta.description');
+const rest = pathWithoutLang(Astro.url.pathname);
+const alt = locales.map((l) => ({ lang: l, url: new URL(href(l, rest), Astro.site).href }));
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+    {alt.map((a) => <link rel="alternate" hreflang={a.lang} href={a.url} />)}
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <meta name="theme-color" content="#5b5cf0" />
+    <link rel="manifest" href={`${base}manifest.webmanifest`} />
+    <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
+    <meta property="og:image" content={new URL(`${base}og.png`, Astro.site).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:type" content="website" />
+
+    <!-- Runs before paint: apply saved theme, and send first-time visitors to their language.
+         The script text is the same on every page (so the CSP can hash it); its data comes from the JSON block. -->
+    <script
+      type="application/json"
+      id="whys-boot"
+      set:html={JSON.stringify({ lang, defaultLang, locales, regionHints, rest, base: import.meta.env.BASE_URL }).replace(/</g, '\\u003c')}
+    />
+    <script is:inline>
+      try {
+        const { lang, defaultLang, locales, regionHints, rest, base } = JSON.parse(document.getElementById('whys-boot').textContent);
+        const theme = localStorage.getItem('whys-theme');
+        if (theme) document.documentElement.dataset.theme = theme;
+
+        if (lang === defaultLang) {
+          let target = localStorage.getItem('whys-lang');
+          if (!target) {
+            for (const l of navigator.languages || [navigator.language]) {
+              const code = String(l).toLowerCase().split('-')[0];
+              if (locales.includes(code)) { target = code; break; }
+            }
+          }
+          if (!target || target === defaultLang) {
+            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+            const hit = Object.keys(regionHints).find((z) => tz.startsWith(z));
+            if (!localStorage.getItem('whys-lang') && hit) target = regionHints[hit];
+          }
+          if (target && target !== lang && locales.includes(target)) {
+            const b = base.endsWith('/') ? base : base + '/';
+            location.replace(b + target + '/' + rest + location.search + location.hash);
+          }
+        }
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">{t('nav.skip')}</a>
+    <header class="site">
+      <div class="wrap bar">
+        <a class="home" href={href(lang)} aria-label={site.name}><Logo /></a>
+        <span class="spacer"></span>
+        <div class="tools">
+          <details class="lang">
+            <summary aria-label={t('nav.language')}>
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              <span>{lang.toUpperCase()}</span>
+            </summary>
+            <ul>
+              {locales.map((l) => (
+                <li>
+                  <a href={href(l, rest)} hreflang={l} lang={l} data-lang={l} aria-current={l === lang ? 'true' : undefined}>
+                    {languageNames[l]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+          <button class="theme" type="button" aria-label={t('nav.theme')} title={t('nav.theme')}>
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" fill="currentColor"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site">
+      <div class="wrap foot">
+        <div>
+          <Logo size={22} />
+          <p>{t('footer.made')}</p>
+        </div>
+        <p class="privacy">{t('footer.privacy')}</p>
+        <p class="copy">© {site.since} {site.name}</p>
+      </div>
+    </footer>
+
+    <script>
+      document.querySelectorAll<HTMLAnchorElement>('a[data-lang]').forEach((a) =>
+        a.addEventListener('click', () => {
+          try { localStorage.setItem('whys-lang', a.dataset.lang!); } catch {}
+        }),
+      );
+      document.querySelector('.theme')?.addEventListener('click', () => {
+        const root = document.documentElement;
+        const dark = root.dataset.theme
+          ? root.dataset.theme === 'dark'
+          : matchMedia('(prefers-color-scheme: dark)').matches;
+        root.dataset.theme = dark ? 'light' : 'dark';
+        try { localStorage.setItem('whys-theme', root.dataset.theme); } catch {}
+      });
+      // Offline support (production only, so it never caches the dev server).
+      if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+        navigator.serviceWorker.register(`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}sw.js`).catch(() => {});
+      }
+      // Close the language menu when clicking elsewhere.
+      document.addEventListener('click', (e) => {
+        const d = document.querySelector<HTMLDetailsElement>('details.lang');
+        if (d?.open && !d.contains(e.target as Node)) d.open = false;
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: saturate(1.4) blur(14px);
+    -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: 64px;
+  }
+  .home {
+    text-decoration: none;
+  }
+  .spacer {
+    margin-right: auto;
+  }
+  .tools {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  .theme,
+  .lang summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    height: 40px;
+    min-width: 40px;
+    justify-content: center;
+    padding: 0 0.6rem;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-2);
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 0.85rem;
+  }
+  .lang {
+    position: relative;
+  }
+  .lang summary {
+    list-style: none;
+  }
+  .lang summary::-webkit-details-marker {
+    display: none;
+  }
+  .lang ul {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    margin: 0;
+    padding: 0.35rem;
+    list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-2);
+    box-shadow: var(--shadow-2);
+    min-width: 170px;
+  }
+  .lang a {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--r-1);
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .lang a:hover {
+    background: var(--surface-2);
+  }
+  .lang a[aria-current] {
+    color: var(--brand-ink);
+  }
+  @media (max-width: 560px) {
+    .bar {
+      gap: 0.75rem;
+    }
+  }
+  @media (max-width: 440px) {
+    .home {
+      --logo-scale: 0.82;
+    }
+    .bar {
+      gap: 0.5rem;
+    }
+    .lang summary svg {
+      display: none;
+    }
+  }
+
+  footer.site {
+    margin-top: 6rem;
+    border-top: 1px solid var(--line);
+    padding: 2.5rem 0 3rem;
+    color: var(--muted);
+    font-size: var(--fs-0);
+  }
+  .foot {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .foot p {
+    margin: 0.4rem 0 0;
+  }
+  @media (max-width: 720px) {
+    .foot {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

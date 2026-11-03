@@ -1,0 +1,79 @@
+---
+question: Vì sao có cầu vồng?
+teaser: Nước mưa trong suốt, ánh nắng trông màu trắng. Vậy những sắc màu kia từ đâu ra, và sao chỉ thỉnh thoảng mới xuất hiện?
+art: Một bạn nhỏ đứng trên bãi cỏ, Mặt Trời ở thấp phía sau lưng. Phía trước, mưa rơi từ những đám mây xám và một chiếc cầu vồng rực rỡ vắt ngang màn mưa, đỏ ở ngoài cùng, tím ở trong cùng.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { RainDrop } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={2}
+  options={[
+    { text: `Giọt mưa có một chút màu.`, reply: `Giọt mưa trong như nước máy. Màu sắc đến từ ánh nắng chứ không phải từ nước.` },
+    { text: `Mặt Trời tô màu lên những đám mây.`, reply: `Em thậm chí không cần mây: có thể tạo cầu vồng bằng vòi tưới cây! Và để ý nhé: cầu vồng luôn ở phía bầu trời đối diện với Mặt Trời.` },
+    { text: `Giọt mưa bẻ cong ánh nắng và tách nó thành nhiều màu.`, reply: `Mỗi giọt mưa giống một lăng kính kiêm tấm gương tí hon: nó bẻ cong ánh nắng, hắt ngược lại và trải ra thành các màu.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<RainDrop
+  label="Ánh nắng đi vào giọt mưa từ bên trái và bị bẻ cong. Bên trong, nó phản xạ ở mặt sau của giọt mưa, rồi đi ra và bị bẻ cong thêm lần nữa, tách thành các màu từ đỏ đến tím. Ánh sáng đỏ đi ra lệch khoảng 42 độ so với tia nắng tới, ánh sáng tím khoảng 40 độ."
+  sun="Ánh nắng"
+  bend="bẻ cong khi đi vào"
+  bounce="phản xạ ở mặt sau"
+  out="bẻ cong lần nữa, tách màu"
+  note="Các màu được vẽ tách xa hơn thực tế để em dễ nhìn."
+/>
+</div>
+
+Hãy lần theo một tia nắng đi qua một giọt mưa. Mỗi màu đi ra theo một góc riêng: màu đỏ lệch khoảng **42°** so với hướng tia nắng, màu tím khoảng **40°**.
+
+</Part>
+
+<Part kind="answer">
+
+Giọt mưa bẻ cong ánh nắng, hắt ngược lại và tách nó thành nhiều màu. Em thấy cầu vồng khi Mặt Trời ở sau lưng và mưa ở trước mặt.
+
+Ánh nắng là hỗn hợp của mọi màu. Khi đi từ không khí vào nước, ánh sáng bị bẻ cong (các nhà khoa học gọi là **khúc xạ**). Mỗi màu bị bẻ cong một chút khác nhau, màu tím nhiều nhất, màu đỏ ít nhất, nên các màu bắt đầu tách nhau ra.
+
+Bên trong giọt mưa, ánh sáng phản xạ ở mặt sau rồi đi ra ngoài, bị bẻ cong thêm lần nữa. Nó quay trở lại về phía có Mặt Trời, mỗi màu theo một góc riêng.
+
+Hàng triệu giọt mưa cùng làm như vậy. Từ những giọt ở độ cao vừa đúng, ánh sáng đỏ đến mắt em; từ những giọt thấp hơn một chút, ánh sáng tím đến mắt em. Cùng nhau, chúng vẽ nên chiếc cầu vồng với **màu đỏ ở ngoài cùng và màu tím ở trong cùng**.
+
+Điều đó giải thích rất nhiều chuyện:
+
+- **Mặt Trời phải ở sau lưng em** và khá thấp. Vì thế cầu vồng hay xuất hiện vào buổi sáng hoặc chiều muộn.
+- **Cầu vồng có hình tròn.** Thật ra cầu vồng là một vòng tròn bao quanh điểm đối diện hẳn với Mặt Trời, chính là bóng đầu của em! Mặt đất thường che mất phần dưới, nhưng từ trên máy bay đôi khi có thể thấy cả vòng tròn.
+- **Cầu vồng đôi** xuất hiện khi ánh sáng phản xạ hai lần trong giọt mưa. Cầu vồng thứ hai mờ hơn, và thứ tự màu bị đảo ngược.
+
+</Part>
+
+<Myth claim="Em có thể đi đến chân cầu vồng.">
+
+Cầu vồng không phải một vật nằm ở một chỗ. Đó là ánh sáng đến mắt *em* từ những giọt mưa ở một góc nhất định. Khi em di chuyển, những giọt mưa khác tạo nên cầu vồng của em, nên nó đi theo em. Ngay cả người đứng cạnh cũng thấy một chiếc cầu vồng hơi khác!
+
+</Myth>
+
+<TryIt title="tự tạo cầu vồng" need={['Vòi tưới có đầu phun sương, hoặc bình xịt nước', 'Một buổi sáng hoặc chiều muộn có nắng']} safety="Không bao giờ nhìn thẳng vào Mặt Trời.">
+
+1. Đứng quay lưng về phía Mặt Trời.
+2. Phun một làn sương mịn ra phía trước, hơi hướng lên trên.
+3. Nhìn vào làn sương (không nhìn Mặt Trời) và di chuyển vòi phun cho đến khi cầu vồng hiện ra.
+4. Màu nào nằm ngoài cùng? Em có thấy chiếc cầu vồng thứ hai mờ hơn không?
+
+</TryIt>
+
+<Whoa big="42°">
+
+Mọi chiếc cầu vồng em từng thấy đều nằm cách điểm đối diện Mặt Trời khoảng 42°. Vì thế cầu vồng trên trời lúc nào cũng to như nhau. Không có cầu vồng nhỏ hay lớn, chỉ có lúc em thấy nhiều hay ít phần của nó mà thôi.
+
+</Whoa>

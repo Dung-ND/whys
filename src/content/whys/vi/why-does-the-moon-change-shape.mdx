@@ -1,0 +1,71 @@
+---
+question: Vì sao Mặt Trăng thay đổi hình dạng?
+teaser: Có đêm trăng là một nụ cười mảnh, có đêm tròn vành vạnh, có đêm biến mất. Mặt Trăng không hề thay đổi, vậy cái gì đã thay đổi?
+art: Bầu trời đêm đầy sao lấp lánh. Dọc theo một đường chấm, Mặt Trăng xuất hiện năm lần, lớn dần từ lưỡi liềm mảnh thành nửa vầng trăng rồi trăng tròn, còn một bạn nhỏ trên đồi chỉ tay lên trời.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import MoonLab from '@/interactives/moon-phases/MoonLab.svelte';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={2}
+  options={[
+    { text: `Bóng của Trái Đất che mất một phần Mặt Trăng.`, reply: `Rất nhiều người nghĩ vậy! Nhưng bóng Trái Đất chỉ phủ lên Mặt Trăng khi có nguyệt thực, vài lần mỗi năm. Hơn nữa, trăng lưỡi liềm thường ở gần Mặt Trời trên bầu trời, nơi bóng Trái Đất không thể nào tới được.` },
+    { text: `Mây che mất một phần Mặt Trăng.`, reply: `Mây có thể che Mặt Trăng, nhưng mây trôi đi và thay đổi liên tục. Còn hình dạng Mặt Trăng thì lặp lại đúng một kiểu mỗi tháng, kể cả những đêm trời quang không gợn mây.` },
+    { text: `Ta thấy phần nửa được chiếu sáng nhiều hay ít khác nhau.`, reply: `Mặt Trời luôn chiếu sáng một nửa Mặt Trăng. Khi Mặt Trăng đi vòng quanh Trái Đất, ta nhìn thấy nửa sáng ấy nhiều hay ít khác nhau.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<MoonLab client:visible lang={props.lang} />
+
+Bấm **Chạy một tháng** hoặc kéo thanh trượt. Hãy để ý đường màu cam: nó đánh dấu nửa Mặt Trăng hướng về phía em.
+
+</Part>
+
+<Part kind="answer">
+
+Mặt Trăng luôn được Mặt Trời chiếu sáng một nửa. Khi nó đi vòng quanh Trái Đất, ta thấy nửa sáng ấy nhiều hay ít khác nhau.
+
+Mặt Trăng không tự phát sáng. Nó sáng vì ánh nắng chiếu vào rồi hắt lại, giống quả bóng trong chùm sáng đèn pin. Lúc nào cũng vậy, nửa hướng về Mặt Trời thì sáng, nửa kia thì tối.
+
+Mặt Trăng đi hết một vòng quanh Trái Đất trong khoảng một tháng. (Vì thế người xưa tính tháng theo trăng, gọi là âm lịch!) Trên đường đi:
+
+- **Trăng mới:** Mặt Trăng nằm giữa Trái Đất và Mặt Trời. Nửa sáng quay đi chỗ khác nên ta không thấy trăng.
+- **Trăng đầu tháng (lớn dần):** mỗi đêm, phần sáng quay về phía ta nhiều hơn một chút: lưỡi liềm, rồi nửa vầng trăng (*thượng huyền*), rồi trăng khuyết đầy đặn.
+- **Trăng tròn:** Trái Đất nằm giữa Mặt Trời và Mặt Trăng, ta thấy trọn nửa sáng. Trăng tròn thường rơi vào ngày rằm (15 âm lịch).
+- **Trăng cuối tháng (nhỏ dần):** mọi hình dạng lặp lại theo chiều ngược lại, cho đến trăng mới.
+
+Một chu kỳ trọn vẹn dài khoảng **29,5 ngày**.
+
+**Lộn ngược!** Người ở Úc hay Argentina thấy hình dạng Mặt Trăng bị lật: trăng đầu tháng sáng ở bên trái chứ không phải bên phải.
+
+</Part>
+
+<Myth claim="Trăng khuyết là do bóng của Trái Đất.">
+
+Bóng Trái Đất chỉ phủ lên Mặt Trăng khi có nguyệt thực, và nguyệt thực chỉ xảy ra vào đêm trăng tròn. Các pha của Mặt Trăng là chuyện ta nhìn thấy bao nhiêu phần của nửa được chiếu sáng.
+
+</Myth>
+
+<TryIt title="Mặt Trăng trong tay em" need={['Một cây đèn không có chụp', 'Một quả bóng, hoặc quả cam cắm vào cây bút chì', 'Một căn phòng tối']} safety="Đừng nhìn thẳng vào bóng đèn, và để đèn xa giấy, vải.">
+
+1. Đặt đèn ở một phía của phòng. Đèn là Mặt Trời. Đầu em là Trái Đất.
+2. Cầm quả bóng ở xa hết tầm tay, cao hơn đầu một chút.
+3. Từ từ xoay người một vòng, mắt luôn nhìn theo quả bóng.
+4. Quan sát phần sáng trên quả bóng: lưỡi liềm, nửa vầng, tròn đầy rồi lại nhỏ dần. Em vừa tạo ra mọi pha của Mặt Trăng!
+
+</TryIt>
+
+<Whoa big="3,8 cm">
+
+Mỗi năm, Mặt Trăng trôi ra xa Trái Đất thêm khoảng 3,8 xăng-ti-mét. Nhanh xấp xỉ tốc độ móng tay em dài ra.
+
+</Whoa>

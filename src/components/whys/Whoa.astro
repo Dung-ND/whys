@@ -1,0 +1,58 @@
+---
+// A surprising fact with one big number. Usage: <Whoa big="30,000 °C">Lightning is hotter…</Whoa>
+import { useT, langFromUrl } from '@/i18n';
+
+interface Props { big: string }
+const { big } = Astro.props;
+const t = useT(langFromUrl(Astro.url));
+---
+<aside class="whoa">
+  <h2 class="tag">{t('whys.whoa')}</h2>
+  <p class="big">{big}</p>
+  <div class="txt"><slot /></div>
+</aside>
+
+<style>
+  .whoa {
+    margin: 2.5rem 0;
+    padding: 1.4rem 1.6rem;
+    border-radius: var(--r-3);
+    background: var(--cat-soft);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 'tag tag' 'big txt';
+    gap: 0.25rem 1.5rem;
+    align-items: center;
+  }
+  .tag {
+    grid-area: tag;
+    font-size: var(--fs-0);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--cat-text);
+    margin: 0;
+  }
+  .big {
+    grid-area: big;
+    margin: 0;
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--cat-text);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+  }
+  .txt {
+    grid-area: txt;
+    font-size: var(--fs-2);
+  }
+  .txt :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  @media (max-width: 620px) {
+    .whoa {
+      grid-template-columns: 1fr;
+      grid-template-areas: 'tag' 'big' 'txt';
+    }
+  }
+</style>

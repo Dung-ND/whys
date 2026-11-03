@@ -1,0 +1,55 @@
+---
+// A step of a why page. Usage in MDX: <Part kind="guess"> … </Part>
+import { useT, langFromUrl } from '@/i18n';
+
+const kinds = { guess: '🤔', investigate: '🔬', answer: '💡' } as const;
+interface Props { kind: keyof typeof kinds }
+const { kind } = Astro.props;
+const t = useT(langFromUrl(Astro.url));
+---
+<section id={kind} class={`part ${kind}`}>
+  <h2 class="label"><span class="ico" aria-hidden="true">{kinds[kind]}</span>{t(`whys.part.${kind}`)}</h2>
+  <div class="body"><slot /></div>
+</section>
+
+<style>
+  .part {
+    margin: 3rem 0;
+  }
+  .label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: var(--fs-0);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--cat-text);
+    margin-bottom: 1rem;
+  }
+  .ico {
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: var(--cat-soft);
+    font-size: 1.15rem;
+    letter-spacing: 0;
+  }
+  .body {
+    font-size: var(--fs-2);
+  }
+  /* Text stays at a readable width; labs and diagrams use the full column. */
+  .body > :global(:is(p, ul, ol)) {
+    max-width: var(--text);
+  }
+  .answer .body :global(p:first-child) {
+    font-size: var(--fs-3);
+    font-weight: 750;
+    line-height: 1.4;
+  }
+  .body :global(b),
+  .body :global(strong) {
+    font-weight: 850;
+  }
+</style>

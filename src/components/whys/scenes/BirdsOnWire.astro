@@ -1,0 +1,58 @@
+---
+// Why don't birds get shocked on power lines? Birds sit on a live wire while electricity
+// (the moving dots) flows along the wire, right under their feet.
+const wires = [120, 170, 220];
+const sag = (y: number) => `M60 ${y}Q320 ${y + 60} 580 ${y}`;
+// Points on the middle of each wire for the birds: the quadratic's midpoint is at y + 30.
+const birds: [number, number, number, string][] = [
+  [200, 120 + 22, 1, 'var(--art-b)'], [260, 120 + 28, -1, 'var(--art-red)'],
+  [330, 170 + 30, 1, 'var(--art-y)'], [430, 220 + 24, -1, 'var(--art-g)'], [480, 220 + 19, 1, 'var(--art-v)'],
+];
+---
+<rect width="640" height="400" fill="var(--art-sky)" />
+<g fill="var(--art-cloud)" stroke="var(--art-ink)" stroke-width="3.5">
+  <path d="M90 60a16 16 0 0 1 26 -14a22 22 0 0 1 40 6a14 14 0 0 1 6 26h-68a10 10 0 0 1 -4 -18z" />
+  <path d="M420 44a14 14 0 0 1 22 -12a18 18 0 0 1 34 4a12 12 0 0 1 6 22h-58a10 10 0 0 1 -4 -14z" />
+</g>
+<path d="M0 340q200 -24 640 -4v64h-640z" fill="var(--art-grass)" stroke="var(--art-ink)" stroke-width="4" />
+<!-- poles -->
+<g fill="var(--art-wood)" stroke="var(--art-ink)" stroke-width="4" stroke-linejoin="round">
+  <rect x="48" y="96" width="24" height="260" rx="4" />
+  <rect x="568" y="96" width="24" height="260" rx="4" />
+  <rect x="30" y="110" width="60" height="12" rx="3" />
+  <rect x="550" y="110" width="60" height="12" rx="3" />
+</g>
+<!-- wires with electricity flowing -->
+{wires.map((y) => (
+  <>
+    <path d={sag(y)} fill="none" stroke="var(--art-wire)" stroke-width="5" />
+    <path d={sag(y)} fill="none" stroke="var(--art-bolt)" stroke-width="5" stroke-dasharray="2 22" stroke-linecap="round" class="flow" />
+  </>
+))}
+{birds.map(([x, y, dir, color], i) => (
+  <g transform={`translate(${x} ${y}) scale(${dir} 1)`}>
+    <g class="bird" style={`animation-delay:${-i * 0.7}s`} stroke="var(--art-ink)" stroke-width="3" stroke-linejoin="round">
+      <path d="M-6 -3v6M6 -3v6" stroke-width="3" />
+      <ellipse cx="0" cy="-20" rx="20" ry="17" fill={color} />
+      <path d="M-18 -22l-14 -4l12 12z" fill={color} />
+      <path d="M-6 -22q8 10 18 2" fill="none" stroke-width="3" />
+      <circle cx="10" cy="-28" r="3" fill="var(--art-ink)" stroke="none" />
+      <path d="M18 -26l10 4l-10 3z" fill="var(--art-o)" />
+    </g>
+  </g>
+))}
+
+<style>
+  .flow {
+    animation: flow 0.8s linear infinite;
+  }
+  .bird {
+    animation: bob 2.2s ease-in-out infinite;
+  }
+  @keyframes flow {
+    to { stroke-dashoffset: -24; }
+  }
+  @keyframes bob {
+    50% { transform: translateY(-3px) rotate(-3deg); }
+  }
+</style>

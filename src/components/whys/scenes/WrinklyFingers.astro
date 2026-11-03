@@ -1,0 +1,75 @@
+---
+// Why do fingers wrinkle in water? A hand rises out of a bubbly bath with wrinkly fingertips, next to a rubber duck.
+---
+<rect width="640" height="400" fill="var(--art-sky-2)" />
+<!-- tiles -->
+<g stroke="var(--art-water)" stroke-width="2" opacity="0.7">
+  {Array.from({ length: 9 }, (_, i) => <path d={`M${i * 80} 0v220`} />)}
+  {Array.from({ length: 3 }, (_, i) => <path d={`M0 ${i * 80}h640`} />)}
+</g>
+<!-- tub -->
+<path d="M30 220h580v40q0 110 -110 110h-360q-110 0 -110 -110z" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="5" />
+<path d="M46 236h548v20q0 96 -96 96h-356q-96 0 -96 -96z" fill="var(--art-water)" />
+<!-- hand -->
+<g class="hand" stroke="var(--art-ink)" stroke-width="4" stroke-linejoin="round" fill="var(--art-skin)">
+  <path d="M260 300v-90q0 -20 18 -22h70q18 2 18 22v90z" />
+  {[[262, 110, 24], [296, 92, 25], [330, 100, 24]].map(([x, y, w]) => (
+    <>
+      <rect x={x} y={y} width={w} height={210 - y} rx="12" />
+      <g class="wr" fill="none" stroke="var(--art-skin-2)" stroke-width="2.5" stroke-linecap="round">
+        <path d={`M${x + 5} ${y + 14}q3 -3 6 0t6 0t6 0`} />
+        <path d={`M${x + 4} ${y + 24}q3 3 6 0t6 0t6 0`} />
+        <path d={`M${x + 5} ${y + 34}q3 -3 6 0t6 0t6 0`} />
+      </g>
+    </>
+  ))}
+  <rect x="356" y="126" width="22" height="90" rx="11" transform="rotate(14 367 210)" />
+  <path d="M262 226q-34 -40 -44 -26q-6 10 28 60" />
+</g>
+<!-- water in front of the wrist -->
+<path d="M200 262h220v40h-220z" fill="var(--art-water)" />
+<path d="M200 262q20 -8 40 0t40 0t40 0t40 0t40 0" fill="none" stroke="var(--art-white)" stroke-width="4" stroke-linecap="round" />
+<!-- bubbles -->
+<g fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="2.5">
+  {[[110, 236, 18], [140, 222, 12], [180, 240, 16], [430, 238, 16], [470, 228, 20], [520, 240, 14], [560, 232, 10]].map(([x, y, r], i) => (
+    <circle class="bub" cx={x} cy={y} r={r} style={`animation-delay:${-i * 0.6}s`} />
+  ))}
+</g>
+<!-- duck -->
+<g class="duck" stroke="var(--art-ink)" stroke-width="4" stroke-linejoin="round">
+  <path d="M440 246q-6 -34 30 -34h40q14 -30 40 -24q24 8 16 34q16 4 0 16q4 20 -30 24h-70q-26 0 -26 -16z" fill="var(--art-y)" />
+  <path d="M568 222l22 4l-20 8z" fill="var(--art-o)" />
+  <circle cx="550" cy="206" r="4" fill="var(--art-ink)" />
+</g>
+<!-- falling drops -->
+<g fill="var(--art-water)" stroke="var(--art-ink)" stroke-width="2.5">
+  <path class="drop" d="M286 230q-6 10 0 14q6 -4 0 -14z" />
+  <path class="drop d2" d="M342 236q-6 10 0 14q6 -4 0 -14z" />
+</g>
+
+<style>
+  .duck {
+    animation: bob 2.4s ease-in-out infinite;
+  }
+  .bub {
+    animation: wobble 3s ease-in-out infinite alternate;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .drop {
+    animation: drip 1.6s ease-in infinite;
+  }
+  .d2 {
+    animation-delay: 0.8s;
+  }
+  @keyframes bob {
+    50% { transform: translateY(5px) rotate(2deg); }
+  }
+  @keyframes wobble {
+    to { transform: scale(1.12); }
+  }
+  @keyframes drip {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(40px); opacity: 0; }
+  }
+</style>

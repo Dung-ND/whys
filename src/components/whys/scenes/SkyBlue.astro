@@ -1,0 +1,79 @@
+---
+// Why is the sky blue? White sunlight (all colors) crosses the air; tiny air molecules bounce
+// blue light around the whole sky, while most red and yellow light goes straight on.
+import Kid from './Kid.astro';
+const spectrum = ['--art-r', '--art-o', '--art-y', '--art-g', '--art-b', '--art-v'];
+// Air molecules (pairs of atoms) along the beam, with the directions their blue light goes.
+const molecules: [number, number, number][] = [
+  [250, 128, 10], [350, 160, 70], [450, 192, 130], [540, 221, 30], [200, 225, 160], [420, 90, 200],
+];
+const dirs = [0, 60, 120, 180, 240, 300];
+---
+<rect width="640" height="400" fill="var(--art-sky)" />
+<rect width="640" height="150" fill="var(--art-sky-2)" opacity="0.35" />
+
+<!-- sun -->
+<g class="sun">
+  <g class="rays" stroke="var(--art-sun-2)" stroke-width="7" stroke-linecap="round">
+    {Array.from({ length: 12 }, (_, i) => <path d="M90 10v16" transform={`rotate(${i * 30} 90 78)`} />)}
+  </g>
+  <circle cx="90" cy="78" r="42" fill="var(--art-sun)" stroke="var(--art-ink)" stroke-width="4" />
+  <circle cx="77" cy="74" r="4" fill="var(--art-ink)" />
+  <circle cx="102" cy="74" r="4" fill="var(--art-ink)" />
+  <path d="M78 90q12 10 24 0" fill="none" stroke="var(--art-ink)" stroke-width="3.5" stroke-linecap="round" />
+</g>
+
+<!-- white light = every color, travelling together -->
+<g class="beam" stroke-width="5" stroke-linecap="round" opacity="0.9">
+  {spectrum.map((c, i) => <path d={`M130 ${92 + i * 5}L640 ${262 + i * 5}`} stroke={`var(${c})`} />)}
+</g>
+
+<!-- molecules scatter blue light every which way -->
+{molecules.map(([x, y], m) => (
+  <g transform={`translate(${x} ${y})`}>
+    <g class="scatter" style={`animation-delay:${(m * 0.37) % 1.8}s`}>
+      {dirs.map((d) => (
+        <g transform={`rotate(${d + molecules[m][2]})`}>
+          <path d="M14 0q4 -5 8 0t8 0t8 0" fill="none" stroke="var(--art-b)" stroke-width="3.5" stroke-linecap="round" />
+          <path d="M38 -5l7 5l-7 5z" fill="var(--art-b)" />
+        </g>
+      ))}
+    </g>
+    <circle cx="-5" cy="0" r="6" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="2.5" />
+    <circle cx="5" cy="0" r="6" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="2.5" />
+  </g>
+))}
+
+<!-- cloud -->
+<g class="cloud" fill="var(--art-cloud)" stroke="var(--art-ink)" stroke-width="3.5">
+  <path d="M470 70a18 18 0 0 1 30 -16a24 24 0 0 1 44 6a16 16 0 0 1 8 30h-76a12 12 0 0 1 -6 -20z" />
+</g>
+
+<!-- ground -->
+<path d="M0 330q160 -40 320 -10t320 -14v94h-640z" fill="var(--art-grass)" stroke="var(--art-ink)" stroke-width="4" />
+<path d="M0 360q200 -20 640 -10v50h-640z" fill="var(--art-grass-2)" />
+<Kid x={150} y={372} point mood="wow" look={[2, -3]} />
+
+<style>
+  .rays {
+    animation: spin 18s linear infinite;
+    transform-origin: 90px 78px;
+  }
+  .scatter {
+    animation: pulse 1.8s ease-out infinite;
+  }
+  .cloud {
+    animation: drift 9s ease-in-out infinite alternate;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes pulse {
+    0% { transform: scale(0.5); opacity: 0; }
+    30% { opacity: 1; }
+    100% { transform: scale(1.25); opacity: 0; }
+  }
+  @keyframes drift {
+    to { transform: translateX(-30px); }
+  }
+</style>

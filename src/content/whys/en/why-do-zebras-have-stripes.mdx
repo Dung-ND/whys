@@ -1,0 +1,75 @@
+---
+question: Why do zebras have stripes?
+teaser: Scientists argued about this for more than 150 years. Then they tried dressing horses in striped coats.
+art: A zebra stands on the golden savanna under an acacia tree. Buzzing flies circle around it with question marks over their heads, unable to land.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { FlyTest } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `To hide in tall grass.`, reply: `A good guess, but zebras live on open grassland, and from far away a lion sees the stripes blur into plain grey. Experiments suggest stripes don't help zebras hide much.` },
+    { text: `To confuse biting flies.`, reply: `That's what the best evidence says! Flies that bite, and can spread diseases, have trouble landing on stripes.` },
+    { text: `To keep cool in the hot sun.`, reply: `Scientists tested this too. Striped and plain objects left in the sun warmed up by about the same amount, so cooling doesn't seem to be the main reason.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<FlyTest
+  label="Three horses: one in a dark coat, one in a white coat and one in a striped coat. Many flies land on the dark and white coats. Around the striped coat, the flies swerve away instead of landing."
+  dark="Dark coat"
+  light="White coat"
+  striped="Striped coat"
+  many="lots of landings"
+  few="few landings"
+/>
+</div>
+
+In 2019, scientists on a farm in England put coats on horses: some plain, some with zebra stripes. Then they filmed the horseflies. The flies flew toward all the horses, but near the stripes they **failed to slow down, bumped into the coat or flew straight past**. Far fewer of them landed.
+
+Nobody is completely sure *why* stripes confuse flies. One idea: as a fly zooms in, the stripes make it hard to judge its speed and direction, so it can't land properly.
+
+</Part>
+
+<Part kind="answer">
+
+The best evidence says stripes protect zebras from biting flies.
+
+In Africa, horseflies and tsetse flies bite, and they can spread serious diseases. Zebras have short, thin coats, which would make them easy targets.
+
+People have argued about zebra stripes since the 1800s. Maybe they help zebras hide? Confuse lions? Stay cool? Recognize each other? Scientists have tested these ideas one by one. So far, protection from flies has the strongest evidence: zebra-like stripes are found where biting flies are most common, and flies really do struggle to land on them.
+
+Two more fun facts: zebras have dark skin under their fur, and **no two zebras have the same stripes**, just like fingerprints.
+
+</Part>
+
+<Myth claim="Stripes help zebras hide in the grass.">
+
+Zebras live on open grassland, and the grass there is mostly yellow-green, not black and white! From a distance, a lion sees the stripes blur together into grey.
+
+</Myth>
+
+<TryIt title="be a fly scientist" need={['3 sheets of white paper', 'A thick black marker', 'Tape', 'A place outdoors where flies are around']}>
+
+1. Leave one sheet white, color one completely black, and draw bold black stripes on the third.
+2. Tape them side by side outdoors, where flies are buzzing around.
+3. For 20 minutes, make a tally mark each time a fly lands on each sheet.
+4. Which sheet got the fewest landings? Compare with a friend's results: real science needs repeats.
+
+</TryIt>
+
+<Whoa big="50% fewer">
+
+In Japan, scientists painted black-and-white stripes on cows. The striped cows got about half as many fly bites, and they flicked their tails and stamped their feet less often.
+
+</Whoa>

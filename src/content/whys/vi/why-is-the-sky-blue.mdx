@@ -1,0 +1,70 @@
+---
+question: Vì sao bầu trời màu xanh?
+teaser: Ánh nắng trông có vẻ trắng, nhưng nó chứa đủ mọi màu của cầu vồng. Vậy sao bầu trời lại chọn màu xanh?
+art: Ông Mặt Trời tươi cười chiếu một chùm sáng sọc bảy màu ngang bầu trời. Dọc theo chùm sáng, các phân tử không khí tí hon bắn ra những mũi tên xanh lượn sóng theo mọi hướng, còn một bạn nhỏ trên bãi cỏ ngạc nhiên chỉ tay lên trời.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import SkyLab from '@/interactives/sky-color/SkyLab.svelte';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `Bầu trời phản chiếu màu xanh của biển.`, reply: `Rất nhiều người nghĩ vậy! Nhưng bầu trời trên sa mạc hay núi cao, xa biển hàng nghìn cây số, vẫn xanh y như thế. Thật ra là ngược lại: biển trông xanh một phần vì nó phản chiếu bầu trời.` },
+    { text: `Không khí làm tán xạ ánh sáng xanh nhiều hơn các màu khác.`, reply: `Ánh nắng là hỗn hợp của mọi màu. Khi gặp các phân tử không khí tí hon, ánh sáng xanh bị bật đi khắp nơi nhiều hơn ánh sáng đỏ rất nhiều, nên màu xanh đến mắt em từ mọi phía của bầu trời.` },
+    { text: `Vũ trụ phía sau lớp không khí có màu xanh.`, reply: `Thắc mắc điều gì ở sau lớp không khí là rất hay! Nhưng vũ trụ có màu đen. Các nhà du hành trên Mặt Trăng, nơi không có không khí, thấy bầu trời đen kịt ngay giữa ban ngày.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<SkyLab client:visible lang={props.lang} />
+
+Kéo Mặt Trời xuống tận đường chân trời. Màu của Mặt Trời thay đổi thế nào? Còn bầu trời xung quanh thì sao?
+
+</Part>
+
+<Part kind="answer">
+
+Không khí làm ánh sáng xanh bật đi khắp bầu trời, nhiều hơn hẳn các màu khác.
+
+Ánh nắng trông trắng, nhưng thật ra là hỗn hợp của mọi màu, từ đỏ đến tím. Em có thể thấy chúng tách ra trong cầu vồng.
+
+Trên đường đến chỗ em, ánh nắng đi qua không khí. Không khí gồm vô số phân tử tí hon, chủ yếu là khí ni-tơ và ô-xi, nhỏ đến mức không thể nhìn thấy. Khi ánh sáng gặp chúng, một ít ánh sáng bị **tán xạ**, tức là bị bật sang hướng khác.
+
+Bí mật nằm ở đây: ánh sáng truyền đi dưới dạng sóng, sóng càng ngắn thì càng dễ bị tán xạ. Ánh sáng xanh có sóng ngắn, ánh sáng đỏ có sóng dài, nên <b class="c-blue">ánh sáng xanh bị tán xạ nhiều gấp khoảng 5 lần ánh sáng đỏ</b>.
+
+Vì thế, dù em nhìn vào chỗ nào trên bầu trời, cũng có ánh sáng xanh bị không khí bật đi đang bay về phía mắt em. Cả bầu trời sáng lên màu xanh! Phần lớn ánh sáng đỏ, cam và vàng vẫn đi thẳng, nên bản thân Mặt Trời trông trắng vàng.
+
+**Còn hoàng hôn thì sao?** Khi Mặt Trời xuống thấp, ánh sáng phải đi qua lớp không khí dày hơn rất nhiều, có lúc gấp khoảng 38 lần. Trên quãng đường dài ấy, gần như toàn bộ ánh sáng xanh đã bị tán xạ mất, chỉ còn lại <b class="c-red">màu đỏ và cam</b>.
+
+**Sao không phải màu tím?** Sóng ánh sáng tím còn ngắn hơn nên bị tán xạ còn nhiều hơn. Nhưng ánh nắng vốn có ít màu tím hơn màu xanh, và mắt chúng ta nhạy với màu xanh hơn nhiều. Cộng lại, ta thấy bầu trời màu xanh.
+
+</Part>
+
+<Myth claim="Bầu trời xanh vì phản chiếu màu của biển.">
+
+Bầu trời giữa sa mạc Sahara vẫn xanh như thường. Thật ra là ngược lại: nước phản chiếu bầu trời. Vào ngày nhiều mây, biển trông xám xịt.
+
+</Myth>
+
+<TryIt title="hoàng hôn trong cốc nước" need={['Một cốc thủy tinh trong đựng nước', 'Vài giọt sữa', 'Đèn pin hoặc đèn điện thoại', 'Một căn phòng tối']}>
+
+1. Khuấy vài giọt sữa vào nước. Nước chỉ hơi đục một chút là được.
+2. Trong phòng tối, chiếu đèn pin xuyên qua thành cốc.
+3. Nhìn cốc từ bên cạnh: nước ánh lên màu **xanh nhạt**.
+4. Giờ nhìn xuyên qua cốc thẳng vào đèn: ánh sáng có màu **vàng cam**, giống hệt hoàng hôn! Các hạt sữa li ti làm tán xạ ánh sáng xanh sang hai bên, giống như không khí vậy.
+
+</TryIt>
+
+<Whoa big="Sao Hỏa">
+
+Trên Sao Hỏa, bầu trời ban ngày có màu vàng nâu như bụi, còn hoàng hôn lại có màu **xanh**! Lớp bụi mịn trong bầu khí quyển mỏng của Sao Hỏa tán xạ ánh sáng khác với chất khí trên Trái Đất.
+
+</Whoa>

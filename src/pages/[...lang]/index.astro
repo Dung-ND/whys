@@ -1,0 +1,237 @@
+---
+import Base from '@/layouts/Base.astro';
+import WhyCard from '@/components/whys/WhyCard.astro';
+import Professor from '@/components/whys/scenes/Professor.astro';
+import Figure from '@/components/whys/Figure.astro';
+import { loadWhys } from '@/components/whys/load';
+import { langPaths, useT } from '@/i18n';
+import { whyCategories, localized, type WhyCategory } from '@/data/whys';
+import type { Lang } from '@/config/site';
+
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const t = useT(lang);
+const items = await loadWhys(lang);
+const cats = Object.keys(whyCategories) as WhyCategory[];
+const method = ['guess', 'investigate', 'answer', 'try'] as const;
+const icons = { guess: '🤔', investigate: '🔬', answer: '💡', try: '🧪' };
+---
+
+<Base lang={lang} description={t('whys.lead')}>
+  <section class="hero wrap">
+    <div class="copy">
+      <p class="eyebrow">{t('whys.eyebrow')}</p>
+      <h1>{t('whys.title')}</h1>
+      <p class="lead">{t('whys.lead')}</p>
+      <button class="btn btn-primary surprise" type="button" data-surprise>🎲 {t('whys.surprise')}</button>
+    </div>
+    <div class="art"><Figure label={t('whys.artLabel')} width={480} height={400}><Professor /></Figure></div>
+  </section>
+
+  <section class="wrap">
+    <h2 class="sr-only">{t('whys.method')}</h2>
+    <ol class="method">
+      {method.map((m, i) => (
+        <li><span class="ico" aria-hidden="true">{icons[m]}</span><span class="n">{i + 1}</span>{t(`whys.method.${m}`)}</li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="wrap">
+    <div class="filters">
+      <div class="chips" role="group" aria-label={t('whys.title')}>
+        <button type="button" data-value="all" aria-pressed="true">{t('whys.all')}</button>
+        {cats.map((c) => (
+          <button type="button" data-value={c} aria-pressed="false" style={`--cat:${whyCategories[c].color}`}>
+            <span class="dot" aria-hidden="true"></span>{localized(whyCategories[c].title, lang)}
+          </button>
+        ))}
+      </div>
+      <label class="search">
+        <span class="sr-only">{t('whys.search')}</span>
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M15.5 15.5l5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <input type="search" placeholder={t('whys.search')} autocomplete="off" />
+      </label>
+    </div>
+
+    <div class="grid">
+      {items.map((item) => <WhyCard item={item} lang={lang} level="h2" />)}
+    </div>
+    <p class="empty" hidden>{t('whys.empty')}</p>
+  </section>
+</Base>
+
+<script>
+  const cards = [...document.querySelectorAll<HTMLAnchorElement>('.grid .wcard')];
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('.chips button')];
+  const input = document.querySelector<HTMLInputElement>('.search input')!;
+  let cat = new URLSearchParams(location.search).get('cat') || 'all';
+
+  // Accents don't matter when searching: "vi sao" finds "vì sao".
+  const plain = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd');
+
+  function apply() {
+    const words = plain(input.value).split(/\s+/).filter(Boolean);
+    let shown = 0;
+    for (const c of cards) {
+      const text = plain(c.dataset.search!);
+      const ok = (cat === 'all' || c.dataset.cat === cat) && words.every((w) => text.includes(w));
+      c.hidden = !ok;
+      if (ok) shown++;
+    }
+    document.querySelector<HTMLElement>('.empty')!.hidden = shown > 0;
+    chips.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.value === cat)));
+    history.replaceState(null, '', cat === 'all' ? location.pathname : `?cat=${cat}`);
+  }
+  chips.forEach((b) => b.addEventListener('click', () => ((cat = b.dataset.value!), apply())));
+  input.addEventListener('input', apply);
+  document.querySelector('[data-surprise]')!.addEventListener('click', () => {
+    const pool = cards.filter((c) => !c.hidden);
+    const pick = (pool.length ? pool : cards)[Math.floor(Math.random() * (pool.length || cards.length))];
+    location.href = pick.href;
+  });
+  apply();
+</script>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 2.5rem 0 1rem;
+  }
+  @media (max-width: 820px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+    .art {
+      max-width: 420px;
+      margin-inline: auto;
+      order: -1;
+    }
+  }
+  .eyebrow {
+    font-weight: 800;
+    color: var(--brand-ink);
+    font-size: var(--fs-0);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  h1 {
+    font-size: clamp(3.5rem, 11vw, 7rem);
+    letter-spacing: -0.05em;
+    margin: 0 0 0.3rem;
+    line-height: 1;
+  }
+  .lead {
+    font-size: var(--fs-3);
+    color: var(--ink-2);
+    max-width: 30em;
+  }
+  .surprise {
+    font-size: var(--fs-2);
+  }
+  .method {
+    list-style: none;
+    margin: 1.5rem 0 2.5rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    counter-reset: m;
+  }
+  @media (max-width: 720px) {
+    .method {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .method li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1rem;
+    border-radius: var(--r-2);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    font-weight: 800;
+  }
+  .method .ico {
+    font-size: 1.6rem;
+  }
+  .method .n {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .chips button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 40px;
+    padding: 0 1rem;
+    border-radius: var(--r-pill);
+    border: 2px solid var(--line);
+    background: var(--surface);
+    font-weight: 800;
+    cursor: pointer;
+    color: var(--ink-2);
+  }
+  .chips .dot {
+    background: var(--cat);
+  }
+  .chips button[aria-pressed='true'] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+  }
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0 0.9rem;
+    border-radius: var(--r-pill);
+    border: 2px solid var(--line);
+    background: var(--surface);
+    color: var(--muted);
+    flex: 0 1 300px;
+  }
+  .search:focus-within {
+    border-color: var(--brand);
+  }
+  .search input {
+    border: 0;
+    background: none;
+    font: inherit;
+    font-weight: 700;
+    color: var(--ink);
+    width: 100%;
+    outline: none;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+  .empty {
+    color: var(--muted);
+    padding: 2rem 0;
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+question: Why don't birds get shocked on power lines?
+teaser: Power lines carry thousands of volts, yet birds perch on them all day long. What do birds know that we don't?
+art: Colorful round birds perch on three power lines strung between two wooden poles. Glowing dots of electricity flow along the wires, right under their feet.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import PowerLineLab from '@/interactives/power-lines/PowerLineLab.svelte';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={2}
+  options={[
+    { text: `Their feet are made of something like rubber.`, reply: `Birds' feet aren't rubber, and a bird's body carries electricity about as well as yours. The real reason is about what the bird touches.` },
+    { text: `The electricity is too weak to hurt them.`, reply: `Power lines carry thousands of volts, plenty to hurt a bird. Sadly, birds that touch two wires at once do get hurt.` },
+    { text: `Both feet touch the same wire.`, reply: `Electricity only flows through something when there's a difference in "electric push" (voltage) from one end to the other. Both feet are at the same voltage, so almost no current goes through the bird.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<PowerLineLab client:visible lang={props.lang} />
+
+Switch between the two choices. Watch where the glowing dots of current go.
+
+</Part>
+
+<Part kind="answer">
+
+Both feet are on the same wire, at the same voltage, so electricity has no reason to flow through the bird.
+
+Electricity flows when there's a push from a higher voltage to a lower one, a bit like water running downhill. **Voltage** is that electric push.
+
+A bird on one wire has both feet at the same voltage, so there's no "downhill" through its body. (The tiny bit of wire between its feet makes a difference of only a small fraction of a volt.) The current simply keeps going along the wire, which carries electricity far more easily than a bird anyway.
+
+Trouble starts when an animal touches something at a *different* voltage at the same time: a second wire, or the pole, which leads down to the ground. Then current rushes through its body. That's why big birds with wide wings, like eagles, can be hurt, and why power companies now build bird-friendly poles with wires farther apart and protective covers.
+
+**People are not birds.** A person who touches a power line is almost always touching the ground, a ladder or a tree too, which gives electricity a path right through their body. Never climb poles, fly kites near power lines or go near a fallen wire.
+
+</Part>
+
+<Myth claim="Birds are safe because their feet are rubbery.">
+
+If a bird touches two wires at once, its feet don't protect it at all. What keeps a bird safe is touching only one wire.
+
+</Myth>
+
+<TryIt title="bird on a wire, safely" need={['A 3 V coin battery (CR2032)', 'A small LED', 'Aluminum foil', 'Tape and a clothes peg']} safety="This tiny battery is safe to touch. Never experiment with plugs, sockets or power lines. Coin batteries are dangerous if swallowed: keep them away from little kids.">
+
+1. Tape two long strips of foil to a table, a finger-width apart. Make sure they don't touch.
+2. With the clothes peg, pinch the battery between the ends of the two strips: one strip on the **+** side, the other on the **−** side. These are your two "power lines".
+3. The LED is your bird. Touch **both** its legs to the same strip: it stays dark.
+4. Now touch its long leg to the + strip and its short leg to the − strip: it lights up! Electricity flows only when there's a difference in voltage.
+
+</TryIt>
+
+<Whoa big="Bare hands">
+
+Some electrical workers repair live high-voltage lines with their bare hands, working from a helicopter or an insulated bucket. They wear a suit woven with metal and connect themselves to the wire, so their whole body is at the same voltage as the line. Just like a bird, no current flows through them.
+
+</Whoa>

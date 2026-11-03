@@ -1,0 +1,73 @@
+---
+question: Why does the Moon change shape?
+teaser: Some nights it's a thin smile, some nights a full circle, some nights it's gone. The Moon itself never changes, so what does?
+art: A night sky full of twinkling stars. Along a dotted path, the Moon appears five times, growing from a thin crescent to a half moon to a full moon, while a kid on a hill points up.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import MoonLab from '@/interactives/moon-phases/MoonLab.svelte';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={2}
+  options={[
+    { text: `Earth's shadow covers part of the Moon.`, reply: `A very popular idea! But Earth's shadow only falls on the Moon during a lunar eclipse, a few times a year. And a thin crescent Moon is seen close to the Sun in the sky, where Earth's shadow can't possibly be.` },
+    { text: `Clouds cover part of the Moon.`, reply: `Clouds can hide the Moon, but they drift and change. The Moon's shapes follow the same pattern every month, even on perfectly clear nights.` },
+    { text: `We see different amounts of its sunlit half.`, reply: `The Sun always lights up half of the Moon. As the Moon travels around Earth, we see more or less of that bright half.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<MoonLab client:visible lang={props.lang} />
+
+Press **Play a month** or drag the slider. Keep an eye on the orange line: it marks the half of the Moon that faces you.
+
+</Part>
+
+<Part kind="answer">
+
+The Moon is always half lit by the Sun. As it travels around Earth, we see different amounts of its bright half.
+
+The Moon makes no light of its own. It shines because sunlight bounces off it, like a ball in a flashlight beam. At every moment, the half facing the Sun is bright and the other half is dark.
+
+The Moon goes all the way around Earth in about a month. (That's where the word *month* comes from!) Along the way:
+
+- **New moon:** the Moon is between Earth and the Sun. Its bright side faces away from us, so we can't see it.
+- **Waxing (growing):** night after night, more of the bright side turns toward us: a crescent, then a half moon, then a fat *gibbous* moon.
+- **Full moon:** Earth is between the Sun and the Moon, and we see the whole bright side.
+- **Waning (shrinking):** the same shapes in reverse, back to new moon.
+
+One full cycle takes about **29.5 days**.
+
+**Why is a half moon called a "quarter"?** Because the Moon has gone a quarter of the way around its trip.
+
+**Upside down!** People in Australia or Argentina see the Moon's shapes flipped: a growing Moon is lit on the left instead of the right.
+
+</Part>
+
+<Myth claim="The phases are caused by Earth's shadow.">
+
+Earth's shadow only reaches the Moon during a lunar eclipse, and that can only happen at full moon. The phases are about how much of the Moon's sunlit half we can see from here.
+
+</Myth>
+
+<TryIt title="the Moon in your hand" need={['A lamp without a lampshade', 'A ball, or an orange on a pencil', 'A dark room']} safety="Don't stare into the lamp, and keep it away from paper and cloth.">
+
+1. Put the lamp on one side of the room. That's the Sun. Your head is Earth.
+2. Hold the ball at arm's length, a little above your head.
+3. Turn slowly in a circle, keeping your eyes on the ball.
+4. Watch the lit part of the ball: crescent, half, full and back again. You just made every phase of the Moon!
+
+</TryIt>
+
+<Whoa big="3.8 cm">
+
+Every year, the Moon drifts about 3.8 centimeters farther away from Earth. That's about as fast as your fingernails grow.
+
+</Whoa>

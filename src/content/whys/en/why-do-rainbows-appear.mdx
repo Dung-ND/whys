@@ -1,0 +1,79 @@
+---
+question: Why do rainbows appear?
+teaser: Rain is clear and sunlight looks white. So where do all those colors come from, and why only sometimes?
+art: A kid stands on the grass with the Sun low in the sky behind them. Ahead, rain falls from grey clouds, and a bright rainbow arches across the rain, red on the outside and violet on the inside.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { RainDrop } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={2}
+  options={[
+    { text: `Raindrops are a little bit colored.`, reply: `Raindrops are as clear as tap water. The colors come from the sunlight, not from the water.` },
+    { text: `The Sun paints colors on the clouds.`, reply: `You don't even need clouds: you can make a rainbow with a garden hose! And notice that a rainbow is always on the opposite side of the sky from the Sun.` },
+    { text: `Raindrops bend sunlight and split it into colors.`, reply: `Each drop works like a tiny prism and mirror: it bends sunlight, bounces it back and spreads it out into colors.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<RainDrop
+  label="Sunlight enters a raindrop from the left and bends. Inside, it bounces off the back of the drop, then comes out bending again, spread into colors from red to violet. Red leaves at about 42 degrees from the incoming sunlight, violet at about 40 degrees."
+  sun="Sunlight"
+  bend="bends going in"
+  bounce="bounces off the back"
+  out="bends again, colors spread"
+  note="Colors spread wider than in real life, so you can see them."
+/>
+</div>
+
+Follow one ray of sunlight through a single drop. Each color comes out at its own angle: red at about **42°** from the direction of the sunlight, violet at about **40°**.
+
+</Part>
+
+<Part kind="answer">
+
+Raindrops bend sunlight, bounce it back and split it into colors. You see a rainbow when the Sun is behind you and rain is in front.
+
+Sunlight is a mix of every color. When light goes from air into water, it bends (scientists call this **refraction**). Each color bends a slightly different amount, violet the most and red the least, so the colors start to spread apart.
+
+Inside the drop, the light bounces off the back and comes out again, bending one more time. It leaves heading back toward the side the Sun is on, each color at its own angle.
+
+Millions of drops are doing this at once. From drops at just the right height, red light reaches your eyes; from drops a bit lower, violet light does. Together they paint a bow with **red on the outside and violet on the inside**.
+
+That explains a lot:
+
+- **The Sun must be behind you** and fairly low. That's why rainbows are most common in the morning and late afternoon.
+- **Rainbows are round.** A rainbow is really a circle around the point exactly opposite the Sun: the shadow of your own head! The ground usually hides the bottom part, but from an airplane you can sometimes see a full circle.
+- **Double rainbows** happen when light bounces twice inside the drops. The second bow is fainter, and its colors are in reverse order.
+
+</Part>
+
+<Myth claim="You can find the end of a rainbow.">
+
+A rainbow isn't an object in one place. It's light coming to *your* eyes from raindrops at one particular angle. When you move, different drops make your rainbow, so it moves with you. Even the person standing next to you sees a slightly different rainbow!
+
+</Myth>
+
+<TryIt title="make your own rainbow" need={['A garden hose with a spray nozzle, or a spray bottle', 'A sunny morning or late afternoon']} safety="Never look straight at the Sun.">
+
+1. Stand with your back to the Sun.
+2. Spray a fine mist in front of you, a little upward.
+3. Look into the mist (not at the Sun) and move the spray until a rainbow appears.
+4. Which color is on the outside? Can you spot a second, fainter bow?
+
+</TryIt>
+
+<Whoa big="42°">
+
+Every rainbow you will ever see sits at about 42° around the point opposite the Sun. That's why rainbows always look the same size in the sky. You never see a small or a big one, only more or less of it.
+
+</Whoa>

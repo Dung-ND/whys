@@ -1,0 +1,66 @@
+---
+question: Why do we get goosebumps?
+teaser: A cold breeze, a scary story or your favorite song, and suddenly your arms are covered in little bumps. What's going on in your skin?
+art: A kid in a red sweater shivers in the snow, breathing out little clouds. A big magnifying glass shows their skin up close, covered in tiny bumps with a hair standing up in each.
+---
+import { Part, Mystery, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import SkinLab from '@/interactives/goosebumps/SkinLab.svelte';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `Your skin shrinks in the cold.`, reply: `Skin doesn't shrink like that. Goosebumps can pop up in a second, and you can get them in a warm room too, when you're scared or moved by music.` },
+    { text: `Tiny muscles pull your hairs upright.`, reply: `Every hair has its own tiny muscle. When it squeezes, the hair stands up and the skin around it bunches into a bump.` },
+    { text: `Little air bubbles form under your skin.`, reply: `There is no air under your skin. The bumps are made by muscles, and they go away as soon as the muscles relax.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<SkinLab client:visible lang={props.lang} />
+
+Switch between **Warm**, **Cold** and **Scared**. Watch the red muscles and what they do to the hairs and the skin.
+
+</Part>
+
+<Part kind="answer">
+
+Each hair on your body has a tiny muscle. When it squeezes, it pulls the hair upright and pushes up a little bump of skin.
+
+You have hairs almost everywhere, even where they're too fine to notice. Each one grows from a little pocket in your skin called a *follicle*, and almost every follicle has its own tiny muscle, the *arrector pili* ("hair raiser" in Latin).
+
+You can't move these muscles on purpose. When you get cold, your nervous system switches them on automatically. Strong feelings can flip the same switch: fear, excitement or a song that gives you chills. That's your body releasing **adrenaline**.
+
+For furry animals, this is really useful. Fluffed-up fur traps a thick layer of warm air, like a puffy jacket. It also makes an animal look bigger: think of a scared cat with a bottlebrush tail. A porcupine raises its quills the same way, because quills are special, extra-stiff hairs.
+
+We humans have lost most of our fur, so our goosebumps don't keep us very warm. They're a leftover from our hairy ancestors, which is why they come with such a funny name: our bumpy skin looks like a plucked goose's.
+
+</Part>
+
+<Mystery>
+
+Scientists used to think human goosebumps were just a leftover. But in 2020, researchers studying mice found that the nerve and muscle that make goosebumps also wake up the stem cells that grow new hair. In mice kept in the cold for a long time, this helps grow a thicker coat. Does it do anything for people? Nobody knows yet.
+
+</Mystery>
+
+<TryIt title="goosebump hunt" need={['A cup of ice water', 'A magnifying glass, if you have one', 'A favorite song']}>
+
+1. Look closely at the skin on your forearm. Can you see the fine hairs?
+2. Hold the cold cup against the inside of your other wrist for a little while, or stand in a cool breeze.
+3. Watch your forearm. Do the hairs stand up? Where do the bumps appear first?
+4. Bonus: listen to a song that gives you chills. Do you get goosebumps without being cold?
+
+</TryIt>
+
+<Whoa big="5 million">
+
+You have about 5 million hair follicles on your body, and almost every one has its own goosebump muscle. Eyebrows and eyelashes don't, which is why they never stand on end.
+
+</Whoa>

@@ -1,0 +1,37 @@
+---
+// The Whys wordmark: a speech bubble with a question mark, and the name.
+import { site } from '@/config/site';
+interface Props { size?: number }
+const { size = 26 } = Astro.props;
+---
+<span class="logo" style={`--s:${size}px`} role="img" aria-label={site.name}>
+  <svg class="mark" viewBox="0 0 48 48" aria-hidden="true">
+    <path d="M24 4c11.6 0 20 7.8 20 18s-8.4 18-20 18c-2 0-3.9-.2-5.7-.7L8 44l2.2-9.3C6.4 31.4 4 27 4 22 4 11.8 12.4 4 24 4z" fill="#5b5cf0" />
+    <path d="M18 17.5a6 6 0 1 1 8.6 5.4c-1.7.9-2.6 2-2.6 3.6v1.2" fill="none" stroke="#ffc93c" stroke-width="4.6" stroke-linecap="round" />
+    <circle cx="24" cy="33.2" r="2.8" fill="#ffc93c" />
+  </svg>
+  <span aria-hidden="true">Why<span class="s">s</span></span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.22em;
+    font-size: calc(var(--s) * var(--logo-scale, 1));
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .mark {
+    flex-shrink: 0;
+    width: 1.3em;
+    height: 1.3em;
+    transform: rotate(-6deg);
+  }
+  .s {
+    color: var(--brand-ink);
+  }
+</style>

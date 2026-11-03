@@ -1,0 +1,97 @@
+---
+// Why do zebras have stripes? A zebra on the savanna; biting flies circle in, get confused by
+// the stripes and fly off instead of landing.
+const id = `zb${Math.random().toString(36).slice(2, 8)}`;
+// Stripes on the body, neck and legs (drawn over everything, then clipped to the zebra's shape).
+const stripes = [
+  'M250 170q10 40 0 90', 'M280 166q12 44 2 96', 'M310 166q12 44 2 96', 'M340 166q12 44 2 96',
+  'M370 168q10 44 0 94', 'M400 172q8 40 -2 88', 'M430 180q10 30 6 70',
+  'M200 120q20 0 30 -10', 'M190 140q24 2 40 -10', 'M190 164q24 2 46 -8', 'M196 188q24 0 50 -8',
+  'M246 270h30', 'M246 296h30', 'M246 322h30', 'M400 270h30', 'M400 296h30', 'M400 322h30',
+];
+const flies: [number, number, number][] = [[150, 120, 0], [520, 120, 1.2], [470, 300, 2.1], [140, 260, 0.6]];
+---
+<rect width="640" height="400" fill="var(--art-sky)" />
+<circle cx="560" cy="70" r="36" fill="var(--art-sun)" stroke="var(--art-ink)" stroke-width="4" />
+<path d="M0 300q160 -24 320 -4t320 -6v110h-640z" fill="var(--art-tan)" stroke="var(--art-ink)" stroke-width="4" />
+<!-- acacia tree -->
+<g stroke="var(--art-ink)" stroke-width="4" stroke-linejoin="round">
+  <path d="M560 300v-90l-20 -30M560 230l26 -40" fill="none" stroke-width="8" />
+  <path d="M500 190q20 -34 70 -30q50 -4 66 30z" fill="var(--art-grass-2)" />
+</g>
+
+<defs>
+  <clipPath id={id}>
+    <path d="M226 200q-6 -50 50 -50h150q50 0 56 50q6 60 -40 66h-176q-46 -6 -40 -66z" />
+    <path d="M250 200l-60 -110q-10 -20 -36 -14l-34 12q-8 30 22 40l34 -6l44 90z" />
+    <rect x="246" y="240" width="30" height="100" rx="6" />
+    <rect x="400" y="240" width="30" height="100" rx="6" />
+  </clipPath>
+</defs>
+<g class="zebra">
+  <g fill="var(--art-white)">
+    <path d="M226 200q-6 -50 50 -50h150q50 0 56 50q6 60 -40 66h-176q-46 -6 -40 -66z" />
+    <path d="M250 200l-60 -110q-10 -20 -36 -14l-34 12q-8 30 22 40l34 -6l44 90z" />
+    <rect x="246" y="240" width="30" height="100" rx="6" />
+    <rect x="400" y="240" width="30" height="100" rx="6" />
+  </g>
+  <g clip-path={`url(#${id})`} stroke="var(--art-ink)" stroke-width="13" stroke-linecap="round" fill="none">
+    {stripes.map((d) => <path d={d} />)}
+  </g>
+  <g fill="none" stroke="var(--art-ink)" stroke-width="4" stroke-linejoin="round">
+    <path d="M226 200q-6 -50 50 -50h150q50 0 56 50q6 60 -40 66h-176q-46 -6 -40 -66z" />
+    <path d="M250 200l-60 -110q-10 -20 -36 -14l-34 12q-8 30 22 40l34 -6l44 90" />
+    <rect x="246" y="240" width="30" height="100" rx="6" />
+    <rect x="400" y="240" width="30" height="100" rx="6" />
+  </g>
+  <!-- mane, ear, eye, nose, hooves, tail -->
+  <path d="M196 74q30 10 60 90" fill="none" stroke="var(--art-ink)" stroke-width="10" stroke-linecap="round" stroke-dasharray="6 5" />
+  <path d="M176 76l6 -26l14 22z" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="4" stroke-linejoin="round" />
+  <circle cx="168" cy="96" r="5" fill="var(--art-ink)" />
+  <ellipse cx="128" cy="110" rx="12" ry="14" fill="var(--art-ink)" />
+  <rect x="244" y="334" width="34" height="12" rx="4" fill="var(--art-ink)" />
+  <rect x="398" y="334" width="34" height="12" rx="4" fill="var(--art-ink)" />
+  <path class="tail" d="M480 190q30 20 26 70" fill="none" stroke="var(--art-ink)" stroke-width="5" stroke-linecap="round" />
+  <path class="tail" d="M506 256l-6 20l14 -4z" fill="var(--art-ink)" />
+</g>
+
+<!-- confused flies -->
+{flies.map(([x, y, d]) => (
+  <g transform={`translate(${x} ${y})`}>
+    <g class="fly" style={`animation-delay:${-d}s`}>
+      <ellipse cx="-4" cy="-8" rx="7" ry="5" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="2" opacity="0.85" class="wing" />
+      <ellipse cx="4" cy="-8" rx="7" ry="5" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="2" opacity="0.85" class="wing" />
+      <ellipse cx="0" cy="0" rx="8" ry="6" fill="var(--art-fly)" stroke="var(--art-ink)" stroke-width="2" />
+      <text x="12" y="-14" font-size="20" font-weight="900" fill="var(--art-ink)">?</text>
+    </g>
+  </g>
+))}
+
+<style>
+  .fly {
+    animation: buzz 3s ease-in-out infinite;
+  }
+  .wing {
+    animation: flap 0.12s linear infinite alternate;
+    transform-box: fill-box;
+    transform-origin: bottom;
+  }
+  .tail {
+    animation: swish 2s ease-in-out infinite alternate;
+    transform-box: view-box;
+    transform-origin: 480px 190px;
+  }
+  @keyframes buzz {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(30px, 16px); }
+    45% { transform: translate(44px, 30px) rotate(20deg); }
+    55% { transform: translate(20px, -10px) rotate(-30deg); }
+    75% { transform: translate(-16px, 10px); }
+  }
+  @keyframes flap {
+    to { transform: scaleY(0.4); }
+  }
+  @keyframes swish {
+    to { transform: rotate(14deg); }
+  }
+</style>

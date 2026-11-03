@@ -1,0 +1,28 @@
+---
+// A Whys picture (still, or moving with CSS only). An empty label hides it from screen readers.
+// Like <Stage>, it stamps the site watermark in the corner.
+import { site } from '@/config/site';
+
+interface Props { label: string; width?: number; height?: number; watermark?: boolean }
+const { label, width = 640, height = 400, watermark = true } = Astro.props;
+---
+<svg class="why-fig" viewBox={`0 0 ${width} ${height}`} role={label ? 'img' : undefined} aria-label={label || undefined} aria-hidden={label ? undefined : 'true'}>
+  <slot />
+  {watermark && <text class="wm" x={width - 14} y={height - 12} text-anchor="end">{site.watermark}</text>}
+</svg>
+
+<style>
+  .why-fig {
+    width: 100%;
+    height: auto;
+    font-family: var(--font);
+  }
+  .wm {
+    font-weight: 900;
+    font-size: 14px;
+    fill: var(--art-ink);
+    opacity: 0.45;
+    letter-spacing: -0.03em;
+    pointer-events: none;
+  }
+</style>

@@ -1,0 +1,95 @@
+---
+// A home experiment, laid out like a lab card. The steps are the MDX children (a numbered list).
+// Usage: <TryIt need={['A glass of water', 'A flashlight']} safety="Ask an adult…"> 1. … </TryIt>
+import { useT, langFromUrl } from '@/i18n';
+
+interface Props { title?: string; need: string[]; safety?: string }
+const { title, need, safety } = Astro.props;
+const t = useT(langFromUrl(Astro.url));
+---
+<aside class="try" id="try">
+  <h2><span aria-hidden="true">🧪</span> {t('whys.try')}{title && <span class="sub">: {title}</span>}</h2>
+  <div class="cols">
+    <div class="need">
+      <h3>{t('whys.need')}</h3>
+      <ul>{need.map((x) => <li set:html={x} />)}</ul>
+    </div>
+    <div class="do">
+      <h3>{t('whys.do')}</h3>
+      <slot />
+    </div>
+  </div>
+  {safety && <p class="safety"><strong>⚠️ {t('whys.safety')}:</strong> <span set:html={safety} /></p>}
+</aside>
+
+<style>
+  .try {
+    margin: 3rem 0;
+    padding: 1.5rem;
+    border-radius: var(--r-3);
+    border: 2px dashed var(--cat);
+    background:
+      linear-gradient(var(--c-grid) 1px, transparent 1px) 0 0 / 24px 24px,
+      linear-gradient(90deg, var(--c-grid) 1px, transparent 1px) 0 0 / 24px 24px,
+      var(--surface);
+  }
+  h2 {
+    font-size: var(--fs-4);
+    margin-bottom: 1rem;
+  }
+  .sub {
+    color: var(--ink-2);
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) 2fr;
+    gap: 1.5rem;
+  }
+  @media (max-width: 700px) {
+    .cols {
+      grid-template-columns: 1fr;
+    }
+  }
+  h3 {
+    font-size: var(--fs-0);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--cat-text);
+    margin-bottom: 0.5rem;
+  }
+  .need ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .need li {
+    padding: 0.35rem 0.75rem;
+    margin-bottom: 0.35rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-1);
+    font-weight: 750;
+  }
+  .need li::before {
+    content: '☐ ';
+    color: var(--cat-text);
+  }
+  .do :global(ol) {
+    margin: 0;
+    padding-left: 1.4rem;
+  }
+  .do :global(li) {
+    margin-bottom: 0.5rem;
+    font-size: var(--fs-2);
+  }
+  .do :global(li::marker) {
+    font-weight: 900;
+    color: var(--cat-text);
+  }
+  .safety {
+    margin: 1rem 0 0;
+    padding: 0.6rem 1rem;
+    border-radius: var(--r-1);
+    background: var(--warn-soft);
+  }
+</style>

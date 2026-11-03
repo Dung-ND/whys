@@ -1,0 +1,48 @@
+---
+// Why does the Moon change shape? The same Moon, night after night, moving across a starry sky:
+// the lit part grows from a thin crescent to full. Phases are drawn with the real terminator shape.
+import Kid from './Kid.astro';
+import { moonLitPath } from '@/lib/whys-science';
+const moons: [number, number, number][] = [
+  [80, 220, 0.08], [180, 140, 0.17], [300, 96, 0.25], [420, 110, 0.36], [545, 170, 0.5],
+];
+const stars: [number, number, number][] = [
+  [40, 60, 3], [130, 40, 2], [230, 70, 2.5], [360, 36, 2], [500, 60, 3], [600, 40, 2], [610, 110, 2.5],
+  [260, 190, 2], [90, 120, 2], [380, 190, 2.5], [470, 240, 2], [20, 160, 2],
+];
+---
+<rect width="640" height="400" fill="var(--art-night)" />
+<rect y="220" width="640" height="180" fill="var(--art-night-2)" opacity="0.6" />
+{stars.map(([x, y, r], i) => (
+  <path class="star" style={`animation-delay:${(i * 0.29) % 2.4}s`} transform={`translate(${x} ${y}) scale(${r / 3})`} d="M0 -7l2 5l5 2l-5 2l-2 5l-2 -5l-5 -2l5 -2z" fill="var(--art-sun)" />
+))}
+<!-- the Moon's path over several nights -->
+<path d="M80 220Q300 20 545 170" fill="none" stroke="var(--art-moon)" stroke-width="2" stroke-dasharray="3 9" opacity="0.5" />
+{moons.map(([x, y, f], i) => (
+  <g class="moon" style={`animation-delay:${i * 0.5}s`}>
+    <circle cx={x} cy={y} r="30" fill="var(--art-moon-dark)" />
+    <path d={moonLitPath(x, y, 30, f)} fill="var(--art-moon)" />
+    <circle cx={x} cy={y} r="30" fill="none" stroke="var(--art-moon)" stroke-width="1.5" opacity="0.5" />
+  </g>
+))}
+<!-- hills and a kid looking up -->
+<path d="M0 320q120 -50 260 -10t380 -20v110h-640z" fill="var(--art-grass-2)" stroke="var(--art-ink)" stroke-width="4" />
+<path d="M0 320q120 -50 260 -10t380 -20v110h-640z" fill="var(--art-night)" opacity="0.45" />
+<Kid x={330} y={380} point mood="wow" look={[3, -3]} />
+
+<style>
+  .star {
+    animation: twinkle 2.4s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .moon {
+    animation: glow 2.5s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle {
+    50% { opacity: 0.3; }
+  }
+  @keyframes glow {
+    to { opacity: 0.8; }
+  }
+</style>

@@ -1,0 +1,75 @@
+---
+question: Vì sao ngựa vằn có sọc?
+teaser: Các nhà khoa học đã tranh cãi về điều này hơn 150 năm. Rồi họ thử mặc áo kẻ sọc cho ngựa.
+art: Một chú ngựa vằn đứng trên thảo nguyên vàng óng dưới gốc cây keo. Những con ruồi vo ve bay quanh, trên đầu hiện dấu chấm hỏi, không tài nào đậu xuống được.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { FlyTest } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `Để ẩn nấp trong cỏ cao.`, reply: `Đoán hay đấy, nhưng ngựa vằn sống trên đồng cỏ trống trải, và nhìn từ xa, sư tử thấy các sọc nhòe thành màu xám. Các thí nghiệm cho thấy sọc không giúp ngựa vằn ẩn nấp được bao nhiêu.` },
+    { text: `Để làm rối mắt ruồi hút máu.`, reply: `Đó là điều mà bằng chứng mạnh nhất cho thấy! Những loài ruồi hút máu, có thể lây bệnh, rất khó đáp xuống bề mặt có sọc.` },
+    { text: `Để mát hơn dưới trời nắng nóng.`, reply: `Các nhà khoa học cũng đã thử ý này. Những vật có sọc và không sọc phơi nắng đều nóng lên gần như nhau, nên làm mát có vẻ không phải lý do chính.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<FlyTest
+  label="Ba con ngựa: một con mặc áo sẫm màu, một con mặc áo trắng và một con mặc áo kẻ sọc. Rất nhiều ruồi đậu lên áo sẫm và áo trắng. Quanh chiếc áo kẻ sọc, ruồi chệch hướng bay đi thay vì đậu xuống."
+  dark="Áo sẫm màu"
+  light="Áo trắng"
+  striped="Áo kẻ sọc"
+  many="nhiều ruồi đậu"
+  few="ít ruồi đậu"
+/>
+</div>
+
+Năm 2019, ở một trang trại tại Anh, các nhà khoa học mặc áo choàng cho ngựa: có chiếc trơn, có chiếc kẻ sọc như ngựa vằn. Rồi họ quay phim những con ruồi trâu. Ruồi bay về phía tất cả các con ngựa, nhưng gần những chiếc áo sọc, chúng **không giảm tốc được, đâm sầm vào áo hoặc bay vụt qua**. Số ruồi đậu xuống ít hơn hẳn.
+
+Chưa ai chắc chắn *vì sao* sọc làm ruồi bối rối. Một giả thuyết là: khi ruồi lao đến gần, các sọc khiến nó khó ước lượng tốc độ và hướng bay, nên không đáp xuống đúng cách được.
+
+</Part>
+
+<Part kind="answer">
+
+Bằng chứng mạnh nhất cho thấy sọc giúp ngựa vằn tránh ruồi hút máu.
+
+Ở châu Phi, ruồi trâu và ruồi xê xê đốt hút máu và có thể lây những bệnh nguy hiểm. Ngựa vằn có bộ lông ngắn và mỏng, lẽ ra là mục tiêu rất dễ.
+
+Con người đã tranh cãi về sọc ngựa vằn từ thế kỷ 19. Có phải sọc giúp ẩn nấp? Làm sư tử rối mắt? Giữ mát? Giúp nhận ra nhau? Các nhà khoa học đã kiểm tra từng ý một. Đến nay, ý tránh ruồi có bằng chứng mạnh nhất: những loài có sọc như ngựa vằn sống ở nơi nhiều ruồi hút máu nhất, và ruồi thật sự rất khó đáp xuống bề mặt có sọc.
+
+Thêm hai điều thú vị: dưới lớp lông, da ngựa vằn có màu sẫm, và **không có hai con ngựa vằn nào có bộ sọc giống nhau**, y như dấu vân tay.
+
+</Part>
+
+<Myth claim="Sọc giúp ngựa vằn ẩn nấp trong cỏ.">
+
+Ngựa vằn sống trên đồng cỏ trống, và cỏ ở đó chủ yếu màu vàng xanh, đâu phải đen trắng! Nhìn từ xa, sư tử thấy các sọc hòa lẫn vào nhau thành màu xám.
+
+</Myth>
+
+<TryIt title="làm nhà khoa học nghiên cứu ruồi" need={['3 tờ giấy trắng', 'Một cây bút dạ đen nét to', 'Băng dính', 'Một chỗ ngoài trời có ruồi']}>
+
+1. Để nguyên một tờ màu trắng, tô kín một tờ màu đen, và kẻ những sọc đen thật đậm lên tờ thứ ba.
+2. Dán ba tờ cạnh nhau ở ngoài trời, nơi có ruồi bay qua lại.
+3. Trong 20 phút, mỗi lần có ruồi đậu lên tờ nào thì vạch một gạch cho tờ đó.
+4. Tờ nào ít ruồi đậu nhất? So kết quả với bạn em: khoa học thật cần làm lại nhiều lần.
+
+</TryIt>
+
+<Whoa big="Ít hơn 50%">
+
+Ở Nhật Bản, các nhà khoa học đã sơn sọc đen trắng lên bò. Những con bò có sọc bị ruồi đốt ít đi khoảng một nửa, và chúng cũng ít phải quẫy đuôi, giậm chân hơn.
+
+</Whoa>
