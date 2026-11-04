@@ -42,22 +42,22 @@
 </script>
 
 <section class="lab wide" bind:this={el} data-anim data-paused={motion ? undefined : ''} data-offscreen={visible ? undefined : ''}>
-  <header>
-    <span><span aria-hidden="true">🔬</span> {title}</span>
-    <button type="button" class="pp" onclick={toggle} aria-label={playing ? t('pause') : t('play')} title={playing ? t('pause') : t('play')}>
-      {#if playing}
-        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.5" /><rect x="14" y="5" width="4" height="14" rx="1.5" /></svg>
-      {:else}
-        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.2-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z" /></svg>
-      {/if}
-      <span>{playing ? t('pause') : t('play')}</span>
-    </button>
-  </header>
+  <header><span aria-hidden="true">🔬</span> {title}</header>
   <div class="fig">{@render children()}</div>
   <p class="cap" aria-live={running ? 'off' : 'polite'}>{@html caption}</p>
-  <!-- Any slider or button here means the reader has taken over from the film. -->
-  <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
-  <div class="controls" oninput={() => (auto = false)} onclick={(e) => (e.target as HTMLElement).closest('button') && (auto = false)}>{@render controls()}</div>
+  <!-- Like a video player: play/pause sits right next to the controls it moves. -->
+  <div class="bar">
+    <button type="button" class="pp" class:on={playing} onclick={toggle} aria-label={playing ? t('pause') : t('play')} title={playing ? t('pause') : t('play')}>
+      {#if playing}
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.5" /><rect x="14" y="5" width="4" height="14" rx="1.5" /></svg>
+      {:else}
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.2-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z" /></svg>
+      {/if}
+    </button>
+    <!-- Any slider or button here means the reader has taken over from the film. -->
+    <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
+    <div class="controls" oninput={() => (auto = false)} onclick={(e) => (e.target as HTMLElement).closest('button') && (auto = false)}>{@render controls()}</div>
+  </div>
 </section>
 
 <style>
@@ -70,11 +70,7 @@
     margin: 1rem 0 1.5rem;
   }
   header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.45rem 0.6rem 0.45rem 1.1rem;
+    padding: 0.6rem 1.1rem;
     font-weight: 900;
     font-size: var(--fs-0);
     text-transform: uppercase;
@@ -83,36 +79,33 @@
     border-bottom: 1px solid var(--line);
     background: var(--cat-soft, var(--surface-2));
   }
-  .pp {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    min-height: 34px;
-    padding: 0 0.8rem 0 0.6rem;
-    border-radius: var(--r-pill);
-    border: 1px solid var(--line-2);
-    background: var(--surface);
-    color: var(--ink);
-    font: inherit;
-    font-size: 0.8rem;
-    letter-spacing: 0.04em;
-    cursor: pointer;
-  }
-  .pp:hover {
-    border-color: var(--ink-2);
+  .bar {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.2rem 1.2rem;
   }
   .pp {
     flex-shrink: 0;
-    white-space: nowrap;
+    /* Lines up with the first slider's track. */
+    margin-top: 10px;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--brand);
+    background: var(--surface);
+    color: var(--brand-ink);
+    cursor: pointer;
+    transition: background var(--t-fast), transform var(--t-fast);
   }
-  /* Small phones: the icon alone (the button keeps its spoken label). */
-  @media (max-width: 480px) {
-    .pp {
-      padding: 0 0.6rem;
-    }
-    .pp span {
-      display: none;
-    }
+  .pp.on {
+    background: var(--brand);
+    color: var(--on-brand);
+  }
+  .pp:hover {
+    transform: scale(1.06);
   }
   .pp svg {
     fill: currentColor;
@@ -130,11 +123,12 @@
     background: var(--surface-2);
   }
   .controls {
+    flex: 1;
+    min-width: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: end;
     gap: 1rem 1.5rem;
-    padding: 1rem 1.2rem 1.2rem;
   }
   .controls > :global(*) {
     flex: 1 1 220px;

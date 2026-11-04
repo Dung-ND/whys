@@ -1,7 +1,6 @@
 <script lang="ts">
   // Light arrives almost instantly; sound travels 343 m/s, so the thunder comes ~3 s per km later.
   // The timer runs in real time, so students can count along.
-  import { untrack } from 'svelte';
   import type { Lang } from '@/config/site';
   import Stage from '@/components/ui/Stage.svelte';
   import Slider from '@/components/ui/Slider.svelte';
@@ -62,7 +61,7 @@
         timer = window.setTimeout(() => next(i + 1), (thunderDelay(storms[i % storms.length]) + 3.5) * 1000);
       }, 900);
     };
-    next(Math.max(0, storms.indexOf(untrack(() => km))));
+    next(0);
     // A strike already on its way finishes by itself (it may be the reader's own).
     return () => clearTimeout(timer);
   });

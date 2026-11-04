@@ -19,6 +19,7 @@
     if (!running) return;
     const order = ['cold', 'warm', 'scared', 'warm'] as const;
     let i = 0;
+    feel = 'warm';
     const timer = setInterval(() => (feel = order[i++ % order.length]), 4000);
     return () => clearInterval(timer);
   });

@@ -1,5 +1,6 @@
 ---
-// Wraps a moving picture: it plays by itself, pauses off screen, and has a play/pause button.
+// Wraps a moving picture: it plays from the start when the reader scrolls to it, pauses off screen,
+// and has a play/pause button.
 // The pause is site-wide (src/lib/motion.ts); pausing freezes every CSS animation inside.
 import { useT, langFromUrl } from '@/i18n';
 const t = useT(langFromUrl(Astro.url));
@@ -16,7 +17,11 @@ const t = useT(langFromUrl(Astro.url));
   import { onMotion, onVisible, setMotion, motionOn } from '@/lib/motion';
   document.querySelectorAll<HTMLElement>('.anim[data-anim]').forEach((box) => {
     const btn = box.querySelector<HTMLButtonElement>('[data-pp]')!;
-    onVisible(box, (v) => box.toggleAttribute('data-offscreen', !v));
+    onVisible(box, (v) => {
+      box.toggleAttribute('data-offscreen', !v);
+      // Each time the reader arrives, the picture starts from the beginning.
+      if (v) box.getAnimations({ subtree: true }).forEach((a) => (a.currentTime = 0));
+    });
     onMotion((on) => {
       box.toggleAttribute('data-paused', !on);
       const label = on ? btn.dataset.pause! : btn.dataset.play!;

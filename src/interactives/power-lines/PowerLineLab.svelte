@@ -16,6 +16,7 @@
   let running = $state(false);
   $effect(() => {
     if (!running) return;
+    mode = 'one';
     const timer = setInterval(() => (mode = mode === 'one' ? 'two' : 'one'), 5000);
     return () => clearInterval(timer);
   });

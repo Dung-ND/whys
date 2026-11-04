@@ -34,9 +34,21 @@ export function onMotion(f: Listener) {
   return () => void listeners.delete(f);
 }
 
-/** Calls `f(true)` while `el` is (mostly) on screen and `f(false)` when it scrolls away. */
+/**
+ * Calls `f(true)` once `el` is well in view (half of it, or half the screen for tall things), and
+ * `f(false)` once it has left the screen completely. So a picture starts when the reader gets to it,
+ * not while it is still peeking in at the bottom.
+ */
 export function onVisible(el: Element, f: (visible: boolean) => void) {
-  const io = new IntersectionObserver(([e]) => f(e.isIntersecting), { threshold: 0.15 });
+  let shown = false;
+  const io = new IntersectionObserver(
+    ([e]) => {
+      const inView = e.intersectionRatio >= 0.5 || e.intersectionRect.height >= innerHeight * 0.5;
+      if (!shown && inView) f((shown = true));
+      else if (shown && !e.isIntersecting) f((shown = false));
+    },
+    { threshold: [0, 0.25, 0.5, 0.75, 1] },
+  );
   io.observe(el);
   return () => io.disconnect();
 }
