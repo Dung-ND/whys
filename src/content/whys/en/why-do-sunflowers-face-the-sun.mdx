@@ -1,0 +1,76 @@
+---
+question: Why do sunflowers face the Sun?
+teaser: Young sunflowers turn from east to west during the day, following the Sun. But how can a plant without muscles move, and what does it do at night?
+art: A field of sunflowers with smiling faces, all turned toward the morning Sun in the corner of the sky. Two bees buzz between the flowers.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { SunflowerDay } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={2}
+  options={[
+    { text: `They have tiny muscles in their stems.`, reply: `Plants don't have muscles. Sunflowers turn in a much slower, cleverer way.` },
+    { text: `The Sun's warmth pulls them around.`, reply: `Warmth doesn't pull on plants. In fact, scientists found that sunflowers keep turning back and forth for days even in a room where the light never changes.` },
+    { text: `One side of the stem grows faster than the other.`, reply: `By day the stem's east side grows faster, bending the flower west. At night the west side grows faster, swinging it back east, ready for sunrise.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<SunflowerDay
+  label="Three young sunflowers. In the morning, the flower leans east toward the rising Sun. In the evening, it leans west toward the setting Sun. At night, it swings back to face east again. A dashed yellow line shows the side of the stem that grows faster."
+  morning="Morning"
+  evening="Evening"
+  night="Night"
+  east="East"
+  west="West"
+  grows="swinging back east"
+/>
+</div>
+
+The dashed yellow line marks the side of the stem that's growing faster. A stem bends away from its faster-growing side, just as a strip of paper curls if you make one side longer.
+
+</Part>
+
+<Part kind="answer">
+
+Young sunflowers follow the Sun by growing faster on one side of their stem: the east side during the day and the west side at night. Grown-up flowers stop moving and face east.
+
+Plants can't walk or wave, but they can **grow unevenly**. If one side of a stem grows a little faster than the other, the stem bends.
+
+During the day, the **east** side of a young sunflower's stem grows faster, so the flower bends steadily west, tracking the Sun across the sky. At night, the **west** side grows faster, and by dawn the flower faces east again, ready for sunrise.
+
+How does it know when? Sunflowers have an **internal clock**, like the one that makes you sleepy at bedtime. In experiments, plants kept in steady light carried on swinging back and forth for a few days.
+
+When the sunflower is fully grown and its flower opens, the stem stops growing and it stops moving. Almost all grown sunflowers end up facing **east**. Scientists discovered why: east-facing flowers warm up faster in the morning sun, and bees love warm flowers.
+
+</Part>
+
+<Myth claim="Sunflowers in full bloom follow the Sun all day.">
+
+Only young sunflowers track the Sun. Once a sunflower blooms, its stem stops growing and the flower stays put, usually facing east. Look at a sunflower field in the evening: most faces point away from the setting Sun!
+
+</Myth>
+
+<TryIt title="a plant that bends to the light" need={['A bean or sunflower seedling in a pot (or sprout a dried bean in damp cotton wool)', 'A sunny windowsill', 'A notebook to draw in']}>
+
+1. Put the seedling on a sunny windowsill.
+2. Each morning for a few days, draw which way it leans.
+3. Then turn the pot halfway around, so it leans away from the window.
+4. Within a day or two, it bends back toward the light, by growing faster on its shady side!
+
+</TryIt>
+
+<Whoa big="5×">
+
+When scientists studied grown sunflowers, they found that bees visited the warm, east-facing flowers about five times more often in the morning than flowers turned to face west.
+
+</Whoa>

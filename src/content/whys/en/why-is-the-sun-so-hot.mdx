@@ -1,0 +1,81 @@
+---
+question: Why is the Sun so hot?
+teaser: The Sun has been shining for 4.6 billion years without running out. It isn't a fire, so what keeps it so hot?
+art: A huge glowing Sun wearing sunglasses smiles in space. Bubbling patches cover its surface and red flares loop from its edge, while a tiny blue Earth sits far away, in the path of its light.
+---
+import { Part, Myth, Mystery, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { SunInside } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `It's a gigantic ball of fire.`, reply: `It looks like fire, but fire needs oxygen, and the Sun isn't burning anything. A Sun made of burning coal would have burned out in a few thousand years.` },
+    { text: `Tiny particles in its center crash and join together.`, reply: `Deep in the Sun's core, the centers of hydrogen atoms smash together and join to make helium. Each time, a little bit of matter turns into a lot of energy. This is called nuclear fusion.` },
+    { text: `It's still hot from when it was made, and slowly cooling.`, reply: `If the Sun were just cooling down, it would have gone cold long ago. Something deep inside keeps making new heat.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<SunInside
+  label="A slice through the Sun. In the white-hot core, hydrogen joins into helium and makes energy. The energy zigzags slowly outward through the next layer, then hot gas carries it up to the surface in rolling loops. Inset: four hydrogens join to make one helium, plus energy."
+  core="core: fusion"
+  zigzag="light zigzags out"
+  boil="hot gas rolls up"
+  surface="surface: about 5,500 °C"
+  fusion="Fusion"
+  hydrogen="hydrogen"
+  helium="helium"
+/>
+</div>
+
+In the core, four hydrogen nuclei join, step by step, into one helium nucleus. The helium weighs a tiny bit less than the four hydrogens did, and that missing bit of matter turns into energy.
+
+</Part>
+
+<Part kind="answer">
+
+Deep in its core, the Sun squeezes hydrogen so hard that it fuses into helium, turning a little matter into a huge amount of energy.
+
+The Sun is a giant ball of gas, mostly hydrogen, so heavy that its own weight squeezes its center incredibly hard. The core is about **15 million °C**.
+
+At that heat and pressure, the centers of hydrogen atoms move so fast that they smash together and stick, making helium. This is **nuclear fusion**. When four hydrogens become one helium, a tiny bit of matter disappears and turns into energy. Einstein's famous formula, E = mc², says a little matter makes a *lot* of energy. Every second, the Sun turns about **4 million tonnes** of matter into energy.
+
+That energy takes a long time to get out. In the thick middle layers, light bounces from particle to particle in a zigzag, taking thousands to over a hundred thousand years to cross. Near the top, hot gas carries the energy up in rolling bubbles, like soup boiling in a pot. Finally it leaves the surface as light and heat, and a little of it reaches us about 8 minutes later.
+
+</Part>
+
+<Mystery>
+
+**Hotter on the outside?** The Sun's surface is about 5,500 °C, but its thin outer atmosphere, the *corona*, is over a million degrees: hundreds of times hotter, even though it's farther from the core. It's like walking away from a campfire and getting hotter. Scientists think the Sun's twisting magnetic fields heat the corona, and the Parker Solar Probe is flying closer to the Sun than any spacecraft before to find out exactly how.
+
+</Mystery>
+
+<Myth claim="The Sun is a giant fire.">
+
+Fire is a chemical reaction that needs oxygen, and there's almost no free oxygen on the Sun. Even if the Sun were made of the best fuel we know burning in pure oxygen, it would have burned out in a few thousand years. Fusion has kept it shining for 4.6 billion years, and it has billions of years left.
+
+</Myth>
+
+<TryIt title="see the Sun safely" need={['Two sheets of white card', 'A pin', 'A sunny day']} safety="Never look at the Sun directly, through the pinhole, or through binoculars or a telescope. It can permanently damage your eyes.">
+
+1. Make a tiny hole in the middle of one card with the pin.
+2. Stand with your back to the Sun. Hold the card with the hole up, so sunlight passes through it.
+3. Hold the second card below it, in its shadow. You'll see a small, round image of the Sun!
+4. Move the cards farther apart to make the image bigger. You're looking at light that left the Sun about 8 minutes ago.
+
+</TryIt>
+
+<Whoa big="8 min 20 s">
+
+Sunlight takes about 8 minutes and 20 seconds to travel from the Sun to Earth. So when you see the Sun, you're seeing it as it was over 8 minutes ago.
+
+</Whoa>

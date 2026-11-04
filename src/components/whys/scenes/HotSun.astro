@@ -1,0 +1,55 @@
+---
+// Why is the Sun so hot? A huge glowing Sun with flares looping off its edge, and a tiny Earth far away.
+---
+<rect width="640" height="400" fill="var(--art-night)" />
+{[[40, 40], [560, 60], [600, 300], [520, 360], [80, 360], [300, 380]].map(([x, y]) => <circle cx={x} cy={y} r="2" fill="var(--art-moon)" />)}
+<g class="glow"><circle cx="250" cy="200" r="190" fill="var(--art-sun-2)" opacity="0.25" /></g>
+<circle cx="250" cy="200" r="160" fill="var(--art-o)" stroke="var(--art-ink)" stroke-width="4" />
+<circle cx="250" cy="200" r="132" fill="var(--art-y)" opacity="0.7" />
+{[[200, 150, 16], [300, 180, 12], [230, 250, 10], [290, 260, 14], [180, 220, 9]].map(([x, y, r], i) => (
+  <circle class="cell" style={`animation-delay:${-i * 0.6}s`} cx={x} cy={y} r={r} fill="var(--art-sun-2)" opacity="0.6" />
+))}
+<path class="flare" d="M390 120q60 -40 40 30" fill="none" stroke="var(--art-red)" stroke-width="10" stroke-linecap="round" />
+<path class="flare f2" d="M140 330q-40 50 20 40" fill="none" stroke="var(--art-red)" stroke-width="8" stroke-linecap="round" />
+<!-- sunglasses -->
+<g stroke="var(--art-ink)" stroke-width="4">
+  <path d="M170 180h160" />
+  <rect x="180" y="172" width="58" height="36" rx="14" fill="var(--art-ink)" />
+  <rect x="262" y="172" width="58" height="36" rx="14" fill="var(--art-ink)" />
+</g>
+<path d="M210 250q40 26 80 0" fill="none" stroke="var(--art-ink)" stroke-width="5" stroke-linecap="round" />
+<!-- tiny Earth -->
+<circle cx="560" cy="200" r="10" fill="var(--art-b)" stroke="var(--art-moon)" stroke-width="2" />
+<path d="M420 200h120" stroke="var(--art-y)" stroke-width="2" stroke-dasharray="6 8" class="beam" />
+
+<style>
+  .glow {
+    animation: glow 4s ease-in-out infinite alternate;
+    transform-origin: 250px 200px;
+  }
+  .cell {
+    animation: boil 3s ease-in-out infinite alternate;
+  }
+  .flare {
+    animation: flare 5s ease-in-out infinite;
+  }
+  .f2 {
+    animation-delay: -2.5s;
+  }
+  .beam {
+    animation: beam 1.5s linear infinite;
+  }
+  @keyframes glow {
+    to { transform: scale(1.05); }
+  }
+  @keyframes boil {
+    to { opacity: 0.2; }
+  }
+  @keyframes flare {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+  }
+  @keyframes beam {
+    to { stroke-dashoffset: -28; }
+  }
+</style>

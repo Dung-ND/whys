@@ -32,6 +32,8 @@ Every page follows the same steps a scientist would:
    (the Sun rises and sets, the month goes by…). The film starts when the lab is half in view; Lab stops it as
    soon as the reader touches a control, and pauses it off screen or when the reader presses pause. The
    play/pause button sits next to the controls, like on a video player.
+   If something should keep moving after the reader takes over (the car in the Moon lab keeps driving at the
+   speed they chose), also use `bind:active`: it is true whenever motion is on and the lab is on screen.
 5. **Check the science.** Any formula goes in `src/lib/whys-science.ts` with a test in `tests/whys.test.ts`.
    Prefer "scientists think" over certainty where the evidence is mixed, and say what is still unknown.
    Home experiments must be safe for kids, with a `safety` note when needed.

@@ -1,0 +1,76 @@
+---
+question: How do fireflies glow?
+teaser: On warm summer evenings, little lights blink on and off across the grass. How does a tiny insect make its own light, without getting hot?
+art: A dusky meadow under a pale Moon, full of fireflies blinking yellow-green as they drift over the grass. A kid stands at the edge, watching in wonder.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { FireflyLight } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={0}
+  options={[
+    { text: `A chemical reaction in their tail makes light.`, reply: `Fireflies mix special chemicals inside their bodies, and the reaction gives off light, with almost no heat at all.` },
+    { text: `They soak up sunlight in the day and glow at night.`, reply: `That's how glow-in-the-dark stickers work, but not fireflies. A firefly kept in the dark for days can still flash.` },
+    { text: `They have tiny electric batteries inside.`, reply: `Some animals, like electric eels, do make electricity, but fireflies don't. Their light comes from chemistry, not electricity.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<FireflyLight
+  label="Top: the firefly's light reaction. A chemical called luciferin plus oxygen, helped by an enzyme called luciferase, makes light. Bottom: three kinds of firefly flash in three different patterns, like codes."
+  luciferin="luciferin"
+  oxygen="oxygen"
+  enzyme="luciferase"
+  light="light!"
+  codes="Each kind of firefly flashes its own code:"
+  species={['Species A', 'Species B', 'Species C']}
+/>
+</div>
+
+Inside a firefly's glowing tail, a chemical called **luciferin** reacts with oxygen. An enzyme called **luciferase** makes the reaction happen fast, and its energy comes out as light.
+
+</Part>
+
+<Part kind="answer">
+
+Fireflies make light with a chemical reaction in their tails, called bioluminescence. They switch it on and off by letting oxygen in.
+
+Making light from chemistry is called **bioluminescence** ("living light"). In a firefly's tail is a special light organ packed with luciferin and luciferase. When oxygen reaches them, they react and give off a flash of yellow-green light.
+
+Most lights, like old light bulbs, waste lots of energy as heat. A firefly's light is **cold light**: the reaction makes almost no heat, which is lucky, or the firefly would cook itself!
+
+To flash, a firefly controls how much oxygen reaches its light organ, switching the light on and off in a split second.
+
+Why flash at all? To **talk**. Male fireflies fly around flashing a pattern, and females on the ground answer with their own flash. Every kind of firefly has its own code: the number of flashes, their length and the gaps between them. Some sneaky fireflies even copy other species' codes to lure them in... and eat them!
+
+</Part>
+
+<Myth claim="Fireflies are a kind of fly.">
+
+Despite the name, fireflies are **beetles**, related to ladybirds. They have hard wing covers, which they lift to fly, just like other beetles.
+
+</Myth>
+
+<TryIt title="warm light, cool light" need={['Two glow sticks', 'A cup of warm tap water', 'A cup of ice water', 'A dark room']}>
+
+1. Snap both glow sticks to start them glowing. Glow sticks use a chemical reaction too, a bit like a firefly.
+2. Put one in the warm water and the other in the ice water.
+3. Wait two minutes, then turn off the lights and compare.
+4. The warm one glows brighter: heat speeds up the chemical reaction. That's why fireflies flash faster on warm nights!
+
+</TryIt>
+
+<Whoa big="In sync">
+
+In a few places in the world, like the Great Smoky Mountains in the United States and mangrove forests in Southeast Asia, thousands of fireflies flash **all together**, on and off, like a giant light show.
+
+</Whoa>

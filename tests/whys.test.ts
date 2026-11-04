@@ -86,3 +86,25 @@ test('ice: about 9% bigger than the water it came from, about 90% under water wh
   close(fractionSubmerged(DENSITY.ice, DENSITY.water), 0.917, 0.001);
   close(fractionSubmerged(DENSITY.ice, DENSITY.seawater), 0.89, 0.01);
 });
+
+import { angularSpeed, MOON_DISTANCE_KM, steamPressure, POP_TEMPERATURE, SUNLIGHT_SECONDS } from '../src/lib/whys-science.ts';
+
+test('moon in the car: near things whiz by, the Moon barely moves', () => {
+  // At 72 km/h (20 m/s), a post 5 m away sweeps past at about 229° per second…
+  close(angularSpeed(72, 5), 229.2, 0.1);
+  // …while the Moon shifts by about a millionth of a degree.
+  assert.ok(angularSpeed(72, MOON_DISTANCE_KM * 1000) < 1e-5);
+  // Driving to the Moon at 100 km/h would take about 160 days.
+  close(MOON_DISTANCE_KM / 100 / 24, 160, 1);
+});
+
+test('popcorn: steam pressure from steam tables', () => {
+  close(steamPressure(100), 1.014, 1e-9);
+  close(steamPressure(POP_TEMPERATURE), 10.03, 1e-9);
+  close(steamPressure(170), (6.181 + 10.03) / 2, 1e-9);
+  assert.ok(steamPressure(150) > steamPressure(140));
+});
+
+test('sunlight takes about 8 minutes 20 seconds to reach Earth', () => {
+  close(SUNLIGHT_SECONDS, 499, 1);
+});

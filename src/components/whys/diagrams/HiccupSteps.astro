@@ -1,0 +1,52 @@
+---
+// A hiccup: the diaphragm (the dome-shaped muscle under the lungs) suddenly jerks down, air rushes in,
+// and a split second later the vocal cords snap shut: "hic!"
+import Figure from '../Figure.astro';
+interface Props { label: string; normal: string; jerk: string; snap: string; diaphragm: string; air: string }
+const { label, normal, jerk, snap, diaphragm, air } = Astro.props;
+const torso = (x: number, dome: number, closed: boolean, rush: boolean) => ({ x, dome, closed, rush });
+const frames = [torso(110, 0, false, false), torso(320, 1, false, true), torso(530, 1, true, false)];
+---
+<Figure label={label} width={640} height={320}>
+  <rect width="640" height="320" rx="16" fill="var(--art-sky-2)" />
+  {frames.map((f, i) => (
+    <g transform={`translate(${f.x} 0)`}>
+      <!-- body outline -->
+      <path d="M-70 280v-150q0 -40 40 -46h60q40 6 40 46v150z" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="3" />
+      <rect x="-12" y="40" width="24" height="46" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="3" />
+      <!-- windpipe and vocal cords -->
+      <path d="M0 50v60" stroke="var(--art-shirt)" stroke-width="8" />
+      {f.closed ? <path d="M-10 60h20" stroke="var(--art-red)" stroke-width="6" stroke-linecap="round" /> : <path d="M-10 60l6 4M10 60l-6 4" stroke="var(--art-red)" stroke-width="4" stroke-linecap="round" />}
+      <!-- lungs -->
+      <ellipse cx="-28" cy="160" rx={f.dome ? 30 : 26} ry={f.dome ? 54 : 46} fill="var(--art-cheek)" stroke="var(--art-ink)" stroke-width="2.5" />
+      <ellipse cx="28" cy="160" rx={f.dome ? 30 : 26} ry={f.dome ? 54 : 46} fill="var(--art-cheek)" stroke="var(--art-ink)" stroke-width="2.5" />
+      <path d="M0 110v16l-20 14M0 126l20 14" fill="none" stroke="var(--art-shirt)" stroke-width="5" />
+      <!-- diaphragm -->
+      <path d={f.dome ? 'M-68 226q68 -20 136 0' : 'M-68 222q68 -44 136 0'} fill="none" stroke="var(--art-red)" stroke-width="7" stroke-linecap="round" />
+      {f.dome && <path d="M0 238v18M-8 248l8 10l8 -10" fill="none" stroke="var(--art-red)" stroke-width="3" stroke-linecap="round" />}
+      {f.rush && <path d="M-20 14q20 10 20 26M20 14q-20 10 -20 26" fill="none" stroke="var(--art-shirt)" stroke-width="3" stroke-dasharray="4 4" />}
+      {f.closed && <text x="34" y="54" class="hic">hic!</text>}
+      <text x="0" y="300" text-anchor="middle" class="t">{['①', '②', '③'][i]} {[normal, jerk, snap][i]}</text>
+    </g>
+  ))}
+  <text x="110" y="252" text-anchor="middle" class="s">{diaphragm}</text>
+  <text x="352" y="30" class="s">{air}</text>
+</Figure>
+
+<style>
+  .t {
+    font-weight: 850;
+    font-size: 14px;
+    fill: var(--art-ink);
+  }
+  .s {
+    font-weight: 800;
+    font-size: 12px;
+    fill: var(--art-ink);
+  }
+  .hic {
+    font-weight: 900;
+    font-size: 22px;
+    fill: var(--art-red);
+  }
+</style>

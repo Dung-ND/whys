@@ -1,0 +1,55 @@
+---
+// Why does a rubbed balloon stick? A kid whose hair stands on end, holding a balloon just rubbed on their head,
+// and another balloon stuck to the wall. Little plus and minus signs float around.
+import Kid from './Kid.astro';
+---
+<rect width="640" height="400" fill="var(--art-sky-2)" />
+<!-- wall with a stuck balloon -->
+<rect x="440" y="0" width="200" height="340" fill="var(--art-tan)" stroke="var(--art-ink)" stroke-width="4" />
+<g stroke="var(--art-ink)" stroke-width="3">
+  <ellipse cx="490" cy="130" rx="44" ry="54" fill="var(--art-b)" />
+  <path d="M484 186l6 8l6 -8z" fill="var(--art-b)" />
+</g>
+<path d="M490 194q-6 30 6 60" fill="none" stroke="var(--art-ink)" stroke-width="2" />
+<g font-weight="900" font-size="20" fill="var(--art-white)">{[[476, 120], [496, 140], [480, 160]].map(([x, y]) => <text x={x} y={y}>−</text>)}</g>
+<path d="M0 340h640v60h-640z" fill="var(--art-wood)" stroke="var(--art-ink)" stroke-width="4" />
+<Kid x={210} y={384} mood="wow" look={[3, -2]} shirt="var(--art-v)" />
+<!-- hair standing up -->
+<g class="hair" stroke="var(--art-hair)" stroke-width="5" stroke-linecap="round" fill="none">
+  {[-60, -40, -20, 0, 20, 40, 60].map((a) => (
+    <path transform={`rotate(${a} 210 272)`} d="M210 244q4 -24 0 -46" />
+  ))}
+</g>
+<!-- balloon held up -->
+<g class="balloon" stroke="var(--art-ink)" stroke-width="3">
+  <ellipse cx="320" cy="170" rx="50" ry="60" fill="var(--art-red)" />
+  <path d="M314 232l6 8l6 -8z" fill="var(--art-red)" />
+  <path d="M296 136q8 -14 22 -18" fill="none" stroke="var(--art-white)" stroke-width="5" opacity="0.6" />
+</g>
+<path d="M320 240q-20 30 -66 40" fill="none" stroke="var(--art-ink)" stroke-width="2" />
+<g font-weight="900" font-size="22">
+  {[[300, 160], [326, 184], [330, 150]].map(([x, y]) => <text x={x} y={y} fill="var(--art-white)">−</text>)}
+  {[[150, 210], [262, 196], [200, 186]].map(([x, y], i) => <text class="spark" style={`animation-delay:${-i * 0.5}s`} x={x} y={y} fill="var(--art-red)">+</text>)}
+</g>
+
+<style>
+  .hair {
+    animation: frizz 2.5s ease-in-out infinite alternate;
+    transform-origin: 210px 272px;
+  }
+  .balloon {
+    animation: float 3s ease-in-out infinite alternate;
+  }
+  .spark {
+    animation: spark 1.5s ease-in-out infinite;
+  }
+  @keyframes frizz {
+    to { transform: scale(1.04); }
+  }
+  @keyframes float {
+    to { transform: translate(-4px, -6px); }
+  }
+  @keyframes spark {
+    50% { opacity: 0.3; }
+  }
+</style>

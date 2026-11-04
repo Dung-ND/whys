@@ -5,6 +5,8 @@
   // A lab plays like a short film until the reader touches a control; then they are in charge.
   // `running` tells the lab when to play its film: motion is on (src/lib/motion.ts), the lab is on
   // screen, and nobody has taken over. Pressing play again restarts the film.
+  // `active` is true whenever things may move at all (motion on, lab on screen), even after the reader
+  // has taken over: for labs where something keeps moving under the reader's control (a car driving).
   import type { Snippet } from 'svelte';
   import { onMotion, onVisible, setMotion } from '@/lib/motion';
   import { strings } from './strings';
@@ -15,10 +17,11 @@
     caption: string;
     lang?: Lang;
     running?: boolean;
+    active?: boolean;
     children: Snippet;
     controls: Snippet;
   }
-  let { title, caption, lang = 'en', running = $bindable(false), children, controls }: Props = $props();
+  let { title, caption, lang = 'en', running = $bindable(false), active = $bindable(false), children, controls }: Props = $props();
   const t = strings(lang);
 
   let el: HTMLElement;
@@ -28,7 +31,8 @@
   $effect(() => onMotion((on) => (motion = on)));
   $effect(() => onVisible(el, (v) => (visible = v)));
   $effect(() => {
-    running = motion && visible && auto;
+    active = motion && visible;
+    running = active && auto;
   });
 
   function toggle() {

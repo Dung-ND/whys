@@ -80,3 +80,31 @@ export const DENSITY = { water: 1.0, seawater: 1.025, ice: 0.917 };
 
 /** Fraction of a floating object below the surface (Archimedes): its density over the liquid's. */
 export const fractionSubmerged = (object: number, liquid: number) => Math.min(1, object / liquid);
+
+/** Average distance from Earth to the Moon, in km. */
+export const MOON_DISTANCE_KM = 384_400;
+
+/**
+ * How fast something seems to slide across your view (degrees per second) when you pass it at `speedKmh`,
+ * at its closest point, `distanceM` metres away. Near things whiz by; the Moon barely moves.
+ */
+export const angularSpeed = (speedKmh: number, distanceM: number) => ((speedKmh / 3.6 / distanceM) * 180) / Math.PI;
+
+/** Saturated steam pressure (bar) at `celsius`, from steam tables, joined by straight lines. */
+const STEAM: [number, number][] = [
+  [20, 0.023], [60, 0.2], [100, 1.014], [120, 1.985], [140, 3.613], [160, 6.181], [180, 10.03], [200, 15.55], [220, 23.2],
+];
+export function steamPressure(celsius: number): number {
+  if (celsius <= STEAM[0][0]) return STEAM[0][1];
+  for (let i = 1; i < STEAM.length; i++) {
+    const [t1, p1] = STEAM[i - 1], [t2, p2] = STEAM[i];
+    if (celsius <= t2) return p1 + ((p2 - p1) * (celsius - t1)) / (t2 - t1);
+  }
+  return STEAM[STEAM.length - 1][1];
+}
+
+/** Popcorn pops at about 180 °C, when steam inside the kernel reaches roughly 9–10 times normal air pressure. */
+export const POP_TEMPERATURE = 180;
+
+/** Seconds for light to travel from the Sun to Earth (1 astronomical unit). */
+export const SUNLIGHT_SECONDS = 149_597_871 / 299_792.458;

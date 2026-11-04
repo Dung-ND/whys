@@ -49,6 +49,14 @@ export const whys: Why[] = [
   { slug: 'why-does-ice-float', n: 14, category: 'everyday', minutes: 3 },
   { slug: 'why-do-we-yawn', n: 15, category: 'body', minutes: 3 },
   { slug: 'how-do-cats-land-on-their-feet', n: 16, category: 'animals', minutes: 3 },
+  { slug: 'why-does-the-moon-follow-our-car', n: 17, category: 'sky', minutes: 3 },
+  { slug: 'why-is-the-sun-so-hot', n: 18, category: 'sky', minutes: 3 },
+  { slug: 'why-do-volcanoes-erupt', n: 19, category: 'weather', minutes: 3 },
+  { slug: 'why-do-sunflowers-face-the-sun', n: 20, category: 'plants', minutes: 3 },
+  { slug: 'how-do-fireflies-glow', n: 21, category: 'animals', minutes: 3 },
+  { slug: 'why-does-a-rubbed-balloon-stick', n: 22, category: 'everyday', minutes: 3 },
+  { slug: 'why-does-popcorn-pop', n: 23, category: 'everyday', minutes: 3 },
+  { slug: 'why-do-we-get-hiccups', n: 24, category: 'body', minutes: 3 },
 ];
 
 export const getWhy = (slug: string) => whys.find((w) => w.slug === slug);

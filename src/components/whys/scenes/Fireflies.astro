@@ -1,0 +1,41 @@
+---
+// How do fireflies glow? A dusky meadow full of fireflies blinking on and off, and a kid watching quietly.
+import Kid from './Kid.astro';
+const bugs: [number, number][] = [[80, 140], [160, 220], [240, 120], [330, 190], [400, 100], [470, 230], [540, 150], [600, 220], [290, 260], [210, 250], [510, 300], [380, 290]];
+---
+<rect width="640" height="400" fill="var(--art-night-2)" />
+<rect width="640" height="140" fill="var(--art-night)" />
+<circle cx="560" cy="60" r="20" fill="var(--art-moon)" opacity="0.9" />
+<path d="M0 300q160 -30 320 -10t320 -10v120h-640z" fill="var(--art-grass-2)" stroke="var(--art-ink)" stroke-width="4" />
+<path d="M0 300q160 -30 320 -10t320 -10v120h-640z" fill="var(--art-night)" opacity="0.5" />
+<g stroke="var(--art-ink)" stroke-width="3" fill="none" opacity="0.6">
+  {[30, 70, 250, 300, 600].map((x) => <path d={`M${x} 310q4 -30 -6 -50M${x + 8} 310q2 -24 10 -40`} />)}
+</g>
+{bugs.map(([x, y], i) => (
+  <g transform={`translate(${x} ${y})`}>
+    <g class="fly" style={`animation-delay:${-(i * 0.73) % 5}s`}>
+      <circle class="glow" r="16" fill="var(--art-y)" opacity="0.35" style={`animation-delay:${-(i * 0.91) % 3}s`} />
+      <circle class="glow" r="5" fill="var(--art-y)" style={`animation-delay:${-(i * 0.91) % 3}s`} />
+      <ellipse cx="-6" cy="-1" rx="5" ry="3" fill="var(--art-ink)" />
+    </g>
+  </g>
+))}
+<Kid x={110} y={384} mood="wow" look={[4, -3]} shirt="var(--art-shirt)" />
+
+<style>
+  .fly {
+    animation: wander 5s ease-in-out infinite;
+  }
+  .glow {
+    animation: blink 3s ease-in-out infinite;
+  }
+  @keyframes wander {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(14px, -10px); }
+    66% { transform: translate(-10px, 6px); }
+  }
+  @keyframes blink {
+    0%, 55%, 100% { opacity: 0.1; }
+    65%, 80% { opacity: 1; }
+  }
+</style>

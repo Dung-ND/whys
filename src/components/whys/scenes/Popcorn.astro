@@ -1,0 +1,72 @@
+---
+// Why does popcorn pop? A pot on the stove with its lid lifting as popcorn bursts out, flakes flying.
+import Kid from './Kid.astro';
+const flakes: [number, number][] = [[260, 120], [330, 90], [400, 130], [300, 60], [370, 40]];
+---
+<rect width="640" height="400" fill="var(--art-sky-2)" />
+<rect y="290" width="640" height="110" fill="var(--art-wood)" stroke="var(--art-ink)" stroke-width="4" />
+<rect x="220" y="282" width="240" height="16" rx="4" fill="var(--art-storm-2)" stroke="var(--art-ink)" stroke-width="3" />
+<g class="flame" fill="var(--art-o)" stroke="var(--art-ink)" stroke-width="2">
+  {[270, 310, 350, 390].map((x) => <path d={`M${x} 282q-10 -12 0 -22q10 10 0 22z`} />)}
+</g>
+<!-- pot -->
+<path d="M230 200h220v60q0 20 -20 20h-180q-20 0 -20 -20z" fill="var(--art-red)" stroke="var(--art-ink)" stroke-width="4" />
+<path d="M206 214h24M450 214h24" stroke="var(--art-ink)" stroke-width="8" stroke-linecap="round" />
+<g class="pile">
+  {[[260, 196], [290, 190], [320, 194], [350, 188], [380, 194], [410, 192], [430, 198], [300, 178], [360, 176], [330, 166]].map(([x, y]) => (
+    <g transform={`translate(${x} ${y})`} stroke="var(--art-ink)" stroke-width="2.5">
+      <circle r="13" fill="var(--art-white)" /><circle cx="9" cy="-6" r="9" fill="var(--art-white)" /><circle cx="-8" cy="-7" r="8" fill="var(--art-white)" />
+    </g>
+  ))}
+</g>
+<g class="lid" stroke="var(--art-ink)" stroke-width="4">
+  <path d="M222 168q118 -40 236 0z" fill="var(--art-storm)" />
+  <rect x="326" y="136" width="28" height="12" rx="6" fill="var(--art-ink)" />
+</g>
+{flakes.map(([x, y], i) => (
+  <g transform={`translate(${x} ${y})`}>
+    <g class="fly" style={`animation-delay:${-i * 0.45}s`} stroke="var(--art-ink)" stroke-width="2.5">
+      <circle r="11" fill="var(--art-white)" /><circle cx="8" cy="-5" r="8" fill="var(--art-white)" /><circle cx="-7" cy="-6" r="7" fill="var(--art-white)" />
+    </g>
+  </g>
+))}
+<text x="470" y="100" class="pop">POP!</text>
+<Kid x={110} y={384} mood="wow" point look={[4, -3]} shirt="var(--art-shirt)" />
+
+<style>
+  .pop {
+    font-weight: 900;
+    font-size: 40px;
+    fill: var(--art-y);
+    stroke: var(--art-ink);
+    stroke-width: 5px;
+    paint-order: stroke;
+    animation: pop 2.2s ease-out infinite;
+  }
+  .lid {
+    animation: lid 1.1s ease-in-out infinite;
+    transform-origin: 340px 168px;
+  }
+  .fly {
+    animation: fly 2.2s ease-out infinite;
+  }
+  .flame {
+    animation: flicker 0.8s ease-in-out infinite alternate;
+  }
+  @keyframes pop {
+    0%, 60%, 100% { opacity: 0; }
+    10%, 40% { opacity: 1; }
+  }
+  @keyframes lid {
+    0%, 70%, 100% { transform: none; }
+    80% { transform: translateY(-10px) rotate(-4deg); }
+  }
+  @keyframes fly {
+    from { transform: translateY(80px) scale(0.5); opacity: 0; }
+    20% { opacity: 1; }
+    to { transform: translateY(-30px) scale(1); opacity: 0; }
+  }
+  @keyframes flicker {
+    to { opacity: 0.7; }
+  }
+</style>

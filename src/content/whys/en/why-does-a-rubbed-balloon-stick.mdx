@@ -1,0 +1,71 @@
+---
+question: Why does a rubbed balloon stick to the wall?
+teaser: Rub a balloon on your hair and it sticks to the wall like magic, and your hair stands on end. What did the rubbing do?
+art: A kid with hair standing on end holds up a red balloon just rubbed on their head. Another blue balloon is stuck to the wall nearby, and little plus and minus signs float around.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import BalloonLab from '@/interactives/static-balloon/BalloonLab.svelte';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `The rubbing makes the balloon sticky.`, reply: `Touch the balloon: it isn't sticky at all. And it can pull your hair toward it from a few centimeters away, without touching.` },
+    { text: `Rubbing moves tiny electric charges from your hair to the balloon.`, reply: `Rubbing scrapes tiny negative charges, called electrons, off your hair onto the balloon. Now they pull on each other: static electricity!` },
+    { text: `The balloon becomes a magnet.`, reply: `A good guess, since it pulls like a magnet does! But a rubbed balloon doesn't pick up paper clips. Its pull is electric, not magnetic.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<BalloonLab client:visible lang={props.lang} />
+
+Rub the balloon a few times. Watch the plus and minus signs, and the hair. Then let the charge leak away.
+
+</Part>
+
+<Part kind="answer">
+
+Rubbing moves electrons from your hair onto the balloon, giving them opposite electric charges, and opposite charges pull on each other.
+
+Everything is made of atoms, and atoms contain tiny particles with electric charge: positive **protons** and negative **electrons**. Usually things have exactly as many of each, so the charges cancel out.
+
+When you rub a rubber balloon on your hair, some electrons are scraped off the hair onto the balloon. Now the balloon has extra electrons (it's **negative**), and your hair is missing some (it's **positive**). This is called **static electricity**, because the charges stay put instead of flowing like the electricity in a wire.
+
+Two simple rules explain everything you see:
+
+- **Opposite charges attract**: your positive hair is pulled toward the negative balloon.
+- **Like charges repel**: each hair has the same positive charge, so the hairs push away from each other and stand on end.
+
+And the wall? It isn't charged, but when the negative balloon comes close, it pushes the wall's electrons slightly away, leaving the surface a little positive. That's enough to hold the light balloon up.
+
+Static electricity works best on **dry days**. In damp air, water on surfaces lets the charges leak away quickly.
+
+</Part>
+
+<Myth claim="Rubbing the balloon creates electricity out of nothing.">
+
+Rubbing doesn't make any new charge. It just moves electrons that were already there, from one thing to another. Your hair and the balloon together have exactly as much charge as before.
+
+</Myth>
+
+<TryIt title="bend water with a balloon" need={['A balloon', 'Your hair (clean and dry works best)', 'A tap', 'Some tiny bits of tissue paper']}>
+
+1. Turn on a tap so a thin, smooth stream of water flows.
+2. Rub the balloon on your hair about ten times.
+3. Slowly bring the balloon close to the stream, without touching it. The water bends toward the balloon!
+4. Rub it again and hold it over the bits of tissue: they jump up to meet it.
+
+</TryIt>
+
+<Whoa big="3,000 V">
+
+That little zap you sometimes feel when you touch a doorknob after walking on a carpet is static electricity too. To feel it at all, it takes about 3,000 volts. It doesn't hurt you, because only a tiny amount of charge flows, for a tiny moment.
+
+</Whoa>

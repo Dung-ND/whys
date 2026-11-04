@@ -1,0 +1,66 @@
+---
+question: Why does the Moon follow our car?
+teaser: Trees, houses and lampposts all rush past the window, but the Moon keeps up with you, mile after mile. Is it following you?
+art: A red car drives along a road at night with a kid looking out of the window. Trees slide past along the roadside, while a big full Moon hangs in the same spot above the hills.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import CarMoonLab from '@/interactives/car-moon/CarMoonLab.svelte';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={2}
+  options={[
+    { text: `The Moon really moves along with us.`, reply: `The Moon does travel around Earth, but slowly: it takes a whole month to go once around. And people driving the other way see it "follow" them too!` },
+    { text: `It's a trick of the car's window glass.`, reply: `Open the window, or watch while walking, and the Moon still keeps up with you. The glass has nothing to do with it.` },
+    { text: `It's so far away that our movement barely changes its direction.`, reply: `The closer something is, the faster it slides past as you move. The Moon is so far away that it barely shifts at all, so it seems to stay with you.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<CarMoonLab client:visible lang={props.lang} />
+
+Change the car's speed and compare the numbers. How many zeros does the Moon have?
+
+</Part>
+
+<Part kind="answer">
+
+The Moon is so far away that driving along barely changes the direction you see it in, so it seems to keep pace with you while everything nearby rushes past.
+
+When you move, things around you seem to slide past in the other direction. How fast they slide depends on how far away they are. A fence post right beside the road flashes past in a blink. A tree a little farther away glides by. Mountains on the horizon creep along slowly.
+
+The Moon is about **384,000 kilometers** away. Compared with that, even a long car trip barely moves you at all, so the direction to the Moon hardly changes. It stays in the same spot in your window.
+
+Your brain is used to faraway things moving slowly and near things moving fast. When the trees and houses rush backward but the Moon doesn't, your brain gets the feeling that the Moon must be moving forward with you, following you.
+
+Scientists call this effect **parallax**: things at different distances seem to shift by different amounts when you move. Astronomers use it to measure how far away the nearest stars are.
+
+</Part>
+
+<Myth claim="The Moon is following me.">
+
+Everyone in every car sees the Moon "following" them, even cars driving in opposite directions! It isn't following anyone; it's just so far away that nobody's movement changes its direction.
+
+</Myth>
+
+<TryIt title="the finger test" need={['Your thumb', 'Something far away, like a tree or a building']}>
+
+1. Hold your thumb up at arm's length, in front of something far away.
+2. Close your left eye and look with your right. Then switch eyes.
+3. Your thumb jumps sideways, but the faraway thing barely moves!
+4. Now bring your thumb closer to your face and try again. The closer the thumb, the bigger the jump. That's parallax.
+
+</TryIt>
+
+<Whoa big="160 days">
+
+If you could drive to the Moon at 100 km/h without stopping, it would take about 160 days: more than five months on the road.
+
+</Whoa>

@@ -1,0 +1,78 @@
+---
+question: Why do volcanoes erupt?
+teaser: Deep under our feet, rock is so hot it melts. But what makes it burst out of the ground, sometimes with an enormous bang?
+art: A volcano erupts, blasting a cloud of grey ash and glowing rocks into the sky while orange lava flows down its sides. A kid watches from far away on the grass.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { VolcanoInside } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `The center of the Earth is full of fire.`, reply: `Earth's center is very hot, but it isn't fire. And volcano magma doesn't come from the center: it forms much closer to the surface, often less than 100 km down.` },
+    { text: `Gas in the melted rock bubbles up and pushes it out.`, reply: `Melted rock, called magma, holds dissolved gas. As it rises and the pressure drops, the gas forms bubbles that grow and force it out, like a shaken bottle of soda.` },
+    { text: `The volcano gets too full and overflows like a pot.`, reply: `It's not just about being full. Gas is the real engine: magma with lots of trapped gas can explode, while magma with little gas just oozes out.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<VolcanoInside
+  label="A slice through a volcano. Melted rock, or magma, sits in a chamber deep underground. It rises up a narrow pipe, and gas bubbles in it grow bigger as it climbs, until it bursts out of the top in a cloud of ash. Beside it, a soda bottle shows the same thing: bubbles growing and fizzing out when the pressure drops."
+  chamber="magma chamber"
+  rises="magma rises"
+  bubbles="gas bubbles grow"
+  erupts="eruption!"
+  soda="just like soda"
+/>
+</div>
+
+Deep down, the weight of rock above keeps the gas dissolved in the magma, just as the closed cap keeps the bubbles in a soda. As magma rises, that weight gets less and the gas comes out as bubbles, which grow and grow.
+
+</Part>
+
+<Part kind="answer">
+
+Magma rises because it's lighter than the solid rock around it, and the gas inside it forms bubbles that grow as it rises, pushing it out with tremendous force.
+
+In some places, often where the giant plates of Earth's surface meet or pull apart, rock tens of kilometers down gets hot enough to melt. The melted rock, called **magma**, is lighter than the solid rock around it, so it slowly rises, like a bubble in honey, and collects in a **magma chamber**.
+
+Magma contains dissolved gases, mostly water vapor and carbon dioxide. Deep down, the huge weight of rock above keeps them squeezed in. But as magma rises toward the surface, the pressure drops, and the gas comes out as bubbles. The bubbles grow, the magma gets frothy and lighter, and it rises faster still. Eventually it bursts out of the ground: an **eruption**.
+
+How violent an eruption is depends on the magma:
+
+- **Runny magma**, like at the volcanoes of Hawaii, lets gas bubbles escape easily. It pours out as rivers of lava.
+- **Thick, sticky magma** traps the gas until the pressure becomes huge. Then it explodes, blasting rock into ash, as when Mount St Helens erupted in 1980.
+
+Magma that reaches the surface is called **lava**.
+
+</Part>
+
+<Myth claim="Lava is the most dangerous part of a volcano.">
+
+Lava usually moves slowly enough to walk away from. The real dangers are fast avalanches of scorching gas and ash, called *pyroclastic flows*, falling ash, and mudflows that race down valleys. Scientists watch volcanoes closely so people can leave in time.
+
+</Myth>
+
+<TryIt title="a fizzy eruption" need={['A big bottle of diet cola', 'A pack of mint candies (Mentos)', 'A sheet of paper rolled into a tube', 'A big outdoor space and an adult']} safety="Do this outdoors with an adult, wear old clothes, and step back quickly once the candies drop in.">
+
+1. Stand the bottle on flat ground outdoors and open it.
+2. Roll the paper into a tube the width of a candy, and load about five candies into it.
+3. Hold the tube over the bottle's mouth and let all the candies drop in at once. Step back!
+4. The candies' bumpy surface helps the dissolved gas form bubbles very fast, and the foam shoots up. Rising magma does something similar when its gas comes out.
+
+</TryIt>
+
+<Whoa big="22 km">
+
+The biggest volcano we know isn't on Earth. Olympus Mons on Mars is about 22 kilometers high: about two and a half times as tall as Mount Everest.
+
+</Whoa>

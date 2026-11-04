@@ -1,0 +1,40 @@
+---
+// Inside a volcano: magma rises from a chamber; as the pressure on it drops, gas dissolved in it forms bubbles
+// that grow and burst out, just like opening a shaken bottle of soda.
+import Figure from '../Figure.astro';
+interface Props { label: string; chamber: string; rises: string; bubbles: string; erupts: string; soda: string }
+const { label, chamber, rises, bubbles, erupts, soda } = Astro.props;
+const bub: [number, number, number][] = [[250, 250, 3], [262, 220, 4], [246, 190, 5], [258, 158, 6.5], [244, 124, 8], [256, 92, 10]];
+---
+<Figure label={label} width={640} height={340}>
+  <rect width="640" height="340" rx="16" fill="var(--art-sky-2)" />
+  <!-- volcano cross-section -->
+  <path d="M60 300L210 80h80l150 220z" fill="var(--art-tan)" stroke="var(--art-ink)" stroke-width="3.5" stroke-linejoin="round" />
+  <rect x="20" y="300" width="460" height="40" fill="var(--art-wood)" />
+  <ellipse cx="250" cy="310" rx="120" ry="24" fill="var(--art-red)" stroke="var(--art-ink)" stroke-width="3" />
+  <path d="M236 292L236 80h28L264 292z" fill="var(--art-red)" stroke="var(--art-ink)" stroke-width="3" />
+  {bub.map(([x, y, r]) => <circle cx={x} cy={y} r={r} fill="var(--art-y)" stroke="var(--art-ink)" stroke-width="1.5" />)}
+  <g fill="var(--art-storm)" stroke="var(--art-ink)" stroke-width="3">
+    <circle cx="250" cy="52" r="24" /><circle cx="222" cy="36" r="18" /><circle cx="280" cy="30" r="20" /><circle cx="250" cy="16" r="16" />
+  </g>
+  <text x="250" y="334" text-anchor="middle" class="t w">① {chamber}</text>
+  <text x="290" y="230" class="t">② {rises}</text>
+  <text x="290" y="140" class="t">③ {bubbles}</text>
+  <text x="306" y="44" class="t">④ {erupts}</text>
+  <!-- soda bottle -->
+  <path d="M546 140h28v26q22 16 22 40v100q0 10 -10 10h-52q-10 0 -10 -10v-100q0 -24 22 -40z" fill="var(--art-glass)" stroke="var(--art-ink)" stroke-width="3" />
+  {[[552, 280, 3], [570, 250, 4], [556, 220, 5], [572, 192, 6]].map(([x, y, r]) => <circle cx={x} cy={y} r={r} fill="var(--art-white)" stroke="var(--art-shirt)" stroke-width="1.5" />)}
+  <path d="M560 136q-14 -30 -2 -60M560 136q16 -30 6 -64" fill="none" stroke="var(--art-shirt)" stroke-width="5" stroke-linecap="round" />
+  <text x="560" y="62" text-anchor="middle" class="t">🥤 {soda}</text>
+</Figure>
+
+<style>
+  .t {
+    font-weight: 850;
+    font-size: 15px;
+    fill: var(--art-ink);
+  }
+  .w {
+    fill: var(--art-white);
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+// Why do we get hiccups? A kid jumps with a surprised "hic!" while holding a glass of water.
+import Kid from './Kid.astro';
+---
+<rect width="640" height="400" fill="var(--art-sky-2)" />
+<rect y="330" width="640" height="70" fill="var(--art-wood)" stroke="var(--art-ink)" stroke-width="4" />
+<!-- table with a fizzy drink -->
+<rect x="400" y="250" width="180" height="16" fill="var(--art-wood)" stroke="var(--art-ink)" stroke-width="4" />
+<path d="M420 266v64M560 266v64" stroke="var(--art-ink)" stroke-width="6" />
+<path d="M450 196h40l-6 54h-28z" fill="var(--art-glass)" stroke="var(--art-ink)" stroke-width="3" />
+<g fill="var(--art-white)" stroke="var(--art-shirt)" stroke-width="1.5">
+  {[[464, 236], [474, 222], [466, 208]].map(([x, y], i) => <circle class="fizz" style={`animation-delay:${-i * 0.5}s`} cx={x} cy={y} r="3" />)}
+</g>
+<g class="jump"><Kid x={230} y={384} mood="wow" shirt="var(--art-o)" /></g>
+<g class="hic">
+  <text x="270" y="210" class="h">hic!</text>
+  <path d="M256 220l-12 6M260 232l-14 2" stroke="var(--art-ink)" stroke-width="3" stroke-linecap="round" />
+</g>
+
+<style>
+  .jump {
+    animation: jump 3s ease-in-out infinite;
+  }
+  .hic {
+    animation: hic 3s ease-in-out infinite;
+  }
+  .h {
+    font-weight: 900;
+    font-size: 36px;
+    fill: var(--art-red);
+    stroke: var(--art-white);
+    stroke-width: 5px;
+    paint-order: stroke;
+  }
+  .fizz {
+    animation: rise 1.5s linear infinite;
+  }
+  @keyframes jump {
+    0%, 30%, 100% { transform: none; }
+    36% { transform: translateY(-16px); }
+    44% { transform: none; }
+  }
+  @keyframes hic {
+    0%, 32%, 70%, 100% { opacity: 0; }
+    36%, 60% { opacity: 1; }
+  }
+  @keyframes rise {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-30px); opacity: 0; }
+  }
+</style>

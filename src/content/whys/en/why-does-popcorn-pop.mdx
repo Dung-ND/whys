@@ -1,0 +1,66 @@
+---
+question: Why does popcorn pop?
+teaser: A hard little seed goes into a hot pot and, a minute later, bursts into a fluffy flake many times its size. What happens inside?
+art: Popcorn bursts out of a red pot on the stove, lifting the lid, with flakes flying through the air and a big POP! A kid points at it in surprise.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import PopcornLab from '@/interactives/popcorn/PopcornLab.svelte';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={2}
+  options={[
+    { text: `Air trapped inside gets hot and expands.`, reply: `There's hardly any air inside a kernel. The real secret is water.` },
+    { text: `The oil in the pot soaks in and explodes.`, reply: `Popcorn pops fine in a hot-air popper or a microwave, with no oil at all. The oil just helps heat the kernels evenly.` },
+    { text: `Water inside turns to steam and bursts the shell.`, reply: `Each kernel holds a little water. Heat turns it into steam, the tough shell holds it in, the pressure builds… and pop!` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<PopcornLab client:visible lang={props.lang} />
+
+Heat the kernel slowly. Watch the water drops and the pressure gauge. At what temperature does it pop?
+
+</Part>
+
+<Part kind="answer">
+
+Each kernel holds a little water inside a tough, waterproof shell. Heat turns the water into steam, the pressure builds until the shell bursts, and the soft starch puffs up into foam.
+
+A popcorn kernel is a seed with three important parts: a hard, waterproof **shell**; soft **starch** inside; and a little **water**, about 14% of the kernel.
+
+When the kernel heats up past 100 °C, the water turns into **steam**. Steam takes up far more space than water, but the shell is so tough and airtight that it can't escape. So the pressure inside climbs, and the heat softens the starch into a hot, gooey jelly.
+
+At about **180 °C**, the steam inside is pushing at around 9 or 10 times normal air pressure. The shell can't take it any more and bursts open. The steam rushes out, puffing the gooey starch into a foam that cools and sets in an instant: a fluffy popcorn flake, 20 to 40 times bigger than the kernel.
+
+Kernels that don't pop (sometimes called "old maids") usually have a tiny crack in their shell that let the steam leak out, or they've dried out too much.
+
+</Part>
+
+<Myth claim="Any corn will pop if you heat it.">
+
+Only popcorn has a shell tough and airtight enough to trap the steam. Sweet corn or field corn have leakier shells, so the steam escapes and they just go soft or scorch.
+
+</Myth>
+
+<TryIt title="watch the pop" need={['A pot with a glass lid', 'A spoonful of oil', 'A small handful of popcorn kernels', 'An adult']} safety="Hot oil and popping kernels can burn. An adult should do the cooking, and keep the lid on.">
+
+1. Ask an adult to heat the oil with three kernels in the pot, lid on.
+2. When those three pop, the oil is hot enough: add the rest in an even layer and put the lid back.
+3. Watch through the glass lid. Can you see kernels jump just before they burst?
+4. When it's done, count how many kernels didn't pop. Are their shells cracked?
+
+</TryIt>
+
+<Whoa big="2,900 fps">
+
+In 2015, scientists filmed popcorn at 2,900 frames per second. They found that a bursting kernel pushes out a little "leg" of starch that kicks it into the air, and that the *pop* sound is made by the steam rushing out.
+
+</Whoa>

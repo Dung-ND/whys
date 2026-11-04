@@ -1,0 +1,85 @@
+---
+question: Why do we get hiccups?
+teaser: Hic! Hic! It comes out of nowhere, you can't stop it on purpose, and it can go on for ages. What is your body doing?
+art: A surprised kid jumps a little with a loud "hic!", next to a table with a glass of fizzy drink.
+---
+import { Part, Myth, Mystery, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { HiccupSteps } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `Air gets stuck in your stomach.`, reply: `Swallowed air can make you burp, and fizzy drinks can set off hiccups. But the hiccup itself happens in your chest and throat, not your stomach.` },
+    { text: `A muscle under your lungs suddenly jerks.`, reply: `Your diaphragm, the big breathing muscle under your lungs, suddenly twitches. Air rushes in, and your vocal cords snap shut: "hic!"` },
+    { text: `Your heart skips a beat.`, reply: `Your heart keeps beating normally during hiccups. The jump you feel is your breathing muscle.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<HiccupSteps
+  label="Three steps of a hiccup. First, normal breathing, with the dome-shaped diaphragm muscle under the lungs. Second, the diaphragm suddenly jerks down and air rushes in. Third, the vocal cords in the throat snap shut and make the hic sound."
+  normal="normal breathing"
+  jerk="the diaphragm jerks"
+  snap="cords snap shut"
+  diaphragm="diaphragm"
+  air="air rushes in"
+/>
+</div>
+
+When the diaphragm suddenly pulls down, air rushes into your lungs. A split second later, the opening between your vocal cords slams shut and stops the air: that sudden stop is the "hic".
+
+</Part>
+
+<Part kind="answer">
+
+A hiccup is a sudden twitch of your diaphragm, the breathing muscle under your lungs, followed by your vocal cords snapping shut.
+
+Under your lungs is a big dome-shaped muscle called the **diaphragm**. Every time you breathe in, it pulls down to suck air in. Normally it works smoothly, without you even noticing.
+
+Sometimes the nerves that control it misfire, and it gives a sudden, sharp twitch. Air rushes in, and just a few hundredths of a second later, the gap between your **vocal cords** snaps shut. The air slams to a stop and makes that "hic!" sound.
+
+Things that often set hiccups off:
+
+- eating or drinking too fast, or a very big meal
+- fizzy drinks
+- excitement, laughing hard, or a sudden change in temperature
+
+Hiccups usually stop by themselves within a few minutes.
+
+</Part>
+
+<Mystery>
+
+**What are hiccups for?** Nobody knows. Babies hiccup a lot, even before they're born. One idea is that hiccups are a leftover from our very distant ancestors, which breathed with gills like tadpoles. Another is that hiccups help babies get rid of air swallowed while feeding. Neither idea has been proven.
+
+</Mystery>
+
+<Myth claim="A sudden fright will cure your hiccups.">
+
+There's no good evidence that a scare works. Holding your breath or sipping cold water seem to help some people, possibly by calming the nerves that control the diaphragm, but no cure works for everyone. Most hiccups simply stop on their own.
+
+</Myth>
+
+<TryIt title="feel your diaphragm" need={['Your hands', 'A quiet place to sit or lie down']}>
+
+1. Lie on your back and rest one hand on your belly, just below your ribs.
+2. Breathe in slowly and deeply. Your hand rises as the diaphragm pulls down, pushing your belly out.
+3. Breathe out slowly. Your hand sinks as the diaphragm relaxes.
+4. Next time you have hiccups, keep your hand there. You can feel the sudden jerk with every "hic!"
+
+</TryIt>
+
+<Whoa big="68 years">
+
+An American man named Charles Osborne had hiccups for 68 years, from 1922 to 1990. That's the longest case ever recorded.
+
+</Whoa>

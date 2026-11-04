@@ -1,0 +1,56 @@
+---
+// Young sunflowers follow the Sun: facing east at dawn, west by evening, and swinging back east overnight.
+// Their stems do it by growing faster on one side: the east side by day, the west side by night.
+import Figure from '../Figure.astro';
+interface Props { label: string; morning: string; evening: string; night: string; east: string; west: string; grows: string }
+const { label, morning, evening, night, east, west, grows } = Astro.props;
+const flower = (x: number, lean: number) => {
+  const tx = x + lean * 40, ty = 110;
+  return { stem: `M${x} 260Q${x} 180 ${tx} ${ty}`, tx, ty };
+};
+const panels = [
+  { x: 110, lean: -1, sun: [40, 70], title: morning, night: false },
+  { x: 320, lean: 1, sun: [400, 70], title: evening, night: false },
+  { x: 530, lean: -0.6, sun: null, title: night, night: true },
+];
+---
+<Figure label={label} width={640} height={320}>
+  <rect width="640" height="320" rx="16" fill="var(--art-sky-2)" />
+  <rect x="430" y="0" width="210" height="320" rx="16" fill="var(--art-night)" />
+  {panels.map((p) => {
+    const f = flower(p.x, p.lean);
+    return (
+      <g>
+        {p.sun && <circle cx={p.sun[0]} cy={p.sun[1]} r="18" fill="var(--art-sun)" stroke="var(--art-ink)" stroke-width="2.5" />}
+        <rect x={p.x - 100} y="260" width="200" height="20" fill="var(--art-grass)" />
+        <path d={f.stem} fill="none" stroke="var(--art-grass-2)" stroke-width="9" stroke-linecap="round" />
+        {/* the faster-growing side of the stem */}
+        <path d={f.stem} fill="none" stroke="var(--art-y)" stroke-width="3" stroke-dasharray="6 6" transform={`translate(${-p.lean * 6} 0)`} />
+        <g transform={`translate(${f.tx} ${f.ty}) rotate(${p.lean * 25})`}>
+          {Array.from({ length: 12 }, (_, i) => <ellipse rx="7" ry="20" cy="-24" fill="var(--art-y)" stroke="var(--art-ink)" stroke-width="1.5" transform={`rotate(${i * 30})`} />)}
+          <circle r="16" fill="var(--art-wood)" stroke="var(--art-ink)" stroke-width="2" />
+        </g>
+        <text x={p.x} y="304" text-anchor="middle" class={p.night ? 't w' : 't'}>{p.title}</text>
+      </g>
+    );
+  })}
+  <text x="16" y="250" class="s">← {east}</text>
+  <text x="414" y="250" text-anchor="end" class="s">{west} →</text>
+  <text x="530" y="40" text-anchor="middle" class="s w">{grows}</text>
+</Figure>
+
+<style>
+  .t {
+    font-weight: 900;
+    font-size: 15px;
+    fill: var(--art-ink);
+  }
+  .s {
+    font-weight: 800;
+    font-size: 13px;
+    fill: var(--art-ink);
+  }
+  .w {
+    fill: var(--art-moon);
+  }
+</style>

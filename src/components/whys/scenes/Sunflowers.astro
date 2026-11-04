@@ -1,0 +1,58 @@
+---
+// Why do sunflowers face the Sun? A field of young sunflowers all turned toward the morning Sun in the east.
+const flowers: [number, number, number][] = [[90, 200, 1], [200, 170, 1.15], [320, 210, 0.95], [440, 180, 1.1], [560, 220, 0.9]];
+---
+<rect width="640" height="400" fill="var(--art-sky)" />
+<g class="rays" stroke="var(--art-sun-2)" stroke-width="6" stroke-linecap="round">
+  {Array.from({ length: 12 }, (_, i) => <path d="M40 0v12" transform={`rotate(${i * 30} 40 60)`} />)}
+</g>
+<circle cx="40" cy="60" r="34" fill="var(--art-sun)" stroke="var(--art-ink)" stroke-width="4" />
+<path d="M0 320q160 -24 640 -10v90h-640z" fill="var(--art-grass)" stroke="var(--art-ink)" stroke-width="4" />
+{flowers.map(([x, y, s], i) => (
+  <g transform={`translate(${x} ${y}) scale(${s})`}>
+    <path d="M10 160Q10 60 0 0" fill="none" stroke="var(--art-grass-2)" stroke-width="9" stroke-linecap="round" />
+    <path d="M8 100q-30 -10 -36 10q20 10 36 0zM10 70q30 -14 38 4q-20 12 -38 0z" fill="var(--art-grass-2)" stroke="var(--art-ink)" stroke-width="2.5" />
+    <g class="head" style={`animation-delay:${-i * 0.5}s`}>
+      <g transform="rotate(-24)">
+        {Array.from({ length: 14 }, (_, k) => <ellipse rx="8" ry="24" cy="-30" fill="var(--art-y)" stroke="var(--art-ink)" stroke-width="2" transform={`rotate(${k * (360 / 14)})`} />)}
+        <circle r="22" fill="var(--art-wood)" stroke="var(--art-ink)" stroke-width="3" />
+        <circle cx="-6" cy="-4" r="3" fill="var(--art-ink)" /><circle cx="8" cy="-6" r="3" fill="var(--art-ink)" />
+        <path d="M-6 8q6 6 14 0" fill="none" stroke="var(--art-ink)" stroke-width="2.5" stroke-linecap="round" />
+      </g>
+    </g>
+  </g>
+))}
+{[[300, 120], [480, 110]].map(([x, y], i) => (
+  <g transform={`translate(${x} ${y})`}>
+    <g class="bee" style={`animation-delay:${-i * 1.4}s`} stroke="var(--art-ink)" stroke-width="2">
+      <ellipse rx="10" ry="7" fill="var(--art-y)" />
+      <path d="M-3 -7v14M3 -7v14" stroke-width="3" />
+      <ellipse cx="-2" cy="-10" rx="6" ry="4" fill="var(--art-white)" opacity="0.8" />
+    </g>
+  </g>
+))}
+
+<style>
+  .rays {
+    animation: spin 20s linear infinite;
+    transform-origin: 40px 60px;
+  }
+  .head {
+    animation: nod 5s ease-in-out infinite alternate;
+  }
+  .bee {
+    animation: buzz 5s ease-in-out infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes nod {
+    to { transform: rotate(-4deg); }
+  }
+  @keyframes buzz {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-30px, 10px); }
+    50% { transform: translate(-50px, -10px); }
+    75% { transform: translate(-20px, -20px); }
+  }
+</style>

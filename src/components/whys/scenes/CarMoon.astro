@@ -1,0 +1,52 @@
+---
+// Why does the Moon follow our car? A car drives along a night road past trees and posts, a kid looking out
+// of the back window, and the Moon hanging in the same spot above.
+---
+<rect width="640" height="400" fill="var(--art-night)" />
+{[[60, 40], [150, 90], [250, 30], [370, 70], [560, 50], [610, 120], [90, 150]].map(([x, y]) => <circle cx={x} cy={y} r="2" fill="var(--art-sun)" />)}
+<circle cx="470" cy="90" r="40" fill="var(--art-moon)" />
+<circle cx="458" cy="80" r="7" fill="var(--art-moon-dark)" opacity="0.2" /><circle cx="484" cy="104" r="6" fill="var(--art-moon-dark)" opacity="0.2" />
+<path d="M0 250l120 -90l90 60l110 -100l120 90l90 -40l110 80v60h-640z" fill="var(--art-night-2)" />
+<!-- scrolling roadside -->
+<g class="trees">
+  {[0, 180, 360, 540, 720, 900, 1080].map((x) => (
+    <g transform={`translate(${x} 0)`}>
+      <path d="M40 300v-30" stroke="var(--art-wood)" stroke-width="8" />
+      <path d="M40 190l34 80h-68z" fill="var(--art-grass-2)" stroke="var(--art-ink)" stroke-width="3" />
+    </g>
+  ))}
+</g>
+<rect y="296" width="640" height="104" fill="var(--art-storm-2)" />
+<g class="lines">{[0, 120, 240, 360, 480, 600, 720].map((x) => <rect x={x} y="344" width="60" height="8" rx="4" fill="var(--art-y)" />)}</g>
+<!-- the car -->
+<g class="car" stroke="var(--art-ink)" stroke-width="4" stroke-linejoin="round">
+  <path d="M190 330v-34q0 -12 12 -14l40 -6l36 -36q8 -8 20 -8h96q12 0 20 8l36 36l36 6q12 2 12 14v34z" fill="var(--art-red)" />
+  <path d="M250 274l32 -30h44v30zM342 244h40l30 30h-70z" fill="var(--art-glass)" />
+  <circle cx="320" cy="262" r="12" fill="var(--art-skin)" stroke-width="3" />
+  <path d="M308 258q12 -16 24 0" fill="var(--art-hair)" stroke-width="3" />
+  <circle cx="324" cy="262" r="2" fill="var(--art-ink)" stroke="none" />
+  <circle cx="248" cy="334" r="22" fill="var(--art-ink)" /><circle cx="248" cy="334" r="8" fill="var(--art-moon)" />
+  <circle cx="400" cy="334" r="22" fill="var(--art-ink)" /><circle cx="400" cy="334" r="8" fill="var(--art-moon)" />
+</g>
+<path d="M330 252q60 -90 120 -140" fill="none" stroke="var(--art-moon)" stroke-width="2" stroke-dasharray="4 8" opacity="0.6" />
+
+<style>
+  .trees {
+    animation: scroll 4s linear infinite;
+  }
+  .lines {
+    animation: scroll2 1s linear infinite;
+  }
+  .car {
+    animation: bump 0.6s ease-in-out infinite alternate;
+  }
+  @keyframes scroll {
+    to { transform: translateX(-180px); }
+  }
+  @keyframes scroll2 {
+    to { transform: translateX(-120px); }
+  }
+  @keyframes bump {
+    to { transform: translateY(1.5px); }
+  }
+</style>

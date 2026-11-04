@@ -15,6 +15,14 @@ import Onion from './Onion.astro';
 import Iceberg from './Iceberg.astro';
 import Yawn from './Yawn.astro';
 import CatFall from './CatFall.astro';
+import CarMoon from './CarMoon.astro';
+import HotSun from './HotSun.astro';
+import Volcano from './Volcano.astro';
+import Sunflowers from './Sunflowers.astro';
+import Fireflies from './Fireflies.astro';
+import Balloon from './Balloon.astro';
+import Popcorn from './Popcorn.astro';
+import Hiccups from './Hiccups.astro';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const scenes: Record<string, any> = {
@@ -34,4 +42,12 @@ export const scenes: Record<string, any> = {
   'why-does-ice-float': Iceberg,
   'why-do-we-yawn': Yawn,
   'how-do-cats-land-on-their-feet': CatFall,
+  'why-does-the-moon-follow-our-car': CarMoon,
+  'why-is-the-sun-so-hot': HotSun,
+  'why-do-volcanoes-erupt': Volcano,
+  'why-do-sunflowers-face-the-sun': Sunflowers,
+  'how-do-fireflies-glow': Fireflies,
+  'why-does-a-rubbed-balloon-stick': Balloon,
+  'why-does-popcorn-pop': Popcorn,
+  'why-do-we-get-hiccups': Hiccups,
 };
