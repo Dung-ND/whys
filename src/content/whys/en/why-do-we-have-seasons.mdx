@@ -1,0 +1,69 @@
+---
+question: Why do we have seasons?
+teaser: Summer is hot and winter is cold, but Earth isn't moving closer to the Sun and back. So what changes?
+art: The picture is split in two. On the left, summer, with the Sun high above a green tree and a kid in a T-shirt. On the right, winter, with the Sun low over snow, a bare tree and a shivering kid in a scarf.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import SeasonsLab from '@/interactives/seasons/SeasonsLab.svelte';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `Earth is closer to the Sun in summer.`, reply: `The most popular guess of all! But Earth is actually closest to the Sun in early January, in the middle of winter in the north. And when it's summer in the north, it's winter in the south, at the very same distance.` },
+    { text: `Earth's tilt points one half toward the Sun.`, reply: `Earth spins on a tilted axis. For part of the year your half of the world leans toward the Sun, and for part of the year it leans away.` },
+    { text: `The Sun burns hotter in summer.`, reply: `The Sun's brightness barely changes from month to month. What changes is the way its light reaches us.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<SeasonsLab client:visible lang={props.lang} />
+
+Watch a year go by, then switch between London and Sydney. Why are their summers in opposite months? And what happens at the equator?
+
+</Part>
+
+<Part kind="answer">
+
+Earth's axis is tilted. For part of the year your half of the world leans toward the Sun (summer), and for part of the year it leans away (winter).
+
+Earth spins around an imaginary line through the North and South Poles, called its **axis**. That axis is tilted by about **23.4°**. As Earth travels around the Sun each year, the axis keeps pointing the same way in space, toward the North Star.
+
+So in June, the northern half of Earth leans toward the Sun, and in December it leans away. Leaning toward the Sun does two things:
+
+- **The Sun climbs higher in the sky.** High sunlight comes down almost straight, so each patch of ground gets lots of energy. Low winter sunlight comes in at a slant and spreads the same energy over a much bigger area, like a flashlight shone at an angle.
+- **Days get longer.** More hours of sunshine warm things up, and shorter nights give them less time to cool down.
+
+The Southern Hemisphere leans the opposite way at the same time, so its seasons are flipped. In Australia, Christmas is a summer holiday!
+
+Near the equator, the Sun is high at noon all year, and days are always about 12 hours long. Instead of summer and winter, many places there have a rainy season and a dry season.
+
+</Part>
+
+<Myth claim="Summer happens when Earth is closest to the Sun.">
+
+Earth's path around the Sun is very nearly a circle. Earth is closest to the Sun around 3 January and farthest around 4 July, and the difference is only about 3%. If distance made the seasons, the whole world would have summer at the same time.
+
+</Myth>
+
+<TryIt title="flashlight sunshine" need={['A flashlight', 'A sheet of squared paper', 'A pencil', 'A dark room']}>
+
+1. Hold the flashlight straight above the paper, about 30 cm away. Trace around the bright spot.
+2. Keep the same distance, but tilt the flashlight so it shines at a slant. Trace the spot again.
+3. Count the squares inside each shape.
+4. The slanted spot is bigger, so the same light is spread thinner. That's winter sunshine!
+
+</TryIt>
+
+<Whoa big="24 hours">
+
+Near the North and South Poles, the Sun doesn't set at all for weeks in summer: this is called the *midnight sun*. In winter it's the opposite, and the Sun doesn't rise for weeks.
+
+</Whoa>

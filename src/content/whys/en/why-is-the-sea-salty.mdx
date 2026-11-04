@@ -1,0 +1,76 @@
+---
+question: Why is the sea salty?
+teaser: Rivers are fresh, rain is fresh, yet the sea they fill is salty. Where does all that salt come from?
+art: Rain falls on rocky mountains and a river winds down to the sea. Wisps of water vapor rise from the waves in the sunshine, while little salt crystals sparkle in the water. A kid on the beach looks surprised.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { SaltCycle } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={0}
+  options={[
+    { text: `Salt washes out of rocks and builds up in the sea.`, reply: `Rain slowly dissolves salts out of rocks, rivers carry them to the sea, and they pile up there over millions of years.` },
+    { text: `Fish and other sea creatures make it.`, reply: `Sea creatures live in salty water, but they don't make the salt. The sea was salty long before they came along.` },
+    { text: `There are huge salt mountains under the sea.`, reply: `There are some thick salt layers under the seafloor, but they formed when ancient salty seas dried up. They're a result of salty seas, not the cause.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<SaltCycle
+  label="Rain falls on mountains and slowly dissolves salt from the rocks. Rivers carry a little of it to the sea. The Sun turns sea water into vapor, which rises as pure water, while the salt stays behind. Vents on the seafloor add more."
+  rain="rain"
+  rocks="slowly dissolves rock"
+  river="rivers carry a little salt"
+  evaporates="the Sun lifts pure water away"
+  stays="the salt stays behind"
+  vents="undersea vents"
+/>
+</div>
+
+Follow the salt. Water goes round and round, from sea to cloud to rain to river and back. But salt only ever goes *in*: once it reaches the sea, it can't evaporate.
+
+</Part>
+
+<Part kind="answer">
+
+Rain slowly dissolves salts out of rocks, rivers carry them to the sea, and when sea water evaporates, the salt stays behind.
+
+Rain picks up a little carbon dioxide from the air, which makes it very slightly acidic. As it soaks through soil and rock, it slowly dissolves tiny bits of minerals, including the ingredients of salt. Rivers carry these to the sea. River water holds so little salt that it tastes fresh.
+
+In the sea, the Sun heats the surface and water evaporates: it turns into invisible vapor, which later becomes clouds and rain. But salt can't evaporate, so it stays in the sea. Over hundreds of millions of years, the sea has become salty.
+
+Rivers aren't the only source. Much of the chloride (half of table salt) comes from gases bubbling out of volcanoes and hot vents on the seafloor.
+
+Today, about **3.5%** of sea water is salt: roughly 35 grams in every liter, or about 6 teaspoons. Salt also leaves the sea slowly, buried in mud on the seafloor, so the saltiness has stayed about the same for a very long time.
+
+</Part>
+
+<Myth claim="If you're really thirsty, you can drink sea water.">
+
+Sea water is saltier than your kidneys can handle. To get rid of all that salt, your body would lose more water than you drank, so you'd end up even thirstier. Sailors and desert cities make fresh water by taking the salt out first.
+
+</Myth>
+
+<TryIt title="make your own sea salt" need={['Half a cup of warm water', '1 teaspoon of salt', 'A dark plate', 'A sunny windowsill', 'A magnifying glass, if you have one']}>
+
+1. Stir the salt into the warm water until it disappears.
+2. Pour a thin layer onto the plate.
+3. Leave it on a sunny windowsill for a few days.
+4. The water vanishes into the air, but the salt stays. Look closely: the crystals are tiny cubes!
+
+</TryIt>
+
+<Whoa big="150 m">
+
+If all the salt in the oceans were taken out and spread evenly over the land, it would make a layer more than 150 meters thick. That's taller than a 40-story building!
+
+</Whoa>

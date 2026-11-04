@@ -1,0 +1,43 @@
+---
+// Why do leaves change color in autumn? A tree with green, yellow and red leaves; leaves drift down
+// onto a pile where a kid is playing.
+import Kid from './Kid.astro';
+const crown: [number, number, string][] = [
+  [200, 120, '--art-y'], [260, 90, '--art-o'], [320, 110, '--art-r'], [380, 130, '--art-y'], [230, 170, '--art-r'],
+  [300, 160, '--art-grass-2'], [360, 180, '--art-o'], [420, 170, '--art-r'], [270, 210, '--art-y'], [340, 220, '--art-o'],
+];
+const falling: [number, number, string][] = [[470, 120, '--art-r'], [150, 160, '--art-y'], [520, 200, '--art-o'], [430, 60, '--art-y']];
+const LEAF = 'M0 -12C8 -6 8 6 0 12C-8 6 -8 -6 0 -12Z';
+---
+<rect width="640" height="400" fill="var(--art-sky-2)" />
+<circle cx="560" cy="70" r="30" fill="var(--art-sun)" stroke="var(--art-ink)" stroke-width="4" />
+<path d="M0 330q200 -24 640 -6v76h-640z" fill="var(--art-grass)" stroke="var(--art-ink)" stroke-width="4" />
+<g stroke="var(--art-ink)" stroke-width="4" stroke-linejoin="round">
+  <path d="M290 330v-110l-40 -40M290 250l44 -40" fill="none" stroke="var(--art-wood)" stroke-width="18" stroke-linecap="round" />
+  {crown.map(([x, y, c]) => <circle cx={x} cy={y} r="44" fill={`var(${c})`} />)}
+</g>
+{falling.map(([x, y, c], i) => (
+  <g transform={`translate(${x} ${y})`}>
+    <path class="fall" style={`animation-delay:${-i * 1.6}s`} d={LEAF} fill={`var(${c})`} stroke="var(--art-ink)" stroke-width="2.5" />
+  </g>
+))}
+<!-- leaf pile -->
+<g stroke="var(--art-ink)" stroke-width="2.5">
+  {Array.from({ length: 18 }, (_, i) => (
+    <path d={LEAF} fill={`var(${['--art-r', '--art-o', '--art-y'][i % 3]})`} transform={`translate(${430 + (i % 6) * 22} ${352 - Math.floor(i / 6) * 12}) rotate(${i * 47})`} />
+  ))}
+</g>
+<Kid x={110} y={380} mood="wow" point shirt="var(--art-g)" look={[2, -3]} />
+
+<style>
+  .fall {
+    animation: fall 6.4s ease-in-out infinite;
+  }
+  @keyframes fall {
+    0% { transform: translate(0, -40px) rotate(0); opacity: 0; }
+    10% { opacity: 1; }
+    50% { transform: translate(30px, 60px) rotate(120deg); }
+    90% { opacity: 1; }
+    100% { transform: translate(-10px, 160px) rotate(260deg); opacity: 0; }
+  }
+</style>

@@ -2,3 +2,9 @@
 export { default as RainDrop } from './RainDrop.astro';
 export { default as FingerEvidence } from './FingerEvidence.astro';
 export { default as FlyTest } from './FlyTest.astro';
+export { default as TwinkleAir } from './TwinkleAir.astro';
+export { default as SaltCycle } from './SaltCycle.astro';
+export { default as OnionChem } from './OnionChem.astro';
+export { default as IceLattice } from './IceLattice.astro';
+export { default as YawnTests } from './YawnTests.astro';
+export { default as CatTwist } from './CatTwist.astro';

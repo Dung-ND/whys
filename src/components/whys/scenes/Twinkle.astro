@@ -1,0 +1,49 @@
+---
+// Why do stars twinkle? Stars flicker through wavy bands of moving air; the planet (a tiny disc) shines steadily.
+import Kid from './Kid.astro';
+const stars: [number, number, number][] = [
+  [60, 50, 1.2], [140, 110, 0.9], [230, 40, 1.4], [330, 90, 1], [420, 30, 1.1], [520, 70, 1.3], [600, 130, 0.9],
+  [40, 170, 0.8], [270, 160, 0.9], [380, 190, 0.8], [560, 200, 1],
+];
+---
+<rect width="640" height="400" fill="var(--art-night)" />
+{stars.map(([x, y, s], i) => (
+  <g transform={`translate(${x} ${y}) scale(${s})`}>
+    <path class="star" style={`animation-delay:${-i * 0.37}s`} d="M0 -12l3 8l9 4l-9 4l-3 8l-3 -8l-9 -4l9 -4z" fill="var(--art-sun)" />
+  </g>
+))}
+<!-- a planet: steady -->
+<circle cx="470" cy="130" r="9" fill="var(--art-o)" stroke="var(--art-sun)" stroke-width="2" />
+<!-- moving pockets of air -->
+<g class="air" fill="none" stroke="var(--art-sky)" stroke-width="3" stroke-linecap="round" stroke-dasharray="40 30" opacity="0.35">
+  <path d="M-80 150q40 -10 80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0" />
+  <path class="a2" d="M-80 200q40 10 80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0" />
+  <path d="M-80 245q40 -10 80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0" />
+</g>
+<path d="M0 330q140 -46 300 -14t340 -18v102h-640z" fill="var(--art-grass-2)" stroke="var(--art-ink)" stroke-width="4" />
+<path d="M0 330q140 -46 300 -14t340 -18v102h-640z" fill="var(--art-night)" opacity="0.45" />
+<Kid x={200} y={384} point mood="wow" look={[3, -3]} />
+
+<style>
+  .star {
+    animation: twinkle 1.6s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .air path {
+    animation: drift 7s linear infinite;
+  }
+  .air .a2 {
+    animation-duration: 5s;
+    animation-direction: reverse;
+  }
+  @keyframes twinkle {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    30% { transform: scale(0.55) translate(1px, 0); opacity: 0.55; }
+    55% { transform: scale(1.15); opacity: 1; }
+    75% { transform: scale(0.75) translate(-1px, 1px); opacity: 0.7; }
+  }
+  @keyframes drift {
+    to { transform: translateX(80px); }
+  }
+</style>

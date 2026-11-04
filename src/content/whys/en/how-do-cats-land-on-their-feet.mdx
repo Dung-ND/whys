@@ -1,0 +1,74 @@
+---
+question: How do cats land on their feet?
+teaser: Drop a cat upside down and it turns over in midair, with nothing to push against. How does it do that?
+art: A cat falls from a shelf, twisting as it drops. Faded cats show it upside down, then with its front half turned, then its back half, before it lands on its feet on a red cushion.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { CatTwist } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={2}
+  options={[
+    { text: `Their tail spins them around.`, reply: `A tail can help a little, but cats born without tails land on their feet too.` },
+    { text: `They push off the air, like a swimmer in water.`, reply: `Air is far too thin to push off. A falling cat has nothing to push against at all, which is what makes the trick so clever.` },
+    { text: `They twist their front and back halves separately.`, reply: `A cat bends in the middle and turns one half at a time, using a clever trick of physics.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<CatTwist
+  label="Four steps of a cat turning over in midair. First it is upside down. Then it tucks its front legs in and turns its front half over. Then it turns its back half. Finally it lands on its feet."
+  s1="upside down"
+  s2="front half turns"
+  s3="back half turns"
+  s4="lands"
+/>
+</div>
+
+With nothing to push against, a cat can't start its whole body spinning. But it can **bend in the middle**. With its front legs tucked in, the front half is compact and turns over easily, while the stretched-out back half only twists back a tiny bit. Then the cat swaps: it tucks its back legs, stretches its front legs, and turns its back half.
+
+</Part>
+
+<Part kind="answer">
+
+A falling cat bends in the middle and turns its front half, then its back half, while its inner ear tells it which way is down.
+
+First, the cat needs to know which way is up. Deep inside each ear is a balance sensor (the *vestibular system*) that works like a built-in spirit level. Together with its eyes, it tells the cat in a split second that it's upside down.
+
+Then comes the twist. It works because of a physics rule: something that isn't spinning can't start spinning all by itself without pushing on something. But it can turn its parts in opposite directions. A spinning ice skater uses the same rule: arms pulled in, she spins fast; arms out, she slows down. The cat's tucked-in half acts like the skater's pulled-in arms and turns a lot, while the stretched-out half barely moves.
+
+Kittens start doing this when they're about 3 to 4 weeks old and get it right by about 7 weeks. This automatic move is called the **righting reflex**.
+
+After turning over, a cat often spreads its legs out a little and arches its back, then bends its legs as it lands to soften the bump.
+
+</Part>
+
+<Myth claim="Cats always land safely, so falls can't hurt them.">
+
+Landing on their feet doesn't make falls safe. Cats are often hurt falling from windows and balconies, which is why vets recommend screens on windows. And never drop a cat to test this!
+
+</Myth>
+
+<TryIt title="spin like a cat" need={['A swivel chair that turns easily', 'Two heavy books or full water bottles', 'An adult to give you a gentle push']} safety="Spin gently, keep your feet off the floor, and stop if you feel dizzy.">
+
+1. Sit on the chair and hold a book in each hand, with your arms stretched out wide.
+2. Ask the adult to give the chair a gentle spin.
+3. Pull the books in to your chest. You spin faster!
+4. Stretch your arms out again, and you slow down. A cat's tucked-in half spins easily for exactly the same reason.
+
+</TryIt>
+
+<Whoa big="1894">
+
+In 1894, the French scientist Étienne-Jules Marey filmed a falling cat with one of the first high-speed cameras. People had argued about how cats could turn in midair, and his photos finally showed the twist, step by step.
+
+</Whoa>

@@ -1,0 +1,84 @@
+---
+question: Why do we yawn?
+teaser: Everyone does it, from babies to grandparents, cats to fish. And just seeing someone yawn can make you yawn too. But why?
+art: At bedtime, a sleepy kid stretches and gives a huge yawn, with Zs floating up. Through the window, a crescent Moon shines, and the cat lying on the bed catches the yawn.
+---
+import { Part, Myth, Mystery, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { YawnTests } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={2}
+  options={[
+    { text: `To get more oxygen into the body.`, reply: `That was the favorite idea for a long time. But when scientists had people breathe air with extra oxygen, they yawned just as often.` },
+    { text: `Because we're bored or sleepy.`, reply: `We do yawn more when we're tired or bored, but that tells us when we yawn, not why. Athletes yawn right before a race, and parachutists before they jump!` },
+    { text: `Scientists aren't sure yet!`, reply: `That's the honest answer. There are some good ideas, and scientists are still testing them. Keep reading to see the evidence so far.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<YawnTests
+  label="Two experiments. In the first, people breathing extra oxygen yawned about as often as people breathing normal air. In the second, people holding a cool pack to their forehead caught far fewer yawns from others than people holding a warm pack."
+  test1="Test 1: extra oxygen"
+  test2="Test 2: a cool forehead"
+  normal="normal air"
+  oxygen="extra oxygen"
+  warm="warm pack"
+  cool="cool pack"
+  result1="about the same yawning"
+  result2="fewer yawns caught"
+/>
+</div>
+
+In 1987, scientists gave people air with extra oxygen, or extra carbon dioxide, to breathe. They yawned just as often, so oxygen isn't the answer. In 2007, other scientists showed people videos of yawning. People holding a **cool pack** to their forehead caught far fewer yawns than people holding a warm one. (The bars show the idea, not exact numbers.)
+
+</Part>
+
+<Part kind="answer">
+
+Nobody knows for sure! One leading idea is that a yawn helps cool your brain and perk you up.
+
+Here's what we do know. A yawn is a long, deep breath in with your jaw wide open, a big stretch of the muscles in your face and neck, and then a quick breath out. It lasts about 6 seconds. Almost every animal with a backbone yawns: dogs, cats, lions, birds, even fish. Babies yawn before they're even born.
+
+One idea is that **yawning cools the brain**. The big gulp of air and the stretch pump fresh, cooler blood through your head. That would explain why people yawn more when the air is cooler than their body (but not freezing), and why a cool pack on the forehead stops yawns.
+
+Another idea is that yawning helps the brain **switch gears**: waking up, winding down for sleep, or getting ready for action. That fits with athletes yawning before a race.
+
+And yawns are **contagious**. Seeing, hearing, or even reading about a yawn makes many people yawn. Yawns spread more easily between friends and family than between strangers, and young children usually don't catch them until they're about 4 or 5. Some scientists think this is linked to how we connect with the people around us.
+
+</Part>
+
+<Mystery>
+
+Is a yawn really a brain cooler, or a gear-switcher, or both? And why do yawns spread from person to person, and even from people to dogs? Scientists are still running experiments, and different studies don't always agree. This is a question that's still wide open.
+
+</Mystery>
+
+<Myth claim="Yawning gets more oxygen into your blood.">
+
+When people breathed air with extra oxygen, they yawned just as often, and air with less oxygen didn't make them yawn more. Whatever yawning is for, it isn't topping up oxygen.
+
+</Myth>
+
+<TryIt title="the contagious yawn test" need={['A friend or family member', 'A timer', 'A notebook and pencil']}>
+
+1. Sit with your friend and chat normally for 3 minutes. Count how many times they yawn.
+2. For the next 3 minutes, give a big, real-looking yawn every 30 seconds. Count their yawns again.
+3. Did they yawn more the second time?
+4. Try it with someone you know less well. Real scientists found that yawns spread more between people who are close.
+
+</TryIt>
+
+<Whoa big="Did you?">
+
+Did you yawn while reading this page? Just reading or thinking about yawning is enough to make many people yawn.
+
+</Whoa>

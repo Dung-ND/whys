@@ -1,0 +1,74 @@
+---
+question: Why do leaves change color in autumn?
+teaser: All summer the trees are green. Then, in a few weeks, they blaze yellow, orange and red. Where do those colors come from?
+art: A big tree with leaves of yellow, orange, red and green. Leaves drift down onto a colorful pile, and a kid in a green shirt points up at the tree.
+---
+import { Part, Myth, Mystery, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import LeafLab from '@/interactives/autumn-leaves/LeafLab.svelte';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `The cold paints the leaves.`, reply: `Cool nights do help bring out the reds, but cold doesn't paint anything. The yellow was inside the leaf all summer!` },
+    { text: `The green fades, and hidden colors show through.`, reply: `Leaves are full of green in summer. In autumn the green breaks down, and the yellows and oranges hiding underneath appear.` },
+    { text: `The leaves got sunburned over the summer.`, reply: `Leaves don't get sunburned. In fact, sunny autumn days make the reds even brighter.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<LeafLab client:visible lang={props.lang} />
+
+Watch autumn go by for a maple, then for a birch. Which color was there from the very start? Which one appears only in autumn?
+
+</Part>
+
+<Part kind="answer">
+
+Leaves are full of green chlorophyll in summer. In autumn the tree stops making it, and the yellows and oranges that were hidden underneath show through.
+
+Leaves are food factories. They use a green chemical called **chlorophyll** to catch sunlight and turn water and air into sugar. This is called *photosynthesis*. Sunlight slowly wears chlorophyll out, so all summer long the tree keeps making more.
+
+Leaves also contain yellow and orange chemicals called **carotenoids**. They're from the same family that makes carrots orange. In summer there's so much green that it hides them.
+
+As days get shorter and colder, trees like maples, oaks and birches get ready for winter. They stop making chlorophyll and pull the useful parts back into their branches to save for spring. The green fades, and the yellow and orange appear.
+
+Reds and purples are different: they're **new**. Some trees, like many maples, make a red pigment called **anthocyanin** in autumn. It's the same kind of pigment that colors red cabbage and blueberries. Sunny days and cool nights (but not freezing ones) give the brightest reds.
+
+At last, the tree grows a little seal where each leaf joins its twig. The leaf dries out, turns brown and falls.
+
+</Part>
+
+<Mystery>
+
+**Why bother making red?** Making a new pigment takes energy, just when the tree is packing up for winter. Many scientists think the red works like sunscreen, protecting the leaf while the tree pulls nutrients out of it. Others think the bright colors warn insects that the tree is healthy and strong. The question isn't settled yet.
+
+</Mystery>
+
+<Myth claim="Frost is what turns leaves red.">
+
+An early hard frost actually kills leaves quickly and makes autumn colors duller. The best reds come after sunny days and cool nights that stay above freezing.
+
+</Myth>
+
+<TryIt title="find the hidden colors" need={['A few green leaves (spinach works too)', 'Rubbing alcohol', 'A small glass jar', 'A strip of coffee filter paper', 'A spoon and a bowl of hot tap water']} safety="Rubbing alcohol catches fire easily and is poisonous to drink. An adult should handle it, away from any flames.">
+
+1. Tear the leaves into tiny pieces and put them in the jar. Ask an adult to cover them with rubbing alcohol, then mash them with the spoon.
+2. Stand the jar in the bowl of hot tap water for about 30 minutes, until the liquid turns green.
+3. Hang the strip of filter paper so that just its end dips into the liquid.
+4. Wait an hour or two. The liquid climbs the paper and splits into bands of color. Can you spot yellow above the green? It was in the leaf all along!
+
+</TryIt>
+
+<Whoa big="Carrots">
+
+Carotenoids, the yellow and orange pigments in autumn leaves, are the very same chemicals that color carrots, pumpkins and egg yolks.
+
+</Whoa>

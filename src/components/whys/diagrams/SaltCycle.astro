@@ -1,0 +1,37 @@
+---
+// Where the sea's salt comes from: rain slowly dissolves rock, rivers carry a little salt to the sea, the Sun
+// lifts pure water back up as vapor, and the salt stays. Undersea vents add more.
+import Figure from '../Figure.astro';
+interface Props { label: string; rain: string; rocks: string; river: string; evaporates: string; stays: string; vents: string }
+const { label, rain, rocks, river, evaporates, stays, vents } = Astro.props;
+---
+<Figure label={label} width={640} height={360}>
+  <rect width="640" height="360" rx="16" fill="var(--art-sky-2)" />
+  <circle cx="590" cy="44" r="24" fill="var(--art-sun)" stroke="var(--art-ink)" stroke-width="3" />
+  <path d="M20 250l80 -140l60 60l60 -90l90 170z" fill="var(--art-tan)" stroke="var(--art-ink)" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M90 50a20 20 0 0 1 30 -16a26 26 0 0 1 48 6a18 18 0 0 1 8 32h-80a14 14 0 0 1 -6 -22z" fill="var(--art-storm)" stroke="var(--art-ink)" stroke-width="3" />
+  <g stroke="var(--art-shirt)" stroke-width="3" stroke-linecap="round">{[104, 124, 144, 164].map((x) => <path d={`M${x} 84l-3 12`} />)}</g>
+  <text x="200" y="64" class="t">① {rain}</text>
+  <text x="24" y="284" class="t">② {rocks}</text>
+  <path d="M200 160q30 40 -10 70t50 50q60 10 100 -10" fill="none" stroke="var(--art-water)" stroke-width="14" stroke-linecap="round" />
+  <g fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="1.2">{[[204, 178], [196, 222], [250, 270], [300, 274]].map(([x, y]) => <rect x={x} y={y} width="7" height="7" />)}</g>
+  <text x="24" y="310" class="t">③ {river}</text>
+  <path d="M330 260h310v100h-310z" fill="var(--art-water)" />
+  <g fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="1.2">{[[360, 300], [420, 320], [480, 296], [540, 330], [600, 306], [450, 340]].map(([x, y]) => <rect x={x} y={y} width="7" height="7" />)}</g>
+  <g fill="none" stroke="var(--art-shirt)" stroke-width="3" stroke-linecap="round" opacity="0.8">{[420, 500, 580].map((x) => <path d={`M${x} 250q-8 -14 0 -28t0 -28M${x - 6} 200l6 -8l6 8`} />)}</g>
+  <text x="370" y="168" class="t">④ {evaporates}</text>
+  <text x="372" y="292" class="t">⑤ {stays}</text>
+  <path d="M560 360l10 -24l10 24z" fill="var(--art-wood)" stroke="var(--art-ink)" stroke-width="2.5" />
+  <text x="550" y="352" text-anchor="end" class="t s">{vents}</text>
+</Figure>
+
+<style>
+  .t {
+    font-weight: 850;
+    font-size: 15px;
+    fill: var(--art-ink);
+  }
+  .s {
+    font-size: 13px;
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+// Why onions sting: cutting breaks cells, so two chemicals kept apart meet; enzymes turn them into a gas
+// that drifts to your eyes, where it makes a little acid-like sting and tears wash it away.
+import Figure from '../Figure.astro';
+interface Props { label: string; whole: string; cut: string; gas: string; eye: string }
+const { label, whole, cut, gas, eye } = Astro.props;
+---
+<Figure label={label} width={640} height={280}>
+  <rect width="640" height="280" rx="16" fill="var(--art-sky-2)" />
+  <!-- whole cell: two chemicals kept in separate rooms -->
+  <rect x="30" y="80" width="120" height="110" rx="14" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="3.5" />
+  <path d="M90 80v110" stroke="var(--art-ink)" stroke-width="3" />
+  <g fill="var(--art-v)">{[[52, 110], [70, 140], [56, 165], [74, 102]].map(([x, y]) => <circle cx={x} cy={y} r="7" />)}</g>
+  <g fill="var(--art-g)">{[[110, 112], [128, 140], [112, 166], [130, 100]].map(([x, y]) => <path d={`M${x} ${y - 8}l7 12h-14z`} />)}</g>
+  <text x="90" y="228" text-anchor="middle" class="t">① {whole}</text>
+  <path d="M166 135h40M196 125l10 10l-10 10" fill="none" stroke="var(--art-ink)" stroke-width="3.5" stroke-linecap="round" />
+  <!-- cut cell: they mix -->
+  <path d="M220 80h120v110h-120z" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="3.5" stroke-dasharray="14 8" />
+  <path d="M250 70l70 130" stroke="var(--art-ink)" stroke-width="4" />
+  <g fill="var(--art-v)">{[[246, 120], [284, 150], [300, 110], [260, 170]].map(([x, y]) => <circle cx={x} cy={y} r="7" />)}</g>
+  <g fill="var(--art-g)">{[[270, 112], [312, 160], [236, 150], [296, 178]].map(([x, y]) => <path d={`M${x} ${y - 8}l7 12h-14z`} />)}</g>
+  <text x="280" y="228" text-anchor="middle" class="t">② {cut}</text>
+  <!-- gas -->
+  <g fill="none" stroke="var(--art-g)" stroke-width="4" stroke-linecap="round" opacity="0.8">
+    <path d="M350 130q20 -30 50 -10t50 -10" /><path d="M350 160q30 -20 60 0t60 -10" />
+  </g>
+  <text x="410" y="228" text-anchor="middle" class="t">③ {gas}</text>
+  <!-- eye -->
+  <path d="M500 135q50 -50 100 0q-50 50 -100 0z" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="3.5" />
+  <circle cx="550" cy="135" r="17" fill="var(--art-shirt)" stroke="var(--art-ink)" stroke-width="3" />
+  <circle cx="550" cy="135" r="7" fill="var(--art-ink)" />
+  <path d="M556 168q-6 10 0 14q6 -4 0 -14z" fill="var(--art-water)" stroke="var(--art-ink)" stroke-width="2" />
+  <text x="556" y="228" text-anchor="middle" class="t">④ {eye}</text>
+</Figure>
+
+<style>
+  .t {
+    font-weight: 850;
+    font-size: 13px;
+    fill: var(--art-ink);
+  }
+</style>

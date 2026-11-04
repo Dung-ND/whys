@@ -13,13 +13,15 @@ import type { Lang } from '@/config/site';
 export type Localized = { en: string } & Partial<Record<Lang, string>>;
 export const localized = (value: Localized, lang: Lang) => value[lang] ?? value.en;
 
-export type WhyCategory = 'sky' | 'weather' | 'body' | 'animals';
+export type WhyCategory = 'sky' | 'weather' | 'body' | 'animals' | 'plants' | 'everyday';
 
 export const whyCategories: Record<WhyCategory, { color: string; text: string; title: Localized }> = {
   sky: { color: 'var(--c-blue)', text: 'var(--t-blue)', title: { en: 'Sky & space', vi: 'Bầu trời & vũ trụ', es: 'Cielo y espacio' } },
-  weather: { color: 'var(--c-teal)', text: 'var(--t-teal)', title: { en: 'Weather', vi: 'Thời tiết', es: 'El tiempo' } },
+  weather: { color: 'var(--c-teal)', text: 'var(--t-teal)', title: { en: 'Earth & weather', vi: 'Trái Đất & thời tiết', es: 'La Tierra y el tiempo' } },
   body: { color: 'var(--c-red)', text: 'var(--t-red)', title: { en: 'My body', vi: 'Cơ thể bạn', es: 'Mi cuerpo' } },
   animals: { color: 'var(--c-green)', text: 'var(--t-green)', title: { en: 'Animals', vi: 'Động vật', es: 'Animales' } },
+  plants: { color: 'var(--c-amber)', text: 'var(--t-amber)', title: { en: 'Plants', vi: 'Thực vật', es: 'Plantas' } },
+  everyday: { color: 'var(--c-purple)', text: 'var(--t-purple)', title: { en: 'Everyday things', vi: 'Đồ vật quanh ta', es: 'Cosas de cada día' } },
 };
 
 export interface Why {
@@ -39,6 +41,14 @@ export const whys: Why[] = [
   { slug: 'why-do-fingers-wrinkle-in-water', n: 6, category: 'body', minutes: 3 },
   { slug: 'why-do-zebras-have-stripes', n: 7, category: 'animals', minutes: 3 },
   { slug: 'why-dont-birds-get-shocked-on-power-lines', n: 8, category: 'animals', minutes: 3 },
+  { slug: 'why-do-we-have-seasons', n: 9, category: 'sky', minutes: 4 },
+  { slug: 'why-do-stars-twinkle', n: 10, category: 'sky', minutes: 3 },
+  { slug: 'why-is-the-sea-salty', n: 11, category: 'weather', minutes: 3 },
+  { slug: 'why-do-leaves-change-color-in-autumn', n: 12, category: 'plants', minutes: 3 },
+  { slug: 'why-do-onions-make-you-cry', n: 13, category: 'everyday', minutes: 3 },
+  { slug: 'why-does-ice-float', n: 14, category: 'everyday', minutes: 3 },
+  { slug: 'why-do-we-yawn', n: 15, category: 'body', minutes: 3 },
+  { slug: 'how-do-cats-land-on-their-feet', n: 16, category: 'animals', minutes: 3 },
 ];
 
 export const getWhy = (slug: string) => whys.find((w) => w.slug === slug);

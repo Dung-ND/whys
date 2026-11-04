@@ -1,0 +1,61 @@
+---
+// Why do we yawn? A sleepy kid at bedtime gives a huge yawn, and the cat on the bed catches it.
+import Kid from './Kid.astro';
+import Cat from './Cat.astro';
+---
+<rect width="640" height="400" fill="var(--art-night-2)" />
+<!-- window with the Moon -->
+<rect x="420" y="40" width="170" height="140" rx="8" fill="var(--art-night)" stroke="var(--art-ink)" stroke-width="5" />
+<path d="M505 40v140M420 110h170" stroke="var(--art-ink)" stroke-width="5" />
+<circle cx="470" cy="80" r="18" fill="var(--art-moon)" />
+<circle cx="478" cy="74" r="16" fill="var(--art-night)" />
+<path d="M550 70l2 5l5 2l-5 2l-2 5l-2 -5l-5 -2l5 -2zM540 140l2 4l4 2l-4 2l-2 4l-2 -4l-4 -2l4 -2z" fill="var(--art-sun)" />
+<!-- floor and bed -->
+<rect y="330" width="640" height="70" fill="var(--art-wood)" />
+<g stroke="var(--art-ink)" stroke-width="4">
+  <rect x="330" y="250" width="290" height="70" rx="10" fill="var(--art-shirt)" />
+  <rect x="330" y="300" width="290" height="40" fill="var(--art-wood)" />
+  <rect x="540" y="232" width="70" height="30" rx="12" fill="var(--art-white)" />
+</g>
+<Cat x={430} y={222} s={0.8} />
+<!-- the cat's yawn -->
+<ellipse cx="478" cy="216" rx="5" ry="6" fill="var(--art-ink)" class="catyawn" />
+<g class="yawn"><Kid x={170} y={380} mood="yawn" point shirt="var(--art-v)" /></g>
+<g class="z" font-weight="900" fill="var(--art-white)">
+  <text x="240" y="170" font-size="26">Z</text>
+  <text x="270" y="140" font-size="34" class="z2">Z</text>
+  <text x="306" y="104" font-size="42" class="z3">Z</text>
+</g>
+
+<style>
+  .yawn {
+    animation: stretch 4s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: bottom;
+  }
+  .catyawn {
+    animation: catyawn 4s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .z text {
+    animation: z 4s ease-in-out infinite;
+    opacity: 0;
+  }
+  .z2 { animation-delay: 0.4s !important; }
+  .z3 { animation-delay: 0.8s !important; }
+  @keyframes stretch {
+    0%, 100% { transform: none; }
+    30%, 60% { transform: scaleY(1.04); }
+  }
+  @keyframes catyawn {
+    0%, 45% { transform: scale(0); }
+    60%, 80% { transform: scale(1); }
+    100% { transform: scale(0); }
+  }
+  @keyframes z {
+    0%, 20% { opacity: 0; transform: translateY(10px); }
+    50% { opacity: 1; }
+    90%, 100% { opacity: 0; transform: translateY(-20px); }
+  }
+</style>

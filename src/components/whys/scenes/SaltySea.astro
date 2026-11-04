@@ -1,0 +1,63 @@
+---
+// Why is the sea salty? A river runs from rainy mountains to the sea; the Sun lifts water off the sea as
+// vapor, leaving the salt behind (sparkles in the water).
+import Kid from './Kid.astro';
+---
+<rect width="640" height="400" fill="var(--art-sky)" />
+<circle cx="560" cy="64" r="34" fill="var(--art-sun)" stroke="var(--art-ink)" stroke-width="4" />
+<!-- mountains and rain -->
+<path d="M0 260l90 -150l60 70l70 -110l100 190z" fill="var(--art-tan)" stroke="var(--art-ink)" stroke-width="4" stroke-linejoin="round" />
+<g fill="var(--art-storm)" stroke="var(--art-ink)" stroke-width="3.5">
+  <path d="M90 60a22 22 0 0 1 34 -18a30 30 0 0 1 54 6a20 20 0 0 1 10 36h-92a16 16 0 0 1 -6 -24z" />
+</g>
+<g class="rain" stroke="var(--art-water)" stroke-width="3" stroke-linecap="round">
+  {[100, 122, 144, 166, 188].map((x, i) => <path d={`M${x} ${92 + (i % 2) * 8}l-3 12`} />)}
+</g>
+<!-- sea -->
+<path d="M300 240h340v160h-340z" fill="var(--art-water)" />
+<g class="waves" fill="none" stroke="var(--art-white)" stroke-width="4" stroke-linecap="round">
+  <path d="M300 240q20 -10 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0" />
+  <path d="M330 290q20 -8 40 0t40 0t40 0t40 0t40 0t40 0t40 0" opacity="0.6" />
+</g>
+<!-- river to the sea -->
+<path d="M210 150q20 40 -20 70t40 60q60 20 100 -30" fill="none" stroke="var(--art-water)" stroke-width="16" stroke-linecap="round" />
+<!-- vapor rising, salt staying -->
+<g class="vapor" fill="none" stroke="var(--art-white)" stroke-width="4" stroke-linecap="round">
+  {[420, 490, 560].map((x, i) => <path style={`animation-delay:${-i * 0.9}s`} d={`M${x} 230q-8 -12 0 -24t0 -24`} />)}
+</g>
+<g fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="1.5">
+  {[[380, 330], [450, 360], [520, 320], [590, 350], [420, 300]].map(([x, y], i) => (
+    <rect class="salt" style={`animation-delay:${-i * 0.5}s`} x={x} y={y} width="9" height="9" transform={`rotate(45 ${x + 4.5} ${y + 4.5})`} />
+  ))}
+</g>
+<!-- beach and kid -->
+<path d="M0 330q150 -40 300 -40v110h-300z" fill="var(--art-tan)" stroke="var(--art-ink)" stroke-width="4" />
+<Kid x={150} y={380} mood="wow" look={[4, -1]} shirt="var(--art-red)" />
+
+<style>
+  .rain {
+    animation: rain 0.9s linear infinite;
+  }
+  .waves {
+    animation: wave 4s ease-in-out infinite alternate;
+  }
+  .vapor path {
+    animation: rise 3s ease-out infinite;
+  }
+  .salt {
+    animation: glint 2.5s ease-in-out infinite;
+  }
+  @keyframes rain {
+    to { transform: translate(-3px, 14px); }
+  }
+  @keyframes wave {
+    to { transform: translateX(-20px); }
+  }
+  @keyframes rise {
+    from { transform: translateY(0); opacity: 0.9; }
+    to { transform: translateY(-80px); opacity: 0; }
+  }
+  @keyframes glint {
+    50% { opacity: 0.3; }
+  }
+</style>

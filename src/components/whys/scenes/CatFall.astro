@@ -1,0 +1,38 @@
+---
+// How do cats land on their feet? A cat drops from a shelf, twisting as it falls: upside down, then the front
+// half turns, then the back half, then it lands on a cushion. Faded cats show the earlier moments.
+import Cat from './Cat.astro';
+---
+<rect width="640" height="400" fill="var(--art-sky-2)" />
+<!-- shelf -->
+<rect x="0" y="80" width="200" height="16" fill="var(--art-wood)" stroke="var(--art-ink)" stroke-width="4" />
+<path d="M30 96l20 30M170 96l-20 30" stroke="var(--art-ink)" stroke-width="5" />
+<rect y="350" width="640" height="50" fill="var(--art-wood)" />
+<ellipse cx="470" cy="352" rx="120" ry="20" fill="var(--art-r)" stroke="var(--art-ink)" stroke-width="4" />
+<!-- the fall, in steps -->
+<path d="M180 120q120 40 250 210" fill="none" stroke="var(--art-ink)" stroke-width="3" stroke-dasharray="6 10" opacity="0.5" />
+<g opacity="0.35"><Cat x={210} y={140} s={0.7} front={-1} back={-1} tuck /></g>
+<g opacity="0.55"><Cat x={300} y={200} s={0.7} front={1} back={-1} tuck rotate={10} /></g>
+<g opacity="0.75"><Cat x={370} y={260} s={0.7} front={1} back={1} rotate={20} /></g>
+<g class="land"><Cat x={455} y={312} s={0.75} /></g>
+<g stroke="var(--art-ink)" stroke-width="3" stroke-linecap="round" class="whoosh">
+  <path d="M410 300l-14 -4M414 316l-16 0M412 330l-14 4" />
+</g>
+
+<style>
+  .land {
+    animation: land 3s ease-in-out infinite;
+  }
+  .whoosh {
+    animation: whoosh 3s ease-in-out infinite;
+  }
+  @keyframes land {
+    0%, 100% { transform: translateY(0); }
+    10% { transform: translateY(5px); }
+    20% { transform: translateY(0); }
+  }
+  @keyframes whoosh {
+    0%, 30%, 100% { opacity: 0; }
+    5%, 20% { opacity: 1; }
+  }
+</style>

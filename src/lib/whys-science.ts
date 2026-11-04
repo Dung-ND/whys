@@ -51,3 +51,32 @@ export function airMass(deg: number): number {
  * proportional to 1/λ⁴; about 10% is scattered at 550 nm with the Sun overhead).
  */
 export const transmitted = (nm: number, mass: number) => Math.exp(-0.098 * mass * Math.pow(550 / nm, 4));
+
+/** Tilt of Earth's axis, in degrees. */
+export const AXIAL_TILT = 23.44;
+
+/**
+ * The Sun's declination (degrees north of the equator) on day `n` of the year (1 = 1 January).
+ * Cooper's approximation: good to about a degree, plenty for pictures.
+ */
+export const declination = (n: number) => AXIAL_TILT * Math.sin((2 * Math.PI * (284 + n)) / 365);
+
+/** How high the Sun is at noon (degrees above the horizon) at latitude `lat` (north positive). */
+export const noonSunHeight = (lat: number, n: number) => 90 - Math.abs(lat - declination(n));
+
+/** Hours from sunrise to sunset at latitude `lat` on day `n` (0 or 24 in polar night or midnight sun). */
+export function dayLength(lat: number, n: number): number {
+  const x = -Math.tan((lat * Math.PI) / 180) * Math.tan((declination(n) * Math.PI) / 180);
+  if (x <= -1) return 24;
+  if (x >= 1) return 0;
+  return (2 * Math.acos(x) * 180) / Math.PI / 15;
+}
+
+/** How much a beam of sunlight spreads out on flat ground when the Sun is `deg` high (1 when overhead). */
+export const beamSpread = (deg: number) => 1 / Math.sin((Math.max(deg, 1) * Math.PI) / 180);
+
+/** Densities in g/cm³: fresh water near 4 °C, sea water, and ice. */
+export const DENSITY = { water: 1.0, seawater: 1.025, ice: 0.917 };
+
+/** Fraction of a floating object below the surface (Archimedes): its density over the liquid's. */
+export const fractionSubmerged = (object: number, liquid: number) => Math.min(1, object / liquid);

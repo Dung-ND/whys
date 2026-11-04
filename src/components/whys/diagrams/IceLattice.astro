@@ -1,0 +1,43 @@
+---
+// Water molecules jumble close together; in ice they lock into an open six-sided pattern that takes up
+// about 9% more room, so ice is lighter than the same amount of water and floats.
+import Figure from '../Figure.astro';
+interface Props { label: string; water: string; ice: string; close: string; open: string }
+const { label, water, ice, close, open } = Astro.props;
+// A water molecule: one oxygen (red) with two hydrogens (white) at about 105°.
+const mol = (x: number, y: number, r: number) =>
+  `<g transform="translate(${x} ${y}) rotate(${r})"><circle cx="-9" cy="7" r="5.5" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="2"/><circle cx="9" cy="7" r="5.5" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="2"/><circle r="9" fill="var(--art-red)" stroke="var(--art-ink)" stroke-width="2"/></g>`;
+const liquid: [number, number, number][] = [];
+for (let i = 0; i < 28; i++) liquid.push([40 + ((i * 47) % 230), 70 + ((i * 29) % 180) + (i % 3) * 6, (i * 73) % 360]);
+// Ice: hexagonal rings.
+const hex: [number, number][] = [];
+for (let row = 0; row < 3; row++) for (let col = 0; col < 3; col++) hex.push([390 + col * 78 + (row % 2) * 39, 100 + row * 66]);
+const corners = (cx: number, cy: number) => Array.from({ length: 6 }, (_, k) => [cx + 40 * Math.cos((Math.PI / 3) * k + Math.PI / 6), cy + 40 * Math.sin((Math.PI / 3) * k + Math.PI / 6)]);
+---
+<Figure label={label} width={640} height={320}>
+  <rect width="640" height="320" rx="16" fill="var(--art-sky-2)" />
+  <rect x="20" y="44" width="280" height="226" rx="14" fill="var(--art-water)" stroke="var(--art-ink)" stroke-width="3" />
+  <Fragment set:html={liquid.map(([x, y, r]) => mol(x, y, r)).join('')} />
+  <text x="160" y="32" text-anchor="middle" class="t">💧 {water}</text>
+  <text x="160" y="298" text-anchor="middle" class="s">{close}</text>
+  <rect x="340" y="44" width="280" height="226" rx="14" fill="var(--art-glass)" stroke="var(--art-ink)" stroke-width="3" />
+  <g fill="none" stroke="var(--art-shirt)" stroke-width="2" stroke-dasharray="4 4">
+    {hex.map(([cx, cy]) => <path d={'M' + corners(cx, cy).map((p) => p.join(' ')).join('L') + 'Z'} />)}
+  </g>
+  <Fragment set:html={hex.flatMap(([cx, cy]) => corners(cx, cy)).filter((p, i, a) => a.findIndex((q) => Math.hypot(q[0] - p[0], q[1] - p[1]) < 4) === i).filter(([x, y]) => x > 350 && x < 610 && y > 54 && y < 262).map(([x, y], i) => mol(x, y, i * 60)).join('')} />
+  <text x="480" y="32" text-anchor="middle" class="t">🧊 {ice}</text>
+  <text x="480" y="298" text-anchor="middle" class="s">{open}</text>
+</Figure>
+
+<style>
+  .t {
+    font-weight: 900;
+    font-size: 17px;
+    fill: var(--art-ink);
+  }
+  .s {
+    font-weight: 750;
+    font-size: 14px;
+    fill: var(--art-ink);
+  }
+</style>

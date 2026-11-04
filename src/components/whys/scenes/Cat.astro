@@ -1,0 +1,28 @@
+---
+// A cartoon cat seen from the side, built in two halves joined at the waist (0, 0), so each half can
+// be turned over on its own: `front` and `back` are 1 (feet down) or -1 (feet up). About 130 units long.
+interface Props { x: number; y: number; s?: number; rotate?: number; front?: number; back?: number; tuck?: boolean }
+const { x, y, s = 1, rotate = 0, front = 1, back = 1, tuck = false } = Astro.props;
+const fl = tuck ? 22 : 36;
+---
+<g transform={`translate(${x} ${y}) rotate(${rotate}) scale(${s})`} stroke="var(--art-ink)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+  <g transform={`scale(1 ${back})`}>
+    <path d="M-44 -4q-30 -10 -26 -44" fill="none" stroke-width="8" />
+    <path d="M-44 -4q-30 -10 -26 -44" fill="none" stroke="var(--art-o)" stroke-width="4" />
+    <path d="M-30 12l-6 26M-14 12l-2 26" stroke-width="7" />
+    <path d="M-30 12l-6 26M-14 12l-2 26" stroke="var(--art-o)" stroke-width="3" />
+    <ellipse cx="-20" cy="0" rx="28" ry="18" fill="var(--art-o)" />
+    <path d="M-30 -14q2 8 0 14M-18 -17q2 9 0 16" fill="none" stroke-width="2.5" />
+  </g>
+  <g transform={`scale(1 ${front})`}>
+    <path d={`M16 12l2 ${fl - 10}M30 12l4 ${fl - 10}`} stroke-width="7" />
+    <path d={`M16 12l2 ${fl - 10}M30 12l4 ${fl - 10}`} stroke="var(--art-o)" stroke-width="3" />
+    <ellipse cx="18" cy="0" rx="26" ry="17" fill="var(--art-o)" />
+    <path d="M44 -24l2 -20l12 14zM64 -28l8 -18l4 18z" fill="var(--art-o)" />
+    <circle cx="56" cy="-14" r="17" fill="var(--art-o)" />
+    <circle cx="52" cy="-17" r="2.6" fill="var(--art-ink)" stroke="none" />
+    <circle cx="63" cy="-17" r="2.6" fill="var(--art-ink)" stroke="none" />
+    <path d="M57 -10l-3 3h6z" fill="var(--art-cheek)" stroke-width="1.5" />
+    <path d="M70 -9h12M70 -5l11 3" fill="none" stroke-width="1.5" />
+  </g>
+</g>

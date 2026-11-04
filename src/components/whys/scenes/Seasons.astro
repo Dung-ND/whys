@@ -1,0 +1,55 @@
+---
+// Why do we have seasons? Summer and winter side by side: a high Sun over a green tree,
+// and a low Sun over snow with a bare tree.
+import Kid from './Kid.astro';
+const flakes = [[350, 40], [420, 90], [500, 30], [560, 120], [610, 60], [470, 170], [380, 200], [590, 210]];
+---
+<!-- summer -->
+<rect width="320" height="400" fill="var(--art-sky)" />
+<g class="rays" stroke="var(--art-sun-2)" stroke-width="6" stroke-linecap="round">
+  {Array.from({ length: 12 }, (_, i) => <path d="M160 14v14" transform={`rotate(${i * 30} 160 70)`} />)}
+</g>
+<circle cx="160" cy="70" r="34" fill="var(--art-sun)" stroke="var(--art-ink)" stroke-width="4" />
+<path d="M148 66a4 4 0 0 1 8 0M164 66a4 4 0 0 1 8 0M150 80q10 8 20 0" fill="none" stroke="var(--art-ink)" stroke-width="3" stroke-linecap="round" />
+<path d="M0 320q160 -26 320 -6v86h-320z" fill="var(--art-grass)" stroke="var(--art-ink)" stroke-width="4" />
+<g stroke="var(--art-ink)" stroke-width="4">
+  <rect x="58" y="210" width="20" height="110" fill="var(--art-wood)" />
+  <circle cx="68" cy="190" r="56" fill="var(--art-grass-2)" />
+</g>
+<Kid x={220} y={372} mood="smile" shirt="var(--art-red)" look={[0, -2]} />
+
+<!-- winter -->
+<rect x="320" width="320" height="400" fill="var(--art-sky-2)" />
+<g class="snow">
+  {flakes.map(([x, y], i) => (
+    <g transform={`translate(${x} ${y})`}>
+      <path class="flake" style={`animation-delay:${-i * 1.1}s`} d="M0 -8v16M-7 -4l14 8M-7 4l14 -8" stroke="var(--art-water)" stroke-width="3" stroke-linecap="round" />
+    </g>
+  ))}
+</g>
+<circle cx="600" cy="292" r="30" fill="var(--art-sun)" stroke="var(--art-ink)" stroke-width="4" />
+<path d="M320 314q160 -14 320 0v86h-320z" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="4" />
+<g fill="none" stroke="var(--art-ink)" stroke-width="5" stroke-linecap="round">
+  <path d="M560 316v-120M560 250l-30 -30M560 230l26 -34M530 220l-10 -24M586 196l8 -20" stroke="var(--art-wood)" stroke-width="9" />
+</g>
+<Kid x={420} y={380} mood="brr" shirt="var(--art-shirt)" />
+<path d="M400 290q20 8 40 0l1 9q-21 9 -42 0z" fill="var(--art-red)" stroke="var(--art-ink)" stroke-width="3" />
+<path d="M428 296l6 26l8 -3l-6 -22z" fill="var(--art-red)" stroke="var(--art-ink)" stroke-width="3" />
+<path d="M320 0v400" stroke="var(--art-ink)" stroke-width="4" stroke-dasharray="10 8" />
+
+<style>
+  .rays {
+    animation: spin 20s linear infinite;
+    transform-origin: 160px 70px;
+  }
+  .flake {
+    animation: fall 9s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes fall {
+    from { transform: translateY(-40px); }
+    to { transform: translateY(60px); }
+  }
+</style>

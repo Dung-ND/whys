@@ -1,0 +1,33 @@
+---
+// How a falling cat turns over, in four steps. Each half of the body turns separately: the half with legs
+// tucked in spins easily, while the stretched-out half barely turns the other way.
+import Figure from '../Figure.astro';
+import Cat from '../scenes/Cat.astro';
+interface Props { label: string; s1: string; s2: string; s3: string; s4: string }
+const { label, s1, s2, s3, s4 } = Astro.props;
+---
+<Figure label={label} width={640} height={250}>
+  <rect width="640" height="250" rx="16" fill="var(--art-sky-2)" />
+  <Cat x={86} y={110} s={0.62} front={-1} back={-1} />
+  <Cat x={244} y={110} s={0.62} front={1} back={-1} tuck />
+  <Cat x={402} y={110} s={0.62} front={1} back={1} />
+  <Cat x={560} y={128} s={0.62} />
+  <rect x="490" y="160" width="130" height="10" rx="5" fill="var(--art-r)" stroke="var(--art-ink)" stroke-width="2.5" />
+  {[[156, '→'], [314, '→'], [472, '→']].map(([x, a]) => <text x={x} y="118" class="a">{a}</text>)}
+  {[[86, s1], [244, s2], [402, s3], [560, s4]].map(([x, s], i) => (
+    <text x={x} y="210" text-anchor="middle" class="t">{`${'①②③④'[i]} ${s}`}</text>
+  ))}
+</Figure>
+
+<style>
+  .t {
+    font-weight: 850;
+    font-size: 14px;
+    fill: var(--art-ink);
+  }
+  .a {
+    font-weight: 900;
+    font-size: 26px;
+    fill: var(--art-ink);
+  }
+</style>

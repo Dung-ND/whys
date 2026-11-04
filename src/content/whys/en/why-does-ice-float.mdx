@@ -1,0 +1,74 @@
+---
+question: Why does ice float?
+teaser: Ice is just frozen water, so why doesn't it sink to the bottom of your glass? Almost every other solid sinks in its own liquid.
+art: An iceberg floats in the sea with a penguin standing on its small tip. Below the waves, most of the iceberg hides under water, much bigger than the part above, while fish swim around it.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { IceLattice } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `Ice has air bubbles trapped inside.`, reply: `Some ice cubes do have bubbles, but perfectly clear ice, with no bubbles at all, floats just as well.` },
+    { text: `Water takes up more space when it freezes.`, reply: `As water freezes, its molecules lock into an open pattern with gaps, so ice takes up about 9% more space than the water it came from.` },
+    { text: `Ice floats because it's cold.`, reply: `Usually it's the other way round: most liquids shrink as they get colder, and most solids sink in their own liquid. Water is a rare exception.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<IceLattice
+  label="On the left, liquid water: water molecules, each one red oxygen with two white hydrogens, jumbled close together. On the right, ice: the molecules are locked into six-sided rings with open space in the middle."
+  water="Liquid water"
+  ice="Ice"
+  close="molecules jumbled close together"
+  open="six-sided rings with gaps: 9% more space"
+/>
+</div>
+
+Each water molecule is one oxygen atom (red) holding two hydrogen atoms (white). In liquid water they tumble around, packed close. In ice, each one holds hands with four neighbors, building six-sided rings full of empty space.
+
+</Part>
+
+<Part kind="answer">
+
+When water freezes, its molecules lock into an open pattern with gaps, so ice takes up about 9% more space. The same amount of water spread over more space is lighter for its size, so it floats.
+
+Whether something floats depends on its **density**: how heavy it is for its size. A thing that is less dense than a liquid floats on it.
+
+In liquid water, molecules tumble and slide past each other, packed close together. As water freezes, each molecule grabs four neighbors with weak links called **hydrogen bonds**. Together they build a pattern of six-sided rings. That's also why snowflakes have six sides! This pattern holds the molecules a little farther apart than in the liquid.
+
+So ice is about 9% less dense than water, and a floating piece of ice sits with about nine-tenths of itself under the surface. That's why people say "just the tip of the iceberg".
+
+This matters a lot for life. Lakes and ponds freeze from the top down, and the layer of ice works like a lid that keeps the water below from freezing. Water is heaviest at about 4 °C, so in winter the bottom of a deep lake stays at about 4 °C, and fish survive there until spring.
+
+</Part>
+
+<Myth claim="When the ice in a full glass melts, the glass overflows.">
+
+Floating ice already pushes aside exactly its own weight of water. When it melts, it fills exactly that space, so the water level stays the same. (Ice melting off land, like glaciers, is different: that water is new to the sea, so sea levels rise.)
+
+</Myth>
+
+<TryIt title="the floating-ice test" need={['A clear glass', 'Water and ice cubes', 'A marker or a strip of tape', 'A plastic bottle with a cap']} safety="Never freeze water in a glass bottle: it can crack.">
+
+1. Fill the glass with ice cubes, then add water right up near the top. Mark the water level.
+2. Look from the side: how much of each ice cube is under water?
+3. Wait until all the ice has melted. Has the level changed?
+4. Bonus: fill the plastic bottle to the very top, close it and put it in the freezer overnight. The next day it bulges, because the ice needs more room.
+
+</TryIt>
+
+<Whoa big="6 sides">
+
+Every snowflake has six sides or six arms. It's the same six-sided pattern that water molecules make when they freeze, grown big enough to see.
+
+</Whoa>

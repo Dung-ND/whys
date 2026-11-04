@@ -1,0 +1,78 @@
+---
+question: Why do onions make you cry?
+teaser: You're not sad, nothing splashed in your eyes, and yet the tears won't stop. What is the onion doing?
+art: A kid cuts an onion on a kitchen counter. Green wisps of gas drift up from the cut onion toward the kid's squeezed-shut eyes, and tears roll down their cheeks.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import { OnionChem } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `Onion juice splashes into your eyes.`, reply: `A splash can sting, but you cry even when nothing splashes at all. The culprit floats through the air.` },
+    { text: `Cutting the onion makes it release a gas.`, reply: `Cutting starts a quick chemical reaction that makes a stinging gas. When it reaches your eyes, they wash it away with tears.` },
+    { text: `The smell is so strong your nose makes you cry.`, reply: `Your nose notices the smell, but the tears come from something reaching your eyes. Wear swimming goggles while cutting and the tears stop, even though you can still smell the onion!` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<OnionChem
+  label="Four steps. In a whole onion cell, two kinds of chemicals are kept apart. Cutting breaks the cell and they mix. Helper chemicals called enzymes turn them into a gas. The gas drifts to an eye, which makes tears."
+  whole="kept apart"
+  cut="cut: they mix"
+  gas="a stinging gas"
+  eye="tears wash it away"
+/>
+</div>
+
+An onion keeps the ingredients of its stinging gas in separate parts of its cells, like two chemicals in a glow stick. Cutting is like snapping the glow stick: they mix, and the reaction begins.
+
+</Part>
+
+<Part kind="answer">
+
+Cutting an onion breaks its cells and starts a chemical reaction that makes a stinging gas. When the gas reaches your eyes, they make tears to wash it away.
+
+An onion is made of millions of tiny cells. Inside them, some sulfur-containing chemicals and some **enzymes** (tiny chemical helpers) are kept in separate compartments. When a knife breaks the cells open, they meet. Within seconds, one enzyme turns the chemicals into something new, and a second enzyme turns that into a gas with a very long name: *syn-propanethial-S-oxide*.
+
+The gas floats up into the air. When it touches the wet surface of your eyes, nerves there sense it as something that shouldn't be there, and they tell your tear glands to flush it out.
+
+Why would an onion do this? It's a defense. An animal that takes a bite gets a nasty sting, and learns to leave onions alone.
+
+A few things really help:
+
+- **Chill the onion** for 30 minutes first. The cold slows the reaction and keeps the gas from rising as fast.
+- **Use a sharp knife.** It slices cleanly through cells instead of crushing many of them.
+- **Keep the gas away from your eyes**: work near a fan or an open window, or wear goggles.
+
+</Part>
+
+<Myth claim="Chewing gum or holding bread in your mouth stops onion tears.">
+
+There's little evidence that these tricks work. What helps most is keeping the gas away from your eyes: a cold onion, a sharp knife, a breeze or a pair of goggles.
+
+</Myth>
+
+<TryIt title="the cold onion test" need={['Two onions of the same size', 'A fridge', 'A cutting board and a sharp knife', 'A timer', 'An adult to do the cutting']} safety="Knives are sharp: let an adult do the cutting.">
+
+1. Put one onion in the fridge for 30 minutes. Leave the other one out on the counter.
+2. Ask an adult to chop the warm onion while you stand close by. Time how long until your eyes sting.
+3. Air the kitchen out, then do the same with the cold onion.
+4. Which one made you cry first? Try it a few times: one test isn't enough to be sure.
+
+</TryIt>
+
+<Whoa big="Ig Nobel">
+
+In 2013, the Japanese scientists who discovered the enzyme that makes the tear gas won an Ig Nobel Prize: a prize for research that first makes people laugh, then makes them think. Their company later bred an onion that doesn't make you cry.
+
+</Whoa>

@@ -1,0 +1,54 @@
+---
+// Why do onions make you cry? A kid cutting an onion; wisps of gas float up to their eyes and tears fall.
+import Kid from './Kid.astro';
+---
+<rect width="640" height="400" fill="var(--art-sky-2)" />
+<!-- kitchen tiles and window -->
+<g stroke="var(--art-water)" stroke-width="2" opacity="0.6">
+  {Array.from({ length: 9 }, (_, i) => <path d={`M${i * 80} 0v260`} />)}
+  {Array.from({ length: 4 }, (_, i) => <path d={`M0 ${i * 70}h640`} />)}
+</g>
+<Kid x={210} y={330} mood="cry" shirt="var(--art-shirt)" />
+<!-- tears -->
+<g fill="var(--art-water)" stroke="var(--art-ink)" stroke-width="2">
+  <path class="tear" d="M196 220q-5 9 0 12q5 -3 0 -12z" />
+  <path class="tear t2" d="M224 220q-5 9 0 12q5 -3 0 -12z" />
+</g>
+<!-- counter -->
+<rect x="0" y="300" width="640" height="100" fill="var(--art-wood)" stroke="var(--art-ink)" stroke-width="4" />
+<rect x="0" y="296" width="640" height="14" fill="var(--art-tan)" stroke="var(--art-ink)" stroke-width="4" />
+<!-- cutting board, onion halves, knife -->
+<rect x="300" y="276" width="260" height="26" rx="8" fill="var(--art-tan)" stroke="var(--art-ink)" stroke-width="4" />
+<g stroke="var(--art-ink)" stroke-width="3.5">
+  <path d="M340 276a46 46 0 0 1 92 0z" fill="var(--art-v)" />
+  <path d="M352 276a34 34 0 0 1 68 0M364 276a22 22 0 0 1 44 0M376 276a10 10 0 0 1 20 0" fill="var(--art-white)" stroke-width="2.5" />
+  <path d="M446 276a40 40 0 0 1 80 0z" fill="var(--art-v)" />
+  <path d="M456 276a30 30 0 0 1 60 0M468 276a18 18 0 0 1 36 0" fill="var(--art-white)" stroke-width="2.5" />
+  <path d="M520 250l90 -60l10 10l-82 66z" fill="var(--art-white)" />
+  <path d="M600 196l26 -18l8 10l-24 18z" fill="var(--art-ink)" />
+</g>
+<!-- the gas drifting up to the eyes -->
+<g class="gas" fill="none" stroke="var(--art-g)" stroke-width="4" stroke-linecap="round" opacity="0.7">
+  <path d="M380 236q-20 -20 -60 -10t-90 -6" />
+  <path d="M480 236q-30 -36 -100 -20t-150 -10" />
+</g>
+
+<style>
+  .tear {
+    animation: drip 2.4s ease-in infinite;
+  }
+  .t2 {
+    animation-delay: 1.2s;
+  }
+  .gas path {
+    stroke-dasharray: 10 14;
+    animation: drift 2.5s linear infinite;
+  }
+  @keyframes drip {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(46px); opacity: 0; }
+  }
+  @keyframes drift {
+    to { stroke-dashoffset: 48; }
+  }
+</style>

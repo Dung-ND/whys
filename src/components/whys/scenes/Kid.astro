@@ -8,7 +8,7 @@ interface Props {
   back?: boolean;
   /** Raise the right arm to point up. */
   point?: boolean;
-  mood?: 'wow' | 'smile' | 'brr';
+  mood?: 'wow' | 'smile' | 'brr' | 'yawn' | 'cry';
   /** Where the eyes look, in units: [dx, dy]. */
   look?: [number, number];
   shirt?: string;
@@ -49,12 +49,20 @@ const [lx, ly] = look;
   ) : (
     <>
       <path d="M-27 -114q2 -28 30 -26q24 2 24 24q-10 -12 -26 -12q-6 8 -16 6q-6 2 -12 8z" fill="var(--art-hair)" />
-      <ellipse cx={-9 + lx} cy={-110 + ly} rx="3.6" ry="4.6" fill="var(--art-ink)" stroke="none" />
-      <ellipse cx={9 + lx} cy={-110 + ly} rx="3.6" ry="4.6" fill="var(--art-ink)" stroke="none" />
+      {mood === 'yawn' || mood === 'cry' ? (
+        <path d="M-14 -110q5 5 10 0M4 -110q5 5 10 0" fill="none" stroke-width="2.6" />
+      ) : (
+        <>
+          <ellipse cx={-9 + lx} cy={-110 + ly} rx="3.6" ry="4.6" fill="var(--art-ink)" stroke="none" />
+          <ellipse cx={9 + lx} cy={-110 + ly} rx="3.6" ry="4.6" fill="var(--art-ink)" stroke="none" />
+        </>
+      )}
       <circle cx="-16" cy="-99" r="4.5" fill="var(--art-cheek)" stroke="none" opacity="0.8" />
       <circle cx="16" cy="-99" r="4.5" fill="var(--art-cheek)" stroke="none" opacity="0.8" />
       {mood === 'wow' && <ellipse cx="0" cy="-96" rx="4.5" ry="6" fill="var(--art-ink)" stroke-width="0" />}
       {mood === 'smile' && <path d="M-7 -98q7 7 14 0" fill="none" stroke-width="2.6" />}
+      {mood === 'yawn' && <ellipse cx="0" cy="-94" rx="7" ry="10" fill="var(--art-ink)" stroke-width="0" />}
+      {mood === 'cry' && <path d="M-7 -94q7 -6 14 0" fill="none" stroke-width="2.6" />}
       {mood === 'brr' && <path d="M-8 -96l4 -3l4 3l4 -3l4 3" fill="none" stroke-width="2.4" />}
     </>
   )}

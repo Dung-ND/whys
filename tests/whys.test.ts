@@ -51,3 +51,38 @@ test('sky: blue is scattered more than red (≈ 1/λ⁴)', () => {
   assert.ok(transmitted(450, 38) < 0.01);
   assert.ok(transmitted(680, 38) > 0.2);
 });
+
+import { declination, noonSunHeight, dayLength, beamSpread, DENSITY, fractionSubmerged } from '../src/lib/whys-science.ts';
+
+test('seasons: the Sun is overhead at the tropics at the solstices', () => {
+  close(declination(172), 23.44, 0.1); // 21 June
+  close(declination(355), -23.44, 0.1); // 21 December
+  close(declination(81), 0, 1); // 22 March
+});
+
+test('seasons: noon Sun height and day length', () => {
+  // At the equator on an equinox, the Sun is overhead and day and night are equal.
+  close(noonSunHeight(0, 81), 90, 1);
+  close(dayLength(0, 81), 12, 0.05);
+  // London (51.5° N): about 62° and 16.4 h in June, 15° and 7.8 h in December.
+  close(noonSunHeight(51.5, 172), 62, 0.5);
+  close(noonSunHeight(51.5, 355), 15, 0.5);
+  close(dayLength(51.5, 172), 16.4, 0.3);
+  close(dayLength(51.5, 355), 7.8, 0.3);
+  // The far north has midnight sun in June and polar night in December.
+  assert.equal(dayLength(80, 172), 24);
+  assert.equal(dayLength(80, 355), 0);
+  // The Southern Hemisphere has the opposite seasons.
+  assert.ok(dayLength(-34, 355) > dayLength(-34, 172));
+});
+
+test('seasons: low sunlight spreads over more ground', () => {
+  close(beamSpread(90), 1);
+  close(beamSpread(30), 2, 1e-9);
+});
+
+test('ice: about 9% bigger than the water it came from, about 90% under water when floating', () => {
+  close(DENSITY.water / DENSITY.ice, 1.09, 0.01);
+  close(fractionSubmerged(DENSITY.ice, DENSITY.water), 0.917, 0.001);
+  close(fractionSubmerged(DENSITY.ice, DENSITY.seawater), 0.89, 0.01);
+});

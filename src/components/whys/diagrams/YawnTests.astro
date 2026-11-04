@@ -1,0 +1,47 @@
+---
+// Two classic yawning experiments: breathing extra oxygen did not change how often people yawned (1987);
+// cooling the forehead made people catch fewer yawns from others (2007).
+import Figure from '../Figure.astro';
+interface Props { label: string; test1: string; test2: string; normal: string; oxygen: string; warm: string; cool: string; result1: string; result2: string }
+const { label, test1, test2, normal, oxygen, warm, cool, result1, result2 } = Astro.props;
+const bar = (x: number, h: number, color: string, name: string) => ({ x, h, color, name });
+const panels = [
+  { x: 20, title: test1, bars: [bar(70, 120, 'var(--art-shirt)', normal), bar(190, 120, 'var(--art-g)', oxygen)], result: result1 },
+  { x: 330, title: test2, bars: [bar(70, 130, 'var(--art-o)', warm), bar(190, 52, 'var(--art-water)', cool)], result: result2 },
+];
+---
+<Figure label={label} width={640} height={320}>
+  <rect width="640" height="320" rx="16" fill="var(--art-sky-2)" />
+  {panels.map((p) => (
+    <g transform={`translate(${p.x} 0)`}>
+      <rect x="0" y="16" width="290" height="290" rx="14" fill="var(--art-white)" stroke="var(--art-ink)" stroke-width="3" />
+      <text x="145" y="46" text-anchor="middle" class="h">{p.title}</text>
+      <line x1="30" y1="236" x2="260" y2="236" stroke="var(--art-ink)" stroke-width="2.5" />
+      {p.bars.map((b) => (
+        <>
+          <rect x={b.x - 30} y={236 - b.h} width="60" height={b.h} rx="6" fill={b.color} stroke="var(--art-ink)" stroke-width="2.5" />
+          <text x={b.x} y="258" text-anchor="middle" class="s">{b.name}</text>
+        </>
+      ))}
+      <text x="145" y="290" text-anchor="middle" class="r">{p.result}</text>
+    </g>
+  ))}
+</Figure>
+
+<style>
+  .h {
+    font-weight: 900;
+    font-size: 16px;
+    fill: var(--art-ink);
+  }
+  .s {
+    font-weight: 750;
+    font-size: 13px;
+    fill: var(--art-ink);
+  }
+  .r {
+    font-weight: 900;
+    font-size: 14px;
+    fill: var(--art-ink);
+  }
+</style>

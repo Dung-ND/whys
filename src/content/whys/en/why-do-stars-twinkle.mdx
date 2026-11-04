@@ -1,0 +1,81 @@
+---
+question: Why do stars twinkle?
+teaser: Stars shine steadily, just like our Sun. So why do they flicker and dance when we look up at night?
+art: A starry night sky. The stars flicker and shimmer while wavy bands of air drift across the sky, but one small orange planet shines steadily. A kid on a hill points up in wonder.
+---
+import { Part, Myth, TryIt, Whoa } from '@/components/whys';
+import Guess from '@/components/whys/Guess.svelte';
+import Animated from '@/components/whys/Animated.astro';
+import { TwinkleAir } from '@/components/whys/diagrams';
+
+<Part kind="guess">
+
+<Guess
+  client:visible
+  lang={props.lang}
+  answer={1}
+  options={[
+    { text: `Stars flicker on and off.`, reply: `Stars shine steadily, like our Sun does. Seen from space, above the air, they don't twinkle at all.` },
+    { text: `The air bends their light back and forth.`, reply: `Moving air above us bends starlight a tiny bit this way and that, many times a second, so the star seems to jump and flicker.` },
+    { text: `Stars spin around very fast.`, reply: `Some stars do spin fast, but that doesn't make them flicker. Astronauts above the air see the very same stars shining steadily.` },
+  ]}
+/>
+
+</Part>
+
+<Part kind="investigate">
+
+<div class="wide">
+<Animated>
+<TwinkleAir
+  label="On the left, light from a star comes down as one thin ray. Moving pockets of air bend it back and forth, so the star seems to jump and flicker. On the right, light from a planet comes down as several rays side by side. Each wobbles, but together they average out, so the planet shines steadily."
+  star="Star: a tiny point"
+  planet="Planet: a tiny disc"
+  air="moving pockets of warm and cool air"
+  twinkles="twinkles"
+  steady="steady"
+  you="you"
+/>
+</Animated>
+</div>
+
+A star's light reaches you as one super-thin ray, so every wobble of the air shows. A planet's light comes as many rays side by side, and their wobbles cancel each other out.
+
+</Part>
+
+<Part kind="answer">
+
+Moving air above us bends starlight back and forth, so the star seems to jump, flicker and change color.
+
+The air above us is never perfectly still. Pockets of warmer and cooler air swirl around, and light bends a little each time it passes from one into another. (It's the same kind of bending that makes a straw look broken in a glass of water.)
+
+Stars are so incredibly far away that their light arrives as one super-thin beam. As the air pockets drift past, they push that beam this way and that, many times a second. The star seems to flicker, wobble and sometimes flash red or blue. Scientists call this **scintillation**.
+
+Planets are much closer, so they look like tiny discs instead of points. Their light arrives as many beams side by side. Each beam gets wobbled differently, and the wobbles average out. That's a handy trick: if a bright "star" isn't twinkling, it might be a planet!
+
+Stars low near the horizon twinkle the most, because their light has to cross much more air to reach you.
+
+</Part>
+
+<Myth claim="Stars twinkle because they blink on and off.">
+
+From space, the same stars shine perfectly steadily. The twinkle is added at the very end of their journey, in the air right above our heads.
+
+</Myth>
+
+<TryIt title="make light wobble" need={['A bowl of water', 'A coin']}>
+
+1. Put the coin at the bottom of the bowl of water.
+2. Look at the coin from above, at a slant.
+3. Gently blow on the water or tap its surface.
+4. The coin seems to wiggle and shimmer! The moving water bends its light, just like moving air bends starlight.
+
+Bonus: on a hot day, look far along a sunny road. Things in the distance shimmer above it, for the same reason.
+
+</TryIt>
+
+<Whoa big="Lasers">
+
+Big telescopes fight the twinkle. They shine a laser into the sky to make an artificial "star", measure how the air bends its light, and reshape a bendy mirror hundreds of times a second to undo it.
+
+</Whoa>
