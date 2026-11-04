@@ -36,5 +36,7 @@
   "whys.translationMissing": "Este porqué aún no está traducido, así que se muestra en inglés.",
   "404.title": "Perdidos en el espacio",
   "404.lead": "No encontramos esa página.",
-  "404.home": "Volver al inicio"
+  "404.home": "Volver al inicio",
+  "motion.pause": "Pausar la animación",
+  "motion.play": "Reproducir la animación"
 }

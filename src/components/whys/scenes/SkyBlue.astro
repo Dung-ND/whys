@@ -31,7 +31,7 @@ const dirs = [0, 60, 120, 180, 240, 300];
 <!-- molecules scatter blue light every which way -->
 {molecules.map(([x, y], m) => (
   <g transform={`translate(${x} ${y})`}>
-    <g class="scatter" style={`animation-delay:${(m * 0.37) % 1.8}s`}>
+    <g class="scatter" style={`animation-delay:${(m * 0.61) % 3}s`}>
       {dirs.map((d) => (
         <g transform={`rotate(${d + molecules[m][2]})`}>
           <path d="M14 0q4 -5 8 0t8 0t8 0" fill="none" stroke="var(--art-b)" stroke-width="3.5" stroke-linecap="round" />
@@ -60,7 +60,7 @@ const dirs = [0, 60, 120, 180, 240, 300];
     transform-origin: 90px 78px;
   }
   .scatter {
-    animation: pulse 1.8s ease-out infinite;
+    animation: pulse 3s ease-out infinite;
   }
   .cloud {
     animation: drift 9s ease-in-out infinite alternate;

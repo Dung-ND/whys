@@ -36,5 +36,7 @@
   "whys.translationMissing": "This why isn't translated yet, so it is shown in English.",
   "404.title": "Lost in space",
   "404.lead": "We couldn't find that page.",
-  "404.home": "Back to home"
+  "404.home": "Back to home",
+  "motion.pause": "Pause the animation",
+  "motion.play": "Play the animation"
 }

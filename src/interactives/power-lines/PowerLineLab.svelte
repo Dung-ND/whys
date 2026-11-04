@@ -12,11 +12,18 @@
   let { lang = 'en' }: { lang?: Lang } = $props();
   const t = strings(lang);
   let mode = $state<'one' | 'two'>('one');
+  // The film: the bird switches between one wire and two every 5 seconds.
+  let running = $state(false);
+  $effect(() => {
+    if (!running) return;
+    const timer = setInterval(() => (mode = mode === 'one' ? 'two' : 'one'), 5000);
+    return () => clearInterval(timer);
+  });
   const TOP = 110, BOT = 220;
   const V = `${fmt(lang, 7200, 0)} V`;
 </script>
 
-<Lab title={t('title')} caption={t(`${mode}Cap`)}>
+<Lab title={t('title')} caption={t(`${mode}Cap`)} {lang} bind:running>
   <Stage width={640} height={300} label={t('label')}>
     <rect x="10" y="10" width="620" height="280" rx="14" fill="var(--art-sky)" />
     <!-- wires -->
@@ -73,7 +80,7 @@
     fill: var(--art-ink);
   }
   .flow {
-    animation: flow 0.8s linear infinite;
+    animation: flow 1.6s linear infinite;
   }
   .zap {
     animation: zap 0.12s linear infinite alternate;

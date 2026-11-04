@@ -1,6 +1,7 @@
 <script lang="ts">
   // Move the Sun up and down: the sky and Sun colors come from Rayleigh scattering (∝ 1/λ⁴)
   // along the real path length through the air (air mass).
+  import { untrack } from 'svelte';
   import type { Lang } from '@/config/site';
   import Stage from '@/components/ui/Stage.svelte';
   import Slider from '@/components/ui/Slider.svelte';
@@ -15,6 +16,21 @@
   const uid = $props.id();
 
   let h = $state(60);
+  let running = $state(false);
+  // The film: the Sun rises and sets every 20 seconds, lingering a little near the horizon.
+  $effect(() => {
+    if (!running) return;
+    let raf = 0;
+    // Start from wherever the Sun is now (untracked, or every frame would restart the film).
+    const start = untrack(() => Math.min(h, 70));
+    const t0 = performance.now() - (Math.acos(1 - start / 35) / (2 * Math.PI)) * 20000;
+    const tick = (now: number) => {
+      h = Math.round(35 - 35 * Math.cos((2 * Math.PI * (now - t0)) / 20000));
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  });
   const nm = [680, 550, 450];
   const scat = nm.map((l) => Math.pow(550 / l, 4));
 
@@ -44,7 +60,7 @@
   const caption = $derived(h > 35 ? t('high') : h > 10 ? t('mid') : t('low', { n: Math.round(am) }));
 </script>
 
-<Lab title={t('title')} {caption}>
+<Lab title={t('title')} {caption} {lang} bind:running>
   <Stage width={640} height={330} label={t('label')}>
     <defs>
       <linearGradient id="{uid}-sky" x1="0" y1="0" x2="0" y2="1">

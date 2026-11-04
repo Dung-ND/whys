@@ -36,5 +36,7 @@
   "whys.translationMissing": "Câu hỏi này chưa được dịch nên đang hiển thị bằng tiếng Anh.",
   "404.title": "Lạc vào vũ trụ",
   "404.lead": "Không tìm thấy trang này.",
-  "404.home": "Về trang chủ"
+  "404.home": "Về trang chủ",
+  "motion.pause": "Tạm dừng hình động",
+  "motion.play": "Phát hình động"
 }

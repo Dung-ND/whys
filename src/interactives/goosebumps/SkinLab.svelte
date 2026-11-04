@@ -13,6 +13,15 @@
   const t = strings(lang);
 
   let feel = $state<'warm' | 'cold' | 'scared'>('warm');
+  // The film: warm, cold, warm, scared… a new feeling every 4 seconds.
+  let running = $state(false);
+  $effect(() => {
+    if (!running) return;
+    const order = ['cold', 'warm', 'scared', 'warm'] as const;
+    let i = 0;
+    const timer = setInterval(() => (feel = order[i++ % order.length]), 4000);
+    return () => clearInterval(timer);
+  });
   // 0 = relaxed, 1 = fully squeezed.
   const k = new Tween(0, { duration: 600, easing: cubicOut });
   $effect(() => {
@@ -31,7 +40,7 @@
   const lean = $derived(55 - 47 * k.current);
 </script>
 
-<Lab title={t('title')} caption={t(`${feel}Cap`)}>
+<Lab title={t('title')} caption={t(`${feel}Cap`)} {lang} bind:running>
   <Stage width={640} height={300} label={t('label')}>
     <rect x="10" y="10" width="620" height="280" rx="14" fill={feel === 'cold' ? 'var(--art-sky-2)' : 'var(--art-tan)'} />
     <path d={surface} fill="var(--art-skin)" stroke="var(--art-ink)" stroke-width="3" stroke-linejoin="round" />

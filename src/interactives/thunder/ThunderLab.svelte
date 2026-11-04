@@ -1,6 +1,7 @@
 <script lang="ts">
   // Light arrives almost instantly; sound travels 343 m/s, so the thunder comes ~3 s per km later.
   // The timer runs in real time, so students can count along.
+  import { untrack } from 'svelte';
   import type { Lang } from '@/config/site';
   import Stage from '@/components/ui/Stage.svelte';
   import Slider from '@/components/ui/Slider.svelte';
@@ -48,6 +49,24 @@
     elapsed = 0;
   });
 
+  // The film: storms 1, 2 and 3 km away, one after another, so the delays can be compared.
+  let running = $state(false);
+  $effect(() => {
+    if (!running) return;
+    let timer = 0;
+    const storms = [1, 2, 3];
+    const next = (i: number) => {
+      km = storms[i % storms.length];
+      timer = window.setTimeout(() => {
+        strike();
+        timer = window.setTimeout(() => next(i + 1), (thunderDelay(storms[i % storms.length]) + 3.5) * 1000);
+      }, 900);
+    };
+    next(Math.max(0, storms.indexOf(untrack(() => km))));
+    // A strike already on its way finishes by itself (it may be the reader's own).
+    return () => clearTimeout(timer);
+  });
+
   const caption = $derived(
     stage === 'ready'
       ? t('ready')
@@ -57,7 +76,7 @@
   );
 </script>
 
-<Lab title={t('title')} {caption}>
+<Lab title={t('title')} {caption} {lang} bind:running>
   <Stage width={640} height={300} label={t('label')}>
     <rect x="10" y="10" width="620" height="280" rx="14" fill="var(--art-storm-2)" />
     {#if stage === 'flash' && elapsed < 0.15}

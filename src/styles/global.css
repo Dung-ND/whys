@@ -160,10 +160,19 @@ button {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  /* Small effects stop at once. Pictures with a play button start paused instead (src/lib/motion.ts),
+     so someone who wants to can still press play. */
+  :not([data-anim] *) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Moving pictures freeze when paused or scrolled out of view. */
+[data-anim]:is([data-paused], [data-offscreen]) * {
+  animation-play-state: paused !important;
 }
 
 @media print {

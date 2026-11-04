@@ -13,7 +13,7 @@
   const t = strings(lang);
 
   let day = $state(4);
-  let playing = $state(false);
+  let running = $state(false);
   const f = $derived(day / SYNODIC_MONTH);
 
   const E = { x: 210, y: 175 }, R = 108;
@@ -28,10 +28,11 @@
   const phase = $derived(t(`p${phaseIndex(f)}` as 'p0'));
 
   $effect(() => {
-    if (!playing) return;
+    if (!running) return;
     let last = performance.now(), raf = 0;
     const tick = (now: number) => {
-      day = (day + ((now - last) / 1000) * 3) % SYNODIC_MONTH;
+      // The film: a whole month in about 15 seconds.
+      day = (day + ((now - last) / 1000) * 2) % SYNODIC_MONTH;
       last = now;
       raf = requestAnimationFrame(tick);
     };
@@ -40,7 +41,7 @@
   });
 </script>
 
-<Lab title={t('title')} caption={t('caption', { phase, pct: Math.round(litFraction(f) * 100) })}>
+<Lab title={t('title')} {lang} bind:running caption={t('caption', { phase, pct: Math.round(litFraction(f) * 100) })}>
   <Stage width={640} height={350} label={t('label')}>
     <rect x="10" y="10" width="400" height="330" rx="14" fill="var(--art-night)" />
     <!-- sunlight from the left -->
@@ -71,7 +72,6 @@
   </Stage>
   {#snippet controls()}
     <Slider label={t('day')} bind:value={day} min={0} max={29.5} step={0.5} color="var(--c-purple)" format={(v) => fmt(lang, v, 1)} />
-    <button type="button" class="btn btn-ghost" onclick={() => (playing = !playing)}>{playing ? '⏸ ' + t('pause') : '▶ ' + t('play')}</button>
   {/snippet}
 </Lab>
 

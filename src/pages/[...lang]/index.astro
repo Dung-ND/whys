@@ -3,6 +3,7 @@ import Base from '@/layouts/Base.astro';
 import WhyCard from '@/components/whys/WhyCard.astro';
 import Professor from '@/components/whys/scenes/Professor.astro';
 import Figure from '@/components/whys/Figure.astro';
+import Animated from '@/components/whys/Animated.astro';
 import { loadWhys } from '@/components/whys/load';
 import { langPaths, useT } from '@/i18n';
 import { whyCategories, localized, type WhyCategory } from '@/data/whys';
@@ -25,7 +26,7 @@ const icons = { guess: '🤔', investigate: '🔬', answer: '💡', try: '🧪' 
       <p class="lead">{t('whys.lead')}</p>
       <button class="btn btn-primary surprise" type="button" data-surprise>🎲 {t('whys.surprise')}</button>
     </div>
-    <div class="art"><Figure label={t('whys.artLabel')} width={480} height={400}><Professor /></Figure></div>
+    <div class="art"><Animated><Figure label={t('whys.artLabel')} width={480} height={400}><Professor /></Figure></Animated></div>
   </section>
 
   <section class="wrap">

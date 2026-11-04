@@ -2,6 +2,7 @@
 import Base from '@/layouts/Base.astro';
 import WhyCard from '@/components/whys/WhyCard.astro';
 import Scene from '@/components/whys/scenes/Scene.astro';
+import Animated from '@/components/whys/Animated.astro';
 import { render } from 'astro:content';
 import { useT, href } from '@/i18n';
 import { locales, defaultLang, type Lang } from '@/config/site';
@@ -51,7 +52,7 @@ const cat = whyCategories[why.category];
     </header>
 
     <div class="wrap content">
-      <div class="hero"><Scene slug={why.slug} label={entry.data.art} /></div>
+      <div class="hero"><Animated><Scene slug={why.slug} label={entry.data.art} /></Animated></div>
     </div>
 
     <div class="wrap content">

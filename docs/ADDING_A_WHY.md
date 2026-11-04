@@ -18,12 +18,17 @@ Every page follows the same steps a scientist would:
    Translations go in `vi/` and `es/`; missing ones fall back to English with a notice.
 3. **Big picture:** draw the scene in `src/components/whys/scenes/<Name>.astro` on a 640 × 400 canvas and register it in
    `scenes/index.ts`. Reuse `Kid.astro` for people. Use only `--art-*` colors from `src/styles/tokens.css`: they are the
-   picture's own colors and stay the same in dark mode. Animate with CSS only (the site's reduce-motion rule stops it).
+   picture's own colors and stay the same in dark mode. Animate with CSS only, and keep it calm: this is a reading
+   site, so slow loops, short bursts with pauses, and a quiet first frame (a paused picture shows frame 0).
+   The page wraps the scene in `Animated.astro`, which adds the play/pause button and pauses it off screen.
    Scenes also appear as card thumbnails, where animation is paused. If you need an `id` (clip path, gradient), make it
    unique per render, because the same scene can appear twice on one page.
 4. **Investigate:** either a lab in `src/interactives/<topic>/` wrapped in `components/whys/Lab.svelte` (keep it to one
    or two controls, and make it work on phones), or a diagram in `components/whys/diagrams/` whose labels are passed in
    from the MDX so each language can translate them.
+   A lab plays a short film by itself: `bind:running` on `<Lab>` and, while `running` is true, move its controls
+   (the Sun rises and sets, the month goes by…). Lab stops the film as soon as the reader touches a control,
+   and pauses it off screen or when the reader presses pause.
 5. **Check the science.** Any formula goes in `src/lib/whys-science.ts` with a test in `tests/whys.test.ts`.
    Prefer "scientists think" over certainty where the evidence is mixed, and say what is still unknown.
    Home experiments must be safe for kids, with a `safety` note when needed.

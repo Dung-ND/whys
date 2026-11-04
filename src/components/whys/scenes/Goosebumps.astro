@@ -33,18 +33,21 @@ const flakes = [[60, 40], [180, 90], [300, 30], [120, 200], [250, 160], [40, 290
 
 <style>
   .shiver {
-    animation: shiver 0.18s linear infinite alternate;
+    animation: shiver 3.5s linear infinite;
   }
   .flake {
-    animation: fall 6s linear infinite;
+    animation: fall 9s linear infinite;
   }
   .breath {
-    animation: puff 2s ease-out infinite;
+    animation: puff 3.5s ease-out infinite;
     transform-box: fill-box;
     transform-origin: left bottom;
   }
+  /* A short shiver, then a pause. */
   @keyframes shiver {
-    to { transform: translateX(3px); }
+    0%, 32%, 100% { transform: none; }
+    4%, 12%, 20%, 28% { transform: translateX(3px); }
+    8%, 16%, 24% { transform: translateX(-3px); }
   }
   @keyframes fall {
     from { transform: translateY(-60px); }
