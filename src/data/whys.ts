@@ -18,7 +18,7 @@ export type WhyCategory = 'sky' | 'weather' | 'body' | 'animals';
 export const whyCategories: Record<WhyCategory, { color: string; text: string; title: Localized }> = {
   sky: { color: 'var(--c-blue)', text: 'var(--t-blue)', title: { en: 'Sky & space', vi: 'Bầu trời & vũ trụ', es: 'Cielo y espacio' } },
   weather: { color: 'var(--c-teal)', text: 'var(--t-teal)', title: { en: 'Weather', vi: 'Thời tiết', es: 'El tiempo' } },
-  body: { color: 'var(--c-red)', text: 'var(--t-red)', title: { en: 'My body', vi: 'Cơ thể em', es: 'Mi cuerpo' } },
+  body: { color: 'var(--c-red)', text: 'var(--t-red)', title: { en: 'My body', vi: 'Cơ thể bạn', es: 'Mi cuerpo' } },
   animals: { color: 'var(--c-green)', text: 'var(--t-green)', title: { en: 'Animals', vi: 'Động vật', es: 'Animales' } },
 };
 
