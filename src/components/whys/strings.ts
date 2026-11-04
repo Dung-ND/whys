@@ -15,7 +15,7 @@ export const strings = (lang: Lang) =>
         pause: 'Pause',
       },
       vi: {
-        pick: 'Chọn câu trả lời em nghĩ là đúng. Trong khoa học không có phỏng đoán sai, chỉ có thí nghiệm!',
+        pick: 'Chọn câu trả lời bạn nghĩ là đúng. Trong khoa học không có phỏng đoán sai, chỉ có thí nghiệm!',
         right: 'Chính xác!',
         wrong: 'Đoán hay đấy, nhưng bằng chứng lại cho thấy điều khác.',
         science: 'Khoa học nói gì',

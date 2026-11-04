@@ -16,6 +16,7 @@ Every page follows the same steps a scientist would:
 2. **Text:** write `src/content/whys/en/<slug>.mdx`. The frontmatter needs `question`, `teaser` (one or two sentences for cards)
    and `art` (what the big picture shows, for screen readers). Copy an existing why for the layout.
    Translations go in `vi/` and `es/`; missing ones fall back to English with a notice.
+   In Vietnamese, address the reader as "bạn", never "em": Whys is for all ages.
 3. **Big picture:** draw the scene in `src/components/whys/scenes/<Name>.astro` on a 640 × 400 canvas and register it in
    `scenes/index.ts`. Reuse `Kid.astro` for people. Use only `--art-*` colors from `src/styles/tokens.css`: they are the
    picture's own colors and stay the same in dark mode. Animate with CSS only, and keep it calm: this is a reading

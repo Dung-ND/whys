@@ -20,7 +20,7 @@ export const strings = (lang: Lang) =>
         label: 'Bên trái: Trái Đất và Mặt Trăng nhìn từ rất xa phía trên, ánh nắng chiếu từ bên trái. Mặt Trời luôn chiếu sáng nửa Mặt Trăng hướng về nó. Bên phải: Mặt Trăng trông thế nào khi nhìn từ Trái Đất vào ngày đó.',
         day: 'Số ngày kể từ trăng mới',
         above: 'Nhìn từ trên cao',
-        see: 'Em thấy từ Trái Đất',
+        see: 'Bạn thấy từ Trái Đất',
         sunlight: 'Ánh nắng',
         p0: 'Trăng mới (không trăng)', p1: 'Trăng lưỡi liềm đầu tháng', p2: 'Trăng thượng huyền', p3: 'Trăng khuyết đầu tháng',
         p4: 'Trăng tròn', p5: 'Trăng khuyết cuối tháng', p6: 'Trăng hạ huyền', p7: 'Trăng lưỡi liềm cuối tháng',
