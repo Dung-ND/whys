@@ -29,6 +29,7 @@ npm run build      # static site in dist/
 ```
 src/
   data/whys.ts              ← the catalog: number, category, reading time of every why
+  data/ideas.ts             ← questions not written yet (open or started), with hints
   content/whys/<lang>/      ← the text of each why (MDX), one file per language
   components/whys/          ← page building blocks: Guess, Myth, TryIt, Whoa, Mystery, Lab
   components/whys/scenes/   ← the big cartoon for each why (and Professor Owl on the home page)
@@ -43,7 +44,9 @@ src/
 
 ## Adding a why
 
-See [docs/ADDING_A_WHY.md](docs/ADDING_A_WHY.md).
+Over a hundred questions are waiting to be written: see them on the site's **Coming soon** page, with
+`npm run ideas`, or in `src/data/ideas.ts`. To write one, read [CONTRIBUTING.md](CONTRIBUTING.md) (picking and claiming
+a question, science and safety rules) and [docs/ADDING_A_WHY.md](docs/ADDING_A_WHY.md) (how the pieces fit).
 
 ## Deploying
 

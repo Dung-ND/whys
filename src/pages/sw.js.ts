@@ -6,7 +6,7 @@ import { whys } from '@/data/whys';
 import { href } from '@/i18n';
 
 export const GET: APIRoute = () => {
-  const pages = locales.flatMap((l) => [href(l), ...whys.map((x) => href(l, `${x.slug}/`))]);
+  const pages = locales.flatMap((l) => [href(l), href(l, 'ideas/'), ...whys.map((x) => href(l, `${x.slug}/`))]);
   const config = { version: String(Date.now()), base: import.meta.env.BASE_URL.replace(/\/?$/, '/'), pages };
   return new Response(`const CONFIG = ${JSON.stringify(config)};\n${worker.toString().slice(worker.toString().indexOf('{') + 1, -1)}`, {
     headers: { 'Content-Type': 'application/javascript; charset=utf-8' },

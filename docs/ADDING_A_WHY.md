@@ -11,6 +11,8 @@ Every page follows the same steps a scientist would:
 
 ## Steps
 
+Start from an open question in `src/data/ideas.ts` and claim it first (see CONTRIBUTING.md).
+
 1. **Catalog:** add an entry to `src/data/whys.ts`: the next free number (`n`, never reused), a category
    and the reading time. The page appears at `/<slug>/`.
 2. **Text:** write `src/content/whys/en/<slug>.mdx`. The frontmatter needs `question`, `teaser` (one or two sentences for cards)

@@ -38,5 +38,13 @@
   "404.lead": "No encontramos esa página.",
   "404.home": "Volver al inicio",
   "motion.pause": "Pausar la animación",
-  "motion.play": "Reproducir la animación"
+  "motion.play": "Reproducir la animación",
+  "ideas.title": "Próximamente",
+  "ideas.lead": "{n} preguntas más en preparación. ¿Cuál te gustaría leer?",
+  "ideas.help": "¿Quieres ayudar a escribir una? Elige una pregunta libre y sigue la guía para colaborar.",
+  "ideas.guide": "Guía para colaborar",
+  "ideas.open": "Libre",
+  "ideas.started": "La está escribiendo {name}",
+  "ideas.link": "{n} preguntas más en camino",
+  "ideas.englishOnly": "Estas preguntas aparecen en inglés hasta que se escriban."
 }

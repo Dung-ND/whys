@@ -38,5 +38,13 @@
   "404.lead": "Không tìm thấy trang này.",
   "404.home": "Về trang chủ",
   "motion.pause": "Tạm dừng hình động",
-  "motion.play": "Phát hình động"
+  "motion.play": "Phát hình động",
+  "ideas.title": "Sắp ra mắt",
+  "ideas.lead": "Còn {n} câu hỏi nữa đang được chuẩn bị. Bạn muốn đọc câu nào tiếp theo?",
+  "ideas.help": "Bạn muốn cùng viết? Hãy chọn một câu hỏi còn trống và làm theo hướng dẫn đóng góp.",
+  "ideas.guide": "Hướng dẫn đóng góp",
+  "ideas.open": "Còn trống",
+  "ideas.started": "{name} đang viết",
+  "ideas.link": "Còn {n} câu hỏi nữa sắp ra mắt",
+  "ideas.englishOnly": "Các câu hỏi này được ghi bằng tiếng Anh cho đến khi được viết xong."
 }

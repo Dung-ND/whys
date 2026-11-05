@@ -5,8 +5,9 @@ import Professor from '@/components/whys/scenes/Professor.astro';
 import Figure from '@/components/whys/Figure.astro';
 import Animated from '@/components/whys/Animated.astro';
 import { loadWhys } from '@/components/whys/load';
-import { langPaths, useT } from '@/i18n';
+import { langPaths, useT, href } from '@/i18n';
 import { whyCategories, localized, type WhyCategory } from '@/data/whys';
+import { ideas } from '@/data/ideas';
 import type { Lang } from '@/config/site';
 
 export const getStaticPaths = langPaths;
@@ -59,6 +60,7 @@ const icons = { guess: '🤔', investigate: '🔬', answer: '💡', try: '🧪' 
       {items.map((item) => <WhyCard item={item} lang={lang} level="h2" />)}
     </div>
     <p class="empty" hidden>{t('whys.empty')}</p>
+    <a class="soon" href={href(lang, 'ideas/')}>🔭 {t('ideas.link', { n: ideas.length })} →</a>
   </section>
 </Base>
 
@@ -234,5 +236,21 @@ const icons = { guess: '🤔', investigate: '🔬', answer: '💡', try: '🧪' 
   .empty {
     color: var(--muted);
     padding: 2rem 0;
+  }
+  .soon {
+    display: block;
+    margin-top: 1.5rem;
+    padding: 1.1rem 1.3rem;
+    border-radius: var(--r-3);
+    border: 2px dashed var(--line-2);
+    color: var(--ink);
+    font-weight: 850;
+    font-size: var(--fs-2);
+    text-align: center;
+    text-decoration: none;
+  }
+  .soon:hover {
+    border-color: var(--brand);
+    color: var(--brand-ink);
   }
 </style>

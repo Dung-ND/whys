@@ -2,6 +2,7 @@
 
 - Static Astro 7 site, Svelte 5 (runes) islands, MDX content. Node ≥ 22.23.4 (`.nvmrc` = 24).
 - `npm test` runs `node --test` on `tests/*.test.ts` (Node strips TS types; no test framework).
+- Questions not written yet live in `src/data/ideas.ts` (open/started, with hints); see CONTRIBUTING.md. Published whys move to the catalog.
 - Catalog in `src/data/whys.ts`; text in `src/content/whys/<lang>/<slug>.mdx`; pages live at `/<slug>/` (and `/vi/<slug>/`, `/es/<slug>/`).
 - Vietnamese text speaks to the reader as "bạn", never "em" (readers are all ages).
 - Labs receive `lang` and keep their own labels in `strings.ts` (en required, others fall back).

@@ -38,5 +38,13 @@
   "404.lead": "We couldn't find that page.",
   "404.home": "Back to home",
   "motion.pause": "Pause the animation",
-  "motion.play": "Play the animation"
+  "motion.play": "Play the animation",
+  "ideas.title": "Coming soon",
+  "ideas.lead": "{n} more questions we're working on. Which one would you like to read next?",
+  "ideas.help": "Want to help write one? Pick an open question and follow the contributor guide.",
+  "ideas.guide": "Contributor guide",
+  "ideas.open": "Open",
+  "ideas.started": "Being written by {name}",
+  "ideas.link": "{n} more questions on the way",
+  "ideas.englishOnly": "These questions are listed in English until they are written."
 }
