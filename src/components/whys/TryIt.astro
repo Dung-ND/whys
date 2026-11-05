@@ -1,11 +1,15 @@
 ---
 // A home experiment, laid out like a lab card. The steps are the MDX children (a numbered list).
 // Usage: <TryIt need={['A glass of water', 'A flashlight']} safety="Ask an adult…"> 1. … </TryIt>
+// An English page shown as a fallback can still give its safety note in the reader's language:
+// safetyI18n={{ vi: '…', es: '…' }}
 import { useT, langFromUrl } from '@/i18n';
 
-interface Props { title?: string; need: string[]; safety?: string }
-const { title, need, safety } = Astro.props;
-const t = useT(langFromUrl(Astro.url));
+interface Props { title?: string; need: string[]; safety?: string; safetyI18n?: Record<string, string> }
+const { title, need, safety, safetyI18n } = Astro.props;
+const lang = langFromUrl(Astro.url);
+const t = useT(lang);
+const safetyText = safetyI18n?.[lang] ?? safety;
 ---
 <aside class="try" id="try">
   <h2><span aria-hidden="true">🧪</span> {t('whys.try')}{title && <span class="sub">: {title}</span>}</h2>
@@ -19,7 +23,7 @@ const t = useT(langFromUrl(Astro.url));
       <slot />
     </div>
   </div>
-  {safety && <p class="safety"><strong>⚠️ {t('whys.safety')}:</strong> <span set:html={safety} /></p>}
+  {safetyText && <p class="safety"><strong>⚠️ {t('whys.safety')}:</strong> <span set:html={safetyText} /></p>}
 </aside>
 
 <style>
