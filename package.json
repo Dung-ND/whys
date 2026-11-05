@@ -12,12 +12,12 @@
     "ideas": "node scripts/ideas.ts"
   },
   "dependencies": {
-    "@astrojs/mdx": "^8.1.1",
+    "@astrojs/mdx": "^8.1.2",
     "@astrojs/sitemap": "^3.7.4",
-    "@astrojs/svelte": "^9.1.1",
+    "@astrojs/svelte": "^9.1.2",
     "@fontsource-variable/nunito": "^5.3.0",
-    "astro": "^7.4.2",
-    "svelte": "^5.57.2"
+    "astro": "^7.4.5",
+    "svelte": "^5.57.3"
   },
   "engines": {
     "node": ">=22.23.4"
