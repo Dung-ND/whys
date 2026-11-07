@@ -1,5 +1,7 @@
 # Whys
 
+> **New to the project?** Read [START_HERE.md](START_HERE.md): it gets you from zero to your first contribution with Claude.
+
 **Questions for curious minds.** Why is the sky blue? Why do fingers wrinkle in water? Why don't birds get shocked on
 power lines? Each why is a short, fun page that answers one question with real science, the way a scientist would:
 
