@@ -4,9 +4,9 @@ import svelte from '@astrojs/svelte';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
-// The GitHub Pages workflow sets SITE_URL and BASE_PATH (https://dung-nd.github.io + /whys/).
+// The GitHub Pages workflow sets SITE_URL and BASE_PATH (https://silly-sprout-lab.github.io + /whys/).
 // With a custom domain, set SITE_URL to it and leave BASE_PATH empty.
-const site = process.env.SITE_URL || 'https://dung-nd.github.io';
+const site = process.env.SITE_URL || 'https://silly-sprout-lab.github.io';
 const base = process.env.BASE_PATH || '/';
 
 export default defineConfig({

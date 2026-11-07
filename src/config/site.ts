@@ -6,7 +6,7 @@ export const site = {
   watermark: 'Whys?',
   /** Year shown in the footer. */
   since: 2026,
-  repo: 'https://github.com/Dung-ND/whys',
+  repo: 'https://github.com/Silly-Sprout-Lab/whys',
 };
 
 /** Supported languages. The first one is the default and is served without a URL prefix. */

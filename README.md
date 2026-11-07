@@ -52,5 +52,5 @@ a question, science and safety rules) and [docs/ADDING_A_WHY.md](docs/ADDING_A_W
 
 GitHub Actions (`.github/workflows/deploy.yml`) runs the tests and builds the site on every push and pull request,
 and publishes `main` to GitHub Pages. To turn publishing on: **Settings → Pages → Source → GitHub Actions**.
-The site is then at `https://dung-nd.github.io/whys/`. For a custom domain, add it in the Pages settings; the
+The site is then at `https://silly-sprout-lab.github.io/whys/`. For a custom domain, add it in the Pages settings; the
 workflow picks up the new address automatically.
